@@ -1,3 +1,3 @@
 # `cpu/`
 
-Boundary for future component models. CPU behavior is not implemented in Milestone 0.
+Граница для будущих моделей компонентов. Поведение CPU в Milestone 0 не реализуется.

@@ -1,3 +1,3 @@
 # `emulator/`
 
-Boundary for the future atomic ISA reference emulator. No execution loop is present in Milestone 0.
+Граница для будущего атомарного эталонного эмулятора ISA. Цикл выполнения в Milestone 0 отсутствует.

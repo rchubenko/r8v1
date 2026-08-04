@@ -1,3 +1,3 @@
 # `loader/`
 
-Boundary for future executable-image and SRAM ownership tooling. No loader protocol or hardware access is present in Milestone 0.
+Граница для будущих средств работы с executable image и владением SRAM. В Milestone 0 loader protocol и hardware access отсутствуют.

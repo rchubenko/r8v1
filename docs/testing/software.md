@@ -1,6 +1,6 @@
-# Локальная software verification
+# Локальная проверка software
 
-## Prerequisites
+## Предварительные требования
 
 - Python `3.13.5` или совместимый Python `>=3.12,<3.14`;
 - `uv` в PATH.
@@ -12,11 +12,11 @@ python3 --version
 uv --version
 ```
 
-Если `uv` отсутствует, установить его безопасным user-local способом из официального installer; системные Python packages изменять не нужно.
+Если `uv` отсутствует, установить его безопасным способом в профиль пользователя из официального installer; системные Python packages изменять не нужно.
 
-## Установка
+## Установка зависимостей
 
-Из repository root:
+Из корня repository:
 
 ```bash
 uv sync --dev
@@ -43,9 +43,9 @@ uv run pytest
 git diff --check
 ```
 
-Scripts не выполняют commit, push или hardware actions и не изменяют source files.
+Scripts не выполняют commit, push или hardware actions и не изменяют исходные files.
 
-## Test boundaries
+## Границы test layers
 
 В Milestone 0 проверяются только package metadata, deterministic test runner, repository layout, обязательные документы, ADR index/numbering и Markdown links. ISA, CPU components, emulator, simulator, assembler, loader и hardware behavior не тестируются, потому что ещё не реализованы.
 

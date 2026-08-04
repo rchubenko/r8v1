@@ -1,12 +1,12 @@
-# ADR-0003: EEPROM Microcoded Control Unit
+# ADR-0003: Микрокодовый блок управления на EEPROM
 
-## Status
+## Статус
 
-Accepted
+Принято
 
 ## Контекст
 
-Final CPU должен работать без формирования Raspberry Pi control signals. Hardwired combinational CU было бы трудно изменять и документировать.
+Final CPU должен работать без формирования Raspberry Pi control signals. Жёстко заданный combinational CU было бы трудно изменять и документировать.
 
 ## Решение
 
@@ -24,13 +24,13 @@ Conditional flags вычисляются отдельной branch logic и не
 
 Положительные:
 
-- microcode generated, reviewable и testable;
+- microcode генерируется, проверяется и доступен для review;
 - до 16 microsteps на opcode;
-- нет duplication по flag combinations;
+- нет дублирования по flag combinations;
 - Pi-driven hybrid control использует идентичные control words.
 
 Отрицательные:
 
-- требуется EEPROM programming workflow;
+- требуется workflow программирования EEPROM;
 - требуются microstep counter и decode logic;
 - EEPROM access timing входит в clock budget.

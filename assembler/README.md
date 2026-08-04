@@ -1,3 +1,3 @@
 # `assembler/`
 
-Boundary for the future assembler. No parser, encoder, or CLI is present in Milestone 0.
+Граница для будущего assembler. Parser, encoder и CLI в Milestone 0 отсутствуют.

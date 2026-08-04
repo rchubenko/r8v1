@@ -2,11 +2,11 @@
 
 ## Статус
 
-Approved foundation proposal for Milestone 0.
+Утверждённое предложение по foundation для Milestone 0.
 
 ## Цели
 
-Структура должна разделять architectural reference behavior и microarchitectural execution, иметь canonical sources для ISA/control-word/microcode, поддерживать deterministic tests, изолировать hardware-facing code, обеспечивать reproducible generated artifacts и не включать future compiler в R8 v1.
+Структура должна разделять architectural reference behavior и microarchitectural execution, иметь canonical sources для ISA, control-word и microcode, поддерживать deterministic tests, изолировать hardware-facing code, обеспечивать reproducible generated artifacts и не включать future compiler в R8 v1.
 
 ## Области
 
@@ -26,12 +26,12 @@ scripts/     minimal reproducible checks
 docs/        architecture, ADR, plans, milestones, testing, reports
 ```
 
-Milestone 0 создаёт только реально нужные package boundaries и markers. Generated binaries и `.gitkeep` не добавляются. `compiler/` implementation directory не создаётся.
+Milestone 0 создаёт только действительно нужные package boundaries и markers. Generated binaries и `.gitkeep` не добавляются. `compiler/` implementation directory не создаётся.
 
 ## Ответственность
 
-`specs/` — canonical machine-readable inputs, не добавляющие semantics вне Markdown. `cpu/` — reusable component models без instruction decoder и complete CPU loop. `emulator/` — atomic architectural behavior без microsteps. `simulator/` — real control words, buses, microsteps, rising-edge transitions; он не вызывает atomic emulator.
+`specs/` — canonical machine-readable inputs, не добавляющие semantics вне Markdown. `cpu/` — reusable component models без instruction decoder и complete CPU loop. `emulator/` — atomic architectural behavior без microsteps. `simulator/` — real control words, buses, microsteps и rising-edge transitions; он не вызывает atomic emulator.
 
 `assembler/` позднее должен выдавать exact 4096-byte image и reject overflow. `microcode/` содержит declarative sequences и reproducible generated outputs; generated files вручную не редактируются. `loader/` разделяет image handling и ownership; `hardware/` содержит physical adapters, где `PASS` возможен только после explicit user confirmation.
 
-`tests/` разделяет test layers. `scripts/` — обычные local entry points; OpenCode workflow commands deferred.
+`tests/` разделяет test layers. `scripts/` содержит обычные local entry points; OpenCode workflow commands отложены.

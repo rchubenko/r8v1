@@ -19,17 +19,17 @@ R8 v1 — автономный 8-битный TTL CPU с unified 4 KB SRAM, asse
 
 ## Карта monorepo
 
-- `specs/` — будущие machine-readable definitions.
+- `specs/` — будущие машиночитаемые definitions.
 - `cpu/` — будущие component models.
-- `emulator/` — будущий ISA reference emulator.
-- `simulator/` — будущий control-word-driven simulator.
+- `emulator/` — будущий эталонный ISA emulator.
+- `simulator/` — будущий simulator, управляемый control word.
 - `assembler/` — будущий assembler.
 - `microcode/` — будущие definitions и generated artifacts.
 - `loader/` — будущий image/loader tooling.
 - `hardware/` — будущая hardware integration.
 - `programs/` — будущие программы.
 - `tests/` — foundation и будущие test layers.
-- `scripts/` — воспроизводимые repository checks.
+- `scripts/` — воспроизводимые проверки репозитория.
 - `docs/` — нормативные документы и отчёты.
 
 `compiler/` в R8 v1 не создаётся.
@@ -47,11 +47,11 @@ uv sync --dev
 
 ## Статус
 
-Текущая работа относится к Milestone 0 — Repository Foundation. Реализация CPU, ISA emulator, microarchitecture simulator, assembler и loader не начата. Hardware status: `NOT_TESTED`.
+Текущая работа относится к Milestone 0 — Repository Foundation. Реализация CPU, ISA emulator, simulator микроархитектуры, assembler и loader не начата. Статус аппаратной проверки: `NOT_TESTED`.
 
 ## Управление проектом
 
-- `AGENTS.md` — repository-wide policy.
+- `AGENTS.md` — общие правила репозитория.
 - `docs/repository-structure.md` — утверждённая структура monorepo.
 - `docs/plans/milestone-0-repository-foundation.md` — план Milestone 0.
-- `docs/reports/milestone-0-readiness-review.md` — readiness review.
+- `docs/reports/milestone-0-readiness-review.md` — проверка готовности.

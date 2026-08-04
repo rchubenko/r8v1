@@ -1,3 +1,3 @@
 # `microcode/`
 
-Boundary for future microcode definitions, validation, generation, and derived images. No generated artifact is present in Milestone 0.
+Граница для будущих definitions, validation, generation и derived images микрокода. В Milestone 0 generated artifact отсутствует.

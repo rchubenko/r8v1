@@ -1,70 +1,431 @@
-# Правила проекта R8 v1
+# Правила проекта R8 v1 (AGENTS.md)
 
-## 1. Scope
+## 1. Область проекта
 
-R8 v1 — autonomous 8-bit TTL CPU с unified 4 KB SRAM, assembler, loader и demonstration programs. Raspberry Pi может быть loader, test bench, debugger, state monitor и temporary microcode driver, но в final autonomous CPU не формирует control signals.
+R8 v1 — автономный 8-битный TTL-процессор с:
 
-R8-Lang compiler, stack, CALL/RET, PUSH/POP, interrupts, logical ALU operations, user peripherals и CPU-resident monitor вне scope R8 v1 без отдельной architecture version.
+* единой SRAM объёмом 4 КБ;
+* ассемблером;
+* загрузчиком (loader);
+* эталонным эмулятором ISA;
+* симулятором микроархитектуры, выполняющим реальные `control word`;
+* генерацией микрокода;
+* демонстрационными программами.
 
-## 2. Источники истины
+На этапах разработки Raspberry Pi может использоваться как:
 
-Порядок приоритета:
+* загрузчик (`loader`);
+* испытательный стенд;
+* отладчик;
+* монитор состояния;
+* временный драйвер микрокода.
 
-1. accepted ADRs из `docs/adr/README.md`;
+В финальной версии R8 v1 Raspberry Pi не формирует управляющие сигналы процессора.
+
+В область проекта **не входят**, пока это не будет утверждено отдельной архитектурной ревизией:
+
+* R8-Lang compiler;
+* Stack Pointer;
+* CALL/RET;
+* PUSH/POP;
+* interrupts;
+* logical ALU operations;
+* пользовательская периферия;
+* CPU-resident monitor;
+* bootloader;
+* любые другие расширения ISA.
+
+---
+
+# 2. Язык документации
+
+Вся нормативная документация проекта пишется на русском языке.
+
+Английский язык допускается **только** для элементов, являющихся частью интерфейса проекта или программной реализации, включая:
+
+* имена файлов;
+* пути;
+* команды shell, Git и Python;
+* программный код;
+* Markdown anchors;
+* регистры;
+* сигналы;
+* поля `control word`;
+* мнемоники ISA;
+* opcode;
+* `enum`;
+* символьные константы;
+* machine-readable identifiers.
+
+Например:
+
+* `HALT`
+* `STEP_END`
+* `PC_OP`
+* `OE_SEL`
+* `E_SEL`
+* `RAM_WE`
+* `FLAGS_LOAD_INTERNAL`
+* `HIGH_Z`
+* `flags_defined_mask`
+
+Обычный повествовательный текст не должен содержать смешения русского и английского языка.
+
+---
+
+# 3. Источники истины
+
+Приоритет источников:
+
+1. принятые ADR, перечисленные в `docs/adr/README.md`;
 2. `docs/architecture.md` и `docs/isa.md`;
 3. `docs/microarchitecture.md`, `docs/control-word.md`, `docs/memory.md`;
-4. machine-readable specifications и generated microcode;
-5. software implementations;
-6. hardware implementations;
-7. tests и reports.
+4. машиночитаемые спецификации и сгенерированный микрокод;
+5. программные реализации;
+6. аппаратная реализация;
+7. тесты и отчёты.
 
-Нижний уровень не может молча переопределять верхний. Replacing ADR обязан указать superseded ADR; conflicting ADR не могут одновременно быть active. При conflict или insufficient behavior: остановить затронутую работу, сообщить gap, указать components/tests, предложить варианты и не выбирать architecture decision самостоятельно.
+Источник нижнего уровня не имеет права молча переопределять источник более высокого уровня.
 
-## 3. Запрет предположений
+Любой новый ADR, заменяющий существующее решение, обязан явно указать, какой ADR он заменяет (`supersedes`).
 
-Нельзя изобретать ISA encoding/semantics, flags, registers, memory model, address path, control word, microsteps, reset, HALT, clock, SRAM ownership или loader image format. Implementation details допустимы только без изменения observable behavior и должны быть зафиксированы в plan/design documentation.
+Конфликтующие ADR не могут одновременно оставаться активными.
 
-Architecture changes для opcode/semantics, flags, registers, memory/image, control word, microsteps, reset, HALT, clock или ownership требуют explicit task, ADR/normative update, updates всех specs, tests и approval.
+Если обнаружены:
 
-## 4. Development order
+* противоречие;
+* неоднозначность;
+* недостаточно определённое поведение;
+* отсутствие обязательной спецификации,
+
+необходимо:
+
+1. остановить затронутую работу;
+2. описать проблему;
+3. указать затронутые документы, компоненты и тесты;
+4. предложить возможные варианты;
+5. дождаться архитектурного решения.
+
+Самостоятельно принимать архитектурные решения запрещено.
+
+---
+
+# 4. Запрет предположений
+
+Запрещено самостоятельно придумывать или изменять:
+
+* ISA;
+* кодирование инструкций;
+* семантику инструкций;
+* правила обновления FLAGS;
+* набор регистров;
+* модель памяти;
+* формат программного образа;
+* структуру `control word`;
+* микропоследовательности;
+* правила RESET;
+* семантику HALT;
+* работу тактового сигнала;
+* правила владения SRAM;
+* интерфейс загрузчика.
+
+Допускается выбирать только такие детали реализации, которые одновременно:
+
+* не изменяют наблюдаемое поведение процессора;
+* не противоречат утверждённой архитектуре;
+* не ограничивают будущую аппаратную реализацию;
+* документированы.
+
+---
+
+# 5. Изменение архитектуры
+
+Любое изменение:
+
+* ISA;
+* opcode;
+* семантики инструкций;
+* FLAGS;
+* регистров;
+* памяти;
+* `control word`;
+* микроархитектуры;
+* RESET;
+* HALT;
+* clock;
+* SRAM ownership;
+
+требует:
+
+1. отдельной задачи;
+2. изменения нормативной документации или нового ADR;
+3. обновления всех затронутых спецификаций;
+4. обновления тестов;
+5. явного утверждения.
+
+Рефакторинг не должен изменять архитектуру.
+
+Редактирование документации не должно изменять смысл нормативных требований.
+
+Если новая формулировка может изменить интерпретацию спецификации, работа должна быть остановлена до принятия архитектурного решения.
+
+---
+
+# 6. Порядок разработки
+
+Каждая функциональность реализуется строго в следующем порядке:
 
 ```text
-specification -> software -> tests -> hardware -> regression -> documentation
+спецификация
+→ программная реализация
+→ автоматические тесты
+→ аппаратная реализация
+→ регрессионная проверка
+→ документация
 ```
 
-Hardware status software-only milestones — `NOT_TESTED`. Complete software CPU обязателен до hardware integration: component models, ISA reference emulator, control-word model/generated microcode, microarchitecture simulator, parity, assembler, programs. ISA emulator atomic; simulator derives behavior из real control words, buses, microsteps и rising-edge transitions и не вызывает atomic implementations.
+Для программных этапов статус аппаратной проверки остаётся:
 
-## 5. Git и main
+```text
+NOT_TESTED
+```
 
-`main` stable. В main попадают только complete approved changes с passing checks, current docs/generated artifacts, accurate hardware status, no unrelated diff и clean tree. Один feature/milestone branch на coherent work, commits atomic. Не смешивать specification, tooling, scripts и documentation без причины. Tags — только completed milestones. Verified commits push в configured remote.
+Полный программный процессор должен быть завершён **до** аппаратной интеграции.
 
-## 6. Hardware statuses
+Последовательность программной реализации:
 
-Использовать ровно эти статусы:
+1. модели компонентов;
+2. эталонный эмулятор ISA;
+3. модель `control word`;
+4. генерация микрокода;
+5. симулятор микроархитектуры;
+6. parity testing;
+7. assembler;
+8. демонстрационные программы.
 
-- `NOT_TESTED` — physical test не выполнялся;
-- `PASS` — user физически выполнил test и подтвердил expected result;
-- `FAIL` — user физически выполнил test и сообщил incorrect result;
-- `BLOCKED` — physical test невозможен из-за отсутствующего или неисправного prerequisite.
+Эталонный эмулятор ISA выполняет инструкции атомарно.
 
-Agent никогда не может выводить hardware `PASS` из simulation, compilation, static analysis, expected behavior, photographs, previous versions или inference. Только explicit user confirmation даёт `PASS`.
+Симулятор микроархитектуры обязан получать архитектурное поведение исключительно через реальные:
 
-## 7. Test layers
+* `control word`;
+* DATA BUS;
+* микрошаги;
+* фронты тактового сигнала;
+* защёлкивание регистров.
 
-Разделять component unit, ISA conformance, control-word validation, microcode generation, microarchitecture microstep, emulator/simulator parity, assembler, loader, hardware component, hardware subsystem и full CPU regression tests. Higher-level simulation не заменяет lower-level physical test. Tests deterministic и reproducible из repository commands. Parity сравнивает `flags_defined_mask` и values только defined flags; strict undefined-flag diagnostics и hardware-like mode проверяются отдельно.
+Он не имеет права вызывать атомарные реализации инструкций.
 
-## 8. Invalid states
+---
 
-Models, validators и drivers должны reject/detect multiple DATA BUS producers, consumer без ровно одного producer, reserved encodings, `RAM_WE` без valid producer, invalid PC operation, HALT с write actions, non-canonical HALT, microcode beyond T15, simultaneous CPU/Pi ownership и reserved opcode без HALT. One producer без consumer разрешён для bring-up/debugging.
+# 7. Git и стабильность репозитория
 
-## 9. Generated artifacts и docs
+Ветка `main` всегда должна оставаться стабильной.
 
-Generated microcode, EEPROM images, opcode tables, listings и другие derived files имеют один canonical source, вручную не редактируются, generation deterministic. Verification обязан обнаруживать stale artifacts. Документация различает approved architecture, proposed decisions, software verification, physical verification и deferred work; simulated hardware не описывается как physical `PASS`.
+В `main` допускаются только изменения, которые:
 
-## 10. Planning, review и commits
+* завершены;
+* проверены;
+* синхронизированы с документацией;
+* не содержат известных архитектурных противоречий;
+* имеют актуальные сгенерированные артефакты;
+* проходят проверки;
+* не содержат посторонних изменений.
 
-Перед implementation plan должен содержать goal, sources, scope, non-goals, modules, blockers, acceptance criteria, tests, documentation и atomic commits. При unresolved architecture decision затронутая implementation останавливается.
+Для каждой логически завершённой работы используется отдельная feature- или milestone-ветка.
 
-Review проверяет consistency с ADR/specs, accidental architecture changes, deterministic behavior, bus/control validity, test adequacy, parity, generated artifacts, docs, hardware status, unrelated changes и repository cleanliness. Перед commit: relevant verification, complete diff review, docs sync, generated-artifact check, no overstated hardware result, no unrelated files. Commit messages concise и imperative с prefixes `spec:`, `model:`, `emulator:`, `sim:`, `microcode:`, `assembler:`, `loader:`, `hardware:`, `test:`, `docs:`, `build:`.
+Коммиты должны быть небольшими, атомарными и легко откатываемыми.
 
-OpenCode workflow commands намеренно deferred до повторяющейся repository work.
+Не допускается смешивать в одном коммите:
+
+* архитектуру;
+* реализацию;
+* инфраструктуру;
+* документацию;
+* tooling,
+
+если для этого нет объективной причины.
+
+Теги создаются только после завершения milestone.
+
+Проверенные коммиты отправляются в настроенный удалённый репозиторий.
+
+---
+
+# 8. Статусы аппаратной проверки
+
+Разрешены только следующие статусы:
+
+* `NOT_TESTED`
+* `PASS`
+* `FAIL`
+* `BLOCKED`
+
+Определения:
+
+* `NOT_TESTED` — физическая проверка не выполнялась;
+* `PASS` — пользователь лично выполнил аппаратный тест и подтвердил ожидаемый результат;
+* `FAIL` — пользователь лично выполнил аппаратный тест и сообщил о несоответствии результата;
+* `BLOCKED` — аппаратная проверка невозможна из-за отсутствующего или неисправного компонента либо другого обязательного условия.
+
+Никакая программная проверка не может привести к аппаратному `PASS`.
+
+Компиляция, симуляция, статический анализ, фотографии, логический вывод и предыдущие версии оборудования не являются основанием для присвоения статуса `PASS`.
+
+---
+
+# 9. Уровни тестирования
+
+Необходимо разделять:
+
+1. unit-тесты компонентов;
+2. тесты соответствия ISA;
+3. тесты `control word`;
+4. тесты генерации микрокода;
+5. тесты микрошагов микроархитектуры;
+6. parity между ISA и микроархитектурой;
+7. тесты assembler;
+8. тесты loader;
+9. тесты аппаратных компонентов;
+10. тесты аппаратных подсистем;
+11. полную регрессию процессора.
+
+Высокоуровневая симуляция не заменяет физическую проверку.
+
+Все тесты должны быть детерминированными и воспроизводимыми.
+
+Parity обязана сравнивать:
+
+* `flags_defined_mask`;
+* значения только определённых флагов.
+
+Strict diagnostics и hardware-like diagnostics проверяются отдельно.
+
+---
+
+# 10. Недопустимые состояния
+
+Модели, генераторы, валидаторы и драйверы обязаны обнаруживать или отклонять:
+
+* несколько одновременно активных источников DATA BUS;
+* потребителя без ровно одного производителя;
+* запрещённые кодировки;
+* `RAM_WE` без допустимого источника данных;
+* недопустимые операции `PC_OP`;
+* HALT вместе с записью регистров или памяти;
+* неканонический HALT;
+* микрокод длиннее T15;
+* одновременное владение SRAM со стороны CPU и Raspberry Pi;
+* выполнение зарезервированной инструкции без HALT.
+
+Допускается один производитель DATA BUS без потребителя для целей отладки и аппаратного bring-up.
+
+---
+
+# 11. Сгенерированные артефакты и документация
+
+Сгенерированные артефакты:
+
+* микрокод;
+* EEPROM images;
+* opcode tables;
+* listings;
+
+имеют один канонический источник и никогда не редактируются вручную.
+
+Генерация должна быть полностью воспроизводимой.
+
+Проверки обязаны обнаруживать устаревшие артефакты.
+
+Документация должна явно различать:
+
+* утверждённую архитектуру;
+* предлагаемые изменения;
+* программную проверку;
+* аппаратную проверку;
+* отложенные возможности.
+
+Запрещено представлять симуляцию как аппаратную проверку.
+
+---
+
+# 12. Планирование
+
+Перед началом реализации должен существовать план, содержащий:
+
+* цель;
+* источники истины;
+* область работы;
+* ограничения;
+* затрагиваемые компоненты;
+* архитектурные вопросы;
+* критерии приёмки;
+* тесты;
+* документацию;
+* рекомендуемые атомарные коммиты.
+
+Если выполнение зависит от непринятого архитектурного решения, соответствующая часть работы должна быть остановлена.
+
+---
+
+# 13. Проверка изменений
+
+Review обязан проверять:
+
+* соответствие архитектуре;
+* отсутствие случайных изменений ISA;
+* детерминированность поведения;
+* корректность работы DATA BUS;
+* корректность `control word`;
+* полноту тестов;
+* parity;
+* воспроизводимость генерации;
+* актуальность документации;
+* корректность аппаратных статусов;
+* отсутствие посторонних изменений;
+* чистое состояние репозитория.
+
+Все замечания должны классифицироваться по серьёзности.
+
+---
+
+# 14. Коммиты
+
+Перед созданием коммита необходимо:
+
+1. выполнить соответствующие проверки;
+2. просмотреть итоговый diff;
+3. убедиться в актуальности документации;
+4. проверить сгенерированные артефакты;
+5. убедиться, что аппаратные результаты не преувеличены;
+6. убедиться в отсутствии посторонних файлов.
+
+Сообщения коммитов должны быть краткими, начинаться с глагола в повелительном наклонении и использовать один из утверждённых префиксов:
+
+* `spec:`
+* `model:`
+* `emulator:`
+* `sim:`
+* `microcode:`
+* `assembler:`
+* `loader:`
+* `hardware:`
+* `test:`
+* `docs:`
+* `build:`
+
+---
+
+# 15. OpenCode
+
+OpenCode используется как инженерный агент проекта.
+
+На текущем этапе проекта:
+
+* сложные workflow-команды;
+* пользовательские команды;
+* subagents;
+* автоматическая оркестрация;
+
+намеренно не используются.
+
+Они будут добавляться только после появления устойчивых повторяющихся сценариев разработки, чтобы автоматизация отражала реальный процесс проекта, а не навязывала его.

@@ -2,15 +2,15 @@
 
 ## Статус
 
-**Статус:** Approved architecture baseline
+**Статус:** Утверждённая архитектурная база
 **Цель:** R8 v1
 **Тип:** 8-bit accumulator-based TTL CPU
 
-Документ задаёт system-level architecture. ISA, microarchitecture, control word и memory behavior описаны в отдельных документах.
+Документ задаёт системную архитектуру. ISA, microarchitecture, control word и memory behavior описаны в отдельных документах.
 
 ## 1. Цель проекта
 
-R8 v1 — autonomous 8-bit TTL CPU, способный загружать и исполнять programs из memory без участия Raspberry Pi в формировании control signals. Raspberry Pi может оставаться program loader, test bench, debugger и state monitor.
+R8 v1 — autonomous 8-bit TTL CPU, способный загружать и исполнять programs из memory без участия Raspberry Pi в формировании control signals. Raspberry Pi может оставаться загрузчиком программ, испытательным стендом, отладчиком и монитором состояния.
 
 R8 v1 включает CPU, unified SRAM, assembler, loader и demonstration programs. R8-Lang compiler, Stack Pointer, CALL/RET, PUSH/POP, interrupts, user peripherals, logical ALU operations и CPU monitor/bootloader отложены.
 
@@ -18,20 +18,19 @@ R8 v1 включает CPU, unified SRAM, assembler, loader и demonstration pro
 
 | Свойство | Значение |
 |---|---|
-| Data width | 8 bit |
-| Address width | 12 bit |
+| Разрядность данных | 8 bit |
+| Разрядность адреса | 12 bit |
 | Address space | 4096 bytes |
-| Instruction width | 16 bit |
-| Instruction format | 4-bit opcode + 12-bit operand |
-| Memory model | Unified Von Neumann memory |
+| Разрядность instruction | 16 bit |
+| Формат instruction | 4-bit opcode + 12-bit operand |
+| Модель памяти | Unified Von Neumann memory |
 | Program counter | Byte-addressed |
-| CPU style | Accumulator-based |
-| Main data bus | 8 bit |
+| Основная DATA BUS | 8 bit |
 | Address path | Separate 12-bit path |
 | Flags | Z, C, S, O |
 | Final CU | EEPROM microcode-based |
 
-## 3. Register set
+## 3. Набор регистров
 
 | Register | Width | Назначение |
 |---|---:|---|
@@ -44,11 +43,11 @@ R8 v1 включает CPU, unified SRAM, assembler, loader и demonstration pro
 | FLAGS | 4 | Z, C, S, O |
 | MICROSTEP | 4 | Текущий microstep T0..T15 |
 
-B не drive DATA BUS, а только подаёт значение в ALU. Architectural output register и Stack Pointer в v1 отсутствуют; будущие output devices должны использовать memory-mapped I/O.
+B не управляет DATA BUS, а только подаёт значение в ALU. Architectural output register и Stack Pointer в v1 отсутствуют; будущие output devices должны использовать memory-mapped I/O.
 
-## 4. Datapath
+## 4. Тракт данных
 
-Используется один shared 8-bit DATA BUS для byte transfers и отдельный 12-bit address path для memory addressing.
+Используется одна общая 8-bit DATA BUS для byte transfers и отдельный 12-bit address path для memory addressing.
 
 ```text
 A ───────────────┐
@@ -59,9 +58,9 @@ IRH / IRL ───────┤
 SRAM ────────────┘
 ```
 
-Одновременно DATA BUS может drive не более одного source. Selection кодируется через `OE_SEL`.
+Одновременно DATA BUS может управляться не более чем одним source. Выбор кодируется через `OE_SEL`.
 
-### FLAGS coupling
+### Связь с FLAGS
 
 FLAGS обновляются автоматически при записи Register A. Decoded A-load action управляет и A register load-enable, и FLAGS register load-enable:
 
@@ -71,7 +70,7 @@ FLAGS_LOAD_INTERNAL = A_LOAD
 
 ADD и SUB определяют все четыре flags. LDI и LDA определяют Z и S, а C и O оставляют concrete hardware-like values, которые architectural unspecified. Independent `FLAGS_LOAD` bit в v1 control word отсутствует.
 
-### Address и fetch path
+### Адресный тракт и fetch path
 
 ```text
 PC ───────────────┐
@@ -85,13 +84,13 @@ IR operand ───────┘
 PC -> MAR -> SRAM -> DATA BUS -> IRH/IRL
 ```
 
-PC не проходит через IR как intermediate address register.
+PC не проходит через IR как промежуточный address register.
 
-## 5. Memory model
+## 5. Модель памяти
 
 Code и data используют unified SRAM address space `0x000..0xFFF`. Programs загружаются с `0x000`, data assembler размещает после code. Hardware не защищает code от writes; overwriting и execution data разрешены.
 
-## 6. Instruction model
+## 6. Модель instruction
 
 Каждая instruction занимает два bytes:
 
@@ -100,17 +99,17 @@ byte 0: opcode[3:0] + operand[11:8]
 byte 1: operand[7:0]
 ```
 
-PC byte-addressed и обычно increment дважды за fetch. Это 12-bit modulo counter: `0xFFF + 1 = 0x000`. Fetch через boundary определён: byte 0 в `0xFFF`, byte 1 в `0x000`, после fetch PC равен `0x001`. Alignment не требуется.
+PC byte-addressed и обычно increment дважды за fetch. Это 12-bit modulo counter: `0xFFF + 1 = 0x000`. Fetch через boundary определён: byte 0 в `0xFFF`, byte 1 в `0x000`, после fetch PC равен `0x001`. Выравнивание не требуется.
 
-Approved v1 ISA: NOP, LDI, LDA, ADD, SUB, STA, JMP, JC, JZ, JN, JV, HLT. Opcodes `0xB`–`0xE` reserved.
+Утверждённая v1 ISA: NOP, LDI, LDA, ADD, SUB, STA, JMP, JC, JZ, JN, JV, HLT. Opcodes `0xB`–`0xE` reserved.
 
-## 7. Control unit
+## 7. Блок управления
 
 Развитие проходит через software simulation, hybrid bring-up и autonomous operation. Final CU использует two EEPROMs, формирующие 16-bit control word по opcode и MICROSTEP. Conditional branch decisions выполняет отдельная combinational branch logic; flags не входят в EEPROM address.
 
-## 8. Clock contract
+## 8. Контракт тактового сигнала
 
-Все sequential CPU elements используют common rising-edge clock:
+Все sequential CPU elements используют общий rising-edge clock:
 
 ```text
 control stable -> propagation delay -> rising edge -> state latch -> control release
@@ -118,9 +117,9 @@ control stable -> propagation delay -> rising edge -> state latch -> control rel
 
 Используется один `CPU_CLK_IN`. Raspberry Pi даёт deterministic single-step pulses во время software-driven и hybrid bring-up. Pi control signals нельзя использовать с free-running autonomous clock. Clock-source switching разрешён только при active reset.
 
-## 9. Reset contract
+## 9. Контракт RESET
 
-Reset — system-level signal вне control word. Sources: power-on reset, manual reset button и Raspberry Pi reset output. Assertion asynchronous, deassertion synchronized, priority над HALT и normal execution.
+Reset — системный сигнал вне control word. Sources: power-on reset, manual reset button и Raspberry Pi reset output. Assertion asynchronous, deassertion synchronized, priority над HALT и normal execution.
 
 | Component | Value |
 |---|---|
@@ -133,7 +132,7 @@ Reset — system-level signal вне control word. Sources: power-on reset, manu
 | MICROSTEP | `T0` |
 | HALT | cleared |
 
-## 10. Software/hardware strategy
+## 10. Стратегия software/hardware
 
 R8 использует software-first co-design. ISA reference emulator выполняет instructions atomically. Microarchitecture simulator должен исполнять те же programs через microsteps, control words, buses, register latching, clock edges и memory cycles, не вызывая atomic ISA implementations.
 
@@ -141,7 +140,7 @@ Software models ведут `flags_defined_mask`. Parity сравнивает mas
 
 Hardware вводится после complete software CPU: software CPU -> hardware DATA BUS/A/B -> hardware ALU/FLAGS -> hardware PC/IR/MAR/SRAM -> EEPROM CU -> autonomous clock.
 
-## 11. Hardware policy
+## 11. Политика hardware
 
 Primary supply — 5 V. 74HC/74HCT допустимы после level validation. Raspberry Pi GPIO нельзя напрямую подвергать unsafe 5 V signals; нужны level shifters/buffers. IC требуют decoupling, unused inputs — defined levels. Hardware test status можно отметить `PASS` только после physical confirmation.
 
@@ -149,6 +148,6 @@ Primary supply — 5 V. 74HC/74HCT допустимы после level validatio
 
 R8 — monorepo. `compiler/` reserved для later versions и не входит в R8 v1 deliverable. `main` должен быть stable; для milestone используется feature branch, commits должны быть atomic, tags создаются только для completed milestones, verified commits push в configured remote. Hardware-related merge требует physical hardware `PASS`.
 
-## 13. Source of Truth
+## 13. Источник истины
 
 Утверждённые written specifications — source of truth. Приоритет: architecture/ISA, microarchitecture/control-word, generated microcode, software implementations, hardware implementation. Emulator и physical wiring не могут silently redefine architectural behavior.

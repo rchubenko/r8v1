@@ -1,12 +1,12 @@
-# ADR-0006: Reset Architecture
+# ADR-0006: Архитектура RESET
 
-## Status
+## Статус
 
-Accepted
+Принято
 
 ## Контекст
 
-Reset должен работать даже когда clock, microcode или HALT state не progressing. Control-word reset bit зависел бы от работающего CU.
+Reset должен работать даже когда clock, microcode или HALT state не продвигаются. Control-word reset bit зависел бы от работающего CU.
 
 ## Решение
 

@@ -1,8 +1,8 @@
-# ADR-0009: Clock Transition Strategy
+# ADR-0009: Стратегия перехода тактового сигнала
 
-## Status
+## Статус
 
-Accepted
+Принято
 
 ## Контекст
 
@@ -20,7 +20,7 @@ Hybrid operation требует deterministic control-signal setup перед к
 
 Положительные:
 
-- deterministic hybrid testing;
+- детерминированное hybrid testing;
 - нет race между Pi control updates и free-running clock;
 - autonomous clock integration не требует rewiring всех registers.
 

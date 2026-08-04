@@ -1,16 +1,16 @@
-# ADR-0005: FLAGS Update on Accumulator Write
+# ADR-0005: Обновление FLAGS при записи в A
 
-## Status
+## Статус
 
-Accepted
+Принято
 
 ## Контекст
 
-Исходный R8 hardware обновлял FLAGS при каждой записи Register A. Отдельный `FLAGS_LOAD` control bit дал бы более гибкую ISA semantics, но добавил бы control-word и gating complexity, не нужную v1 ISA.
+Исходный R8 hardware обновлял FLAGS при каждой записи Register A. Отдельный `FLAGS_LOAD` control bit дал бы более гибкую семантику ISA, но добавил бы control-word и gating complexity, не нужную v1 ISA.
 
 ## Решение
 
-Сохранить исходную R8 scheme. Decoded A-load action одновременно является FLAGS load-enable event.
+Сохранить исходную R8 scheme. Decoded A-load action одновременно является событием FLAGS load-enable.
 
 ```text
 FLAGS_LOAD_INTERNAL = A_LOAD
@@ -18,7 +18,7 @@ FLAGS_LOAD_INTERNAL = A_LOAD
 
 В v1 control word нет independent `FLAGS_LOAD` bit. Control-word bit 13 reserved.
 
-Validity flags:
+Допустимость значений flags:
 
 - ADD/SUB определяют Z, C, S и O;
 - LDI/LDA определяют Z и S;

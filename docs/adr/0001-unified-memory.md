@@ -1,18 +1,18 @@
-# ADR-0001: Unified 4 KB Memory
+# ADR-0001: Единая память объёмом 4 КБ
 
-## Status
+## Статус
 
-Accepted
+Принято
 
 ## Контекст
 
-R8 нужны code и data storage при понятных CPU, assembler, loader и debugging model. Ранее рассматривались раздельные program и data memories.
+R8 нужны понятные модели хранения code и data, CPU, assembler, loader и debugging. Ранее рассматривались раздельные program и data memories.
 
 ## Решение
 
-Использовать одно byte-addressed 4 KB SRAM address space для code и data.
+Использовать одно адресуемое по байтам 4 KB SRAM address space для code и data.
 
-- Address range: `0x000..0xFFF`.
+- Диапазон адресов: `0x000..0xFFF`.
 - Instructions занимают два bytes.
 - PC считает bytes.
 - Code начинается в `0x000`.
@@ -23,7 +23,7 @@ R8 нужны code и data storage при понятных CPU, assembler, loade
 Положительные:
 
 - единая address model;
-- один loader target;
+- единый loader target;
 - более простая absolute addressing;
 - более простые debugger и assembler;
 - поддержка будущего self-modifying или monitor-style software.

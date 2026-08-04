@@ -1,3 +1,3 @@
 # `hardware/`
 
-Boundary for future hardware adapters, bring-up, schematics, and physical tests. Hardware status remains `NOT_TESTED`.
+Граница для будущих hardware adapters, bring-up, schematics и physical tests. Hardware status остаётся `NOT_TESTED`.

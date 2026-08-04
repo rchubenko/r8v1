@@ -2,11 +2,11 @@
 
 ## Статус
 
-**Статус:** Approved baseline
+**Статус:** Утверждённая база
 **Width:** 16 bit
 **Storage:** two 8-bit EEPROMs
 
-## 1. Bit layout
+## 1. Раскладка битов
 
 | Bits | Field | Width |
 |---|---|---:|
@@ -29,21 +29,21 @@ control_word =
 
 `EEPROM LOW -> control_word[7:0]`, `EEPROM HIGH -> control_word[15:8]`. Microcode address: `A[7:4] = opcode`, `A[3:0] = microstep`.
 
-## 2. Encodings
+## 2. Кодировки
 
-`OE_SEL` выбирает single DATA BUS source: `000 OE_NONE`, `001 OE_A`, `010 OE_ALU`, `011 OE_IRH`, `100 OE_IRL`, `101 OE_SRAM`; `110` и `111` reserved.
+`OE_SEL` выбирает единственный источник DATA BUS: `000 OE_NONE`, `001 OE_A`, `010 OE_ALU`, `011 OE_IRH`, `100 OE_IRL`, `101 OE_SRAM`; `110` и `111` reserved.
 
-`E_SEL` выбирает action: `000 E_NONE`, `001 E_A`, `010 E_B`, `011 E_IRH`, `100 E_IRL`, `101 E_MAR`; `110` и `111` reserved. `E_MAR` использует отдельный 12-bit address path и не потребляет DATA BUS.
+`E_SEL` выбирает действие: `000 E_NONE`, `001 E_A`, `010 E_B`, `011 E_IRH`, `100 E_IRL`, `101 E_MAR`; `110` и `111` reserved. `E_MAR` использует отдельный 12-bit address path и не потребляет DATA BUS.
 
 `ALU_MODE`: `000 ALU_ADD`, `001 ALU_SUB`; `010..111` reserved. `ADDR_SEL=0` выбирает PC, `ADDR_SEL=1` — IR operand. Если `E_SEL != E_MAR`, ADDR_SEL не имеет architectural effect.
 
 `PC_OP`: `00 PC_HOLD`, `01 PC_INC`, `10 PC_LOAD`, `11 PC_COND_LOAD`. Conditional load выбирает C/Z/S/O по opcode через external branch logic.
 
-`RAM_WE=1` означает write DATA BUS byte в `SRAM[MAR]`; CPU должен own memory, DATA BUS должен иметь valid source, MAR — valid address. Physical `/WE`, `/OE`, `/CE` формируются memory-control и ownership arbitration.
+`RAM_WE=1` означает запись byte с DATA BUS в `SRAM[MAR]`; CPU должен владеть memory, DATA BUS должен иметь valid source, MAR — valid address. Physical `/WE`, `/OE`, `/CE` формируются memory-control и ownership arbitration.
 
-## 3. FLAGS coupling
+## 3. Связь с FLAGS
 
-Independent flags-load command отсутствует. Decoded `E_A` — load-enable event FLAGS:
+Independent flags-load command отсутствует. Decoded `E_A` — событие load-enable для FLAGS:
 
 ```text
 FLAGS_LOAD_INTERNAL = E_A
@@ -53,7 +53,7 @@ FLAGS_LOAD_INTERNAL = E_A
 
 ## 4. STEP_END и HALT
 
-`STEP_END` исполняет текущую microinstruction и возвращает microstep counter в T0 вместо increment. Его можно комбинировать с register, PC или memory actions.
+`STEP_END` исполняет текущую microinstruction и возвращает microstep counter в T0 вместо increment. Его можно комбинировать с действиями над register, PC или memory.
 
 HALT использует canonical neutral control word:
 
@@ -71,8 +71,8 @@ OE_SEL = OE_NONE
 
 На rising edge `HALT_STATE` становится 1. Затем microstep counter и architectural CPU state удерживаются до RESET. RESET имеет priority, очищает HALT и возвращает counter в T0. Reserved opcodes используют тот же neutral HALT word на T4.
 
-## 5. Validation rules
+## 5. Правила валидации
 
-Generator должен reject: reserved OE/E/ALU codes; `RAM_WE=1` с `OE_NONE`; bit 13 = 1; `OE_SRAM` вместе с RAM_WE; E_MAR с undefined address source; invalid PC operations; sequences, не завершающиеся к T15; non-canonical HALT или HALT с write action; multiple DATA BUS sources; DATA BUS consumer без ровно одного producer; conditional jump по undefined flag в strict mode.
+Generator должен отвергать: reserved OE/E/ALU codes; `RAM_WE=1` с `OE_NONE`; bit 13 = 1; `OE_SRAM` вместе с RAM_WE; E_MAR с undefined address source; invalid PC operations; sequences, не завершающиеся к T15; non-canonical HALT или HALT с write action; multiple DATA BUS sources; DATA BUS consumer без ровно одного producer; conditional jump по undefined flag в strict mode.
 
 `OE_NONE` означает no producer (`HIGH_Z`/`None`). Consumers: `E_A`, `E_B`, `E_IRH`, `E_IRL`, `RAM_WE`; `E_MAR` не consumer. One producer без consumer разрешён для bring-up/debugging. Control word использует logical active-high semantics; physical inversion остаётся в decoder/interface circuitry.

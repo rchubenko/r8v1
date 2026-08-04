@@ -1,3 +1,3 @@
 # `programs/`
 
-Boundary for future demonstration and diagnostic programs. No program is added in Milestone 0.
+Граница для будущих демонстрационных и диагностических programs. В Milestone 0 programs не добавляются.

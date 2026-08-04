@@ -1,12 +1,12 @@
-# ADR-0002: Software-First Co-Design
+# ADR-0002: Совместная разработка от программной модели
 
-## Status
+## Статус
 
-Accepted
+Принято
 
 ## Контекст
 
-Создание hardware первым делает архитектурные ошибки дорогими. Независимое создание software и hardware создаёт риск divergence.
+Создание hardware первым делает архитектурные ошибки дорогими. Независимое создание software и hardware создаёт риск расхождения.
 
 ## Решение
 
@@ -15,7 +15,7 @@ Accepted
 1. ISA reference emulator;
 2. microarchitecture simulator, управляемый real control words и microsteps.
 
-После установления software parity последовательно заменять coherent software subsystems hardware backends.
+После установления software parity последовательно заменять согласованные software subsystems аппаратными backends.
 
 ## Последствия
 

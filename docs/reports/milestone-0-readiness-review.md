@@ -1,6 +1,6 @@
-# Milestone 0 Repository Readiness Review
+# Проверка готовности репозитория к Milestone 0
 
-## 1. Repository readiness summary
+## 1. Итог проверки готовности репозитория
 
 Репозиторий **не готов к непосредственному выполнению Milestone 0**.
 
@@ -14,7 +14,7 @@
 
 Архитектурных блокеров для Milestone 0 не обнаружено.
 
-## 2. Verified architecture baseline
+## 2. Проверенная архитектурная база
 
 | Область | Источники | Результат | Статус |
 | ------- | --------- | --------- | ------ |
@@ -38,7 +38,7 @@
 | Active ADR index | `docs/adr/README.md`, ADR files | ADR-0001..0010, все Accepted и индексированы | `CONSISTENT` |
 | Architecture inception status | `docs/reports/architecture-inception.md` | Документ явно заявляет отсутствие unresolved decisions blocking Milestone 0/1 | `CONSISTENT` |
 
-## 3. Repository findings
+## 3. Результаты проверки репозитория
 
 ### Git
 
@@ -142,7 +142,7 @@ Broken Markdown links не обнаружены.
 
 Следовательно, toolchain пока не утверждён.
 
-## 4. Toolchain options
+## 4. Варианты toolchain
 
 | Вариант | ISA emulator | Microarchitecture simulator | Fixed-width state | Deterministic tests | CLI assembler/loader | Raspberry Pi | Setup | Анализ и сопровождение |
 | ------- | ------------ | --------------------------- | ----------------- | ------------------ | ------------------- | ------------ | ------ | ----------------------- |
@@ -171,7 +171,7 @@ Broken Markdown links не обнаружены.
 
 Настройку toolchain до отдельного утверждения выполнять не следует.
 
-## 5. Proposed Milestone 0 execution plan
+## 5. Предлагаемый план выполнения Milestone 0
 
 ### Task 0.0 — Initialize repository boundary and Git governance
 
@@ -325,7 +325,7 @@ Broken Markdown links не обнаружены.
 - **Риски:** merge unrelated changes или overstated hardware status.
 - **Commit/tag:** tag `v1-m0-foundation` допускается только после merge и verification; до этого tag не создавать.
 
-## 6. Proposed branch and atomic commits
+## 6. Предлагаемая ветка и атомарные commits
 
 Предлагаемая ветка:
 
