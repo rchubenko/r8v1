@@ -1,0 +1,49 @@
+[project]
+name = "r8v1"
+version = "0.1.0"
+description = "R8 v1 repository foundation"
+requires-python = ">=3.12,<3.14"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "R8 v1 contributors" }]
+dependencies = []
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.uv]
+package = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["r8_foundation"]
+
+[dependency-groups]
+dev = [
+    "mypy>=1.15,<2",
+    "pytest>=8.3,<9",
+    "ruff>=0.9,<1",
+]
+
+[tool.pytest.ini_options]
+addopts = "--strict-config --strict-markers"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+extend-exclude = ["docs"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+files = ["r8_foundation", "tests"]
+exclude = ["^docs/"]
