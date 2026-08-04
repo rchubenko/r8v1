@@ -1,436 +1,99 @@
 # Milestone 0: Repository Foundation
 
-> Этот план сохранён как normative scope Milestone 0. Поясняющий текст переведён на русский; identifiers, paths, commands и commit names сохранены.
+## Цель и результат
 
-## Goal
+Создать stable и reproducible monorepo foundation, которая enforces approved R8 v1 architecture до CPU, emulator, simulator, assembler, loader или hardware implementation.
 
-Create a stable, reproducible monorepo foundation that enforces the approved R8 v1 architecture before any CPU, emulator, simulator, assembler, loader, or hardware implementation begins.
+К завершению active documents и ADR согласованы, governance присутствует, skeleton создан, deterministic build/test harness работает из clean checkout, architecture checks имеют entry points, CPU behavior не реализован, а `main` готов к Milestone 1 component models.
 
-## Milestone result
+## Источники и scope
 
-At completion:
+Источники: `AGENTS.md`, `docs/architecture.md`, `docs/isa.md`, `docs/microarchitecture.md`, `docs/control-word.md`, `docs/memory.md` и accepted ADR из `docs/adr/README.md`.
 
-- active architecture documents and ADRs form one internally consistent baseline;
-- repository-wide agent rules are present;
-- the approved monorepo skeleton exists;
-- a minimal deterministic build and test harness works from a clean checkout;
-- architectural consistency and generated-artifact checks have defined entry points;
-- no CPU behavior has been implemented;
-- `main` is stable and ready for Milestone 1 component models.
+Scope: approved normative clarifications, ADR index/ADR-0010, root governance, monorepo skeleton, language/build manifest, minimal test framework, reproducible scripts, documentation и architecture consistency checks.
 
-## Sources
+Non-goals: CPU component behavior, ISA execution, control-word classes, generated microcode, microarchitecture simulation, assembler, Raspberry Pi GPIO, SRAM loader, schematics, OpenCode commands/subagents/complex automation, CI beyond local baseline и compiler.
 
-- `AGENTS.md`;
-- `docs/architecture.md`;
-- `docs/isa.md`;
-- `docs/microarchitecture.md`;
-- `docs/control-word.md`;
-- `docs/memory.md`;
-- accepted ADRs listed in `docs/adr/README.md`.
+## Последовательные задачи
 
-## Milestone scope
+### Task 0.1 — Architecture baseline
 
-- normative documentation updates for approved software-model semantics;
-- ADR index and ADR-0010;
-- root `AGENTS.md`;
-- monorepo directory skeleton;
-- language/build manifest selection;
-- minimal test framework;
-- minimal reproducible repository scripts;
-- documentation and architecture consistency checks;
-- contribution and verification documentation.
+Проверить `flags_defined_mask`, undefined-flag modes, `HIGH_Z`, producer/consumer invariant, canonical HALT, PC boundary, exact 4096-byte image, software SRAM initialization и active ADR index. Не выбирать новые behavior и не менять ISA, registers, control word, microsequences, reset, clock или ownership.
 
-## Non-goals
+Acceptance: ровно один active ADR-0005, ADR-0010 accepted/indexed, ISA/microarchitecture/control-word/memory/architecture согласованы, links исправны. Checks: duplicate ADR scan, `FLAGS_LOAD` review, heading/link check и manual normative review.
 
-- CPU component behavior;
-- ISA execution;
-- control-word classes or generated microcode;
-- microarchitecture simulation;
-- assembler parsing or encoding;
-- Raspberry Pi GPIO code;
-- SRAM loader implementation;
-- hardware schematics or wiring;
-- OpenCode custom commands, subagents, or complex automation;
-- CI beyond a minimal local reproducibility baseline;
-- compiler work.
+### Task 0.2 — Repository governance
 
-## Task 0.1 — Finalize the architecture baseline
+Закрепить sources-of-truth order, no-guessing policy, development sequence, stable `main`, hardware statuses, test-layer separation, generated-artifact policy, documentation, review и commit requirements. OpenCode commands, merge automation и CI не добавлять.
 
-### Goal
+Acceptance: root `AGENTS.md` требует `NOT_TESTED`, `PASS`, `FAIL`, `BLOCKED`, запрещает inferred hardware `PASS`, требует specification -> software -> tests -> hardware -> regression -> documentation и complete software CPU до hardware integration. Проверка — policy checklist.
 
-Commit the approved normative clarifications without changing unrelated architecture.
+### Task 0.3 — Monorepo skeleton
 
-### Scope
+Создать approved package boundaries и только нужные package markers, root README, `.gitignore` и один manifest. Не создавать `compiler/`, placeholder production classes, speculative APIs или generated binaries.
 
-- defined-mask and undefined-flag diagnostic semantics;
-- HIGH_Z DATA BUS and producer/consumer invariant;
-- canonical neutral HALT word and edge semantics;
-- 12-bit PC wraparound and boundary fetch;
-- exact 4096-byte executable image and software SRAM initialization;
-- active ADR index.
+Acceptance: approved top-level boundaries существуют, package discovery/import smoke test проходит, structure соответствует `docs/repository-structure.md`, manual setup документирован. Проверки: layout, import smoke test, `git diff --check`, clean-tree check.
 
-### Non-goals
+### Task 0.4 — Software toolchain
 
-- selecting additional behavior;
-- implementation code;
-- physical circuit decisions.
+Закрепить supported Python version, `pyproject.toml`, `uv`, lockfile, Ruff, mypy и pytest. Runtime dependencies не добавлять без необходимости.
 
-### Acceptance criteria
+Acceptance: clean install из manifest/lock, formatter/static/test checks проходят, ошибки дают non-zero exit code, глобальные undeclared dependencies не нужны. Проверки: version report, install и intentional failure propagation.
 
-- exactly one active ADR-0005 exists;
-- ADR-0010 is accepted and indexed;
-- ISA, microarchitecture, control-word, memory, and architecture documents agree;
-- no unrelated opcode, register, control-word field, microsequence, reset, clock, or ownership rule changes;
-- all internal Markdown links resolve.
+### Task 0.5 — Deterministic test harness
 
-### Tests
+Добавить только package metadata, deterministic runner, layout, required-document, ADR и Markdown-link tests. ISA/CPU behavior tests не добавлять.
 
-- search for duplicate ADR numbers;
-- search for contradictory `FLAGS_LOAD` statements;
-- check heading and link consistency;
-- review normative statements against the approved decisions.
+Acceptance: repeated runs одинаковы, clean checkout проходит, test failure имеет non-zero exit code.
 
-### Documentation
+### Task 0.6 — Reproducible scripts
 
-- affected normative documents;
-- `docs/adr/README.md`;
-- ADR-0010.
+Создать `scripts/verify` и `scripts/check-docs`. `verify` запускает Ruff format, Ruff lint, mypy, pytest, docs checks и `git diff --check`. Scripts не изменяют source, не commit/push и не выполняют hardware actions. `scripts/generate` не создаётся до появления generated artifacts.
 
-### Recommended commits
+### Task 0.7 — Architecture consistency gates
+
+Механически проверять required files, unique ADR numbers, index completeness, reserved opcode range, control-word width/reserved bit, memory/image constants и independent `FLAGS_LOAD`. Разрешать `FLAGS_LOAD_INTERNAL` и explicit negative statements. Не заменять human review natural-language theorem checker.
+
+Acceptance: duplicated ADR, missing index entry и invalid machine-checkable constants fail с file locations; approved baseline passes. Нужны positive/negative deterministic fixtures.
+
+### Task 0.8 — Documentation и clean checkout
+
+Обновить README, `docs/testing/software.md`, command map, prerequisites, generated-artifact policy и clean-checkout instructions. Проверить links, `git diff --check`, clean-tree и отсутствие overstated hardware claims.
+
+### Task 0.9 — Final regression
+
+Проверить полный diff, architecture consistency, docs, generated artifacts, scope и clean checkout. Добавить `docs/milestones/milestone-0-report.md` с exact verification performed. Не начинать Milestone 1 и physical testing.
+
+Acceptance: `scripts/verify` проходит, CPU/emulator/simulator/assembler/loader behavior отсутствует, hardware status `NOT_TESTED`, `main` stable.
+
+### Task 0.10 — Stable `main`
+
+После полного review merge feature branch в stable `main`, повторно выполнить verification и только затем push. Tag до завершения merge и verification не создавать; optional tag — `v1-m0-foundation`.
+
+## Atomic commits
 
 ```text
-spec: define deterministic software model semantics
-spec: align normative documents with ADR-0010
-```
-
-## Task 0.2 — Add repository governance
-
-### Goal
-
-Establish repository-wide rules before implementation starts.
-
-### Scope
-
-- sources-of-truth order;
-- no-guessing and architecture-change policy;
-- required development sequence;
-- stable `main` rules;
-- hardware verification statuses;
-- test-layer separation;
-- generated-artifact and documentation policy;
-- planning, review, and commit requirements.
-
-### Non-goals
-
-- OpenCode command implementation;
-- automated branch or merge management;
-- CI enforcement.
-
-### Acceptance criteria
-
-- root `AGENTS.md` exists;
-- it uses exactly `NOT_TESTED`, `PASS`, `FAIL`, and `BLOCKED` for hardware status;
-- it explicitly forbids inferred hardware `PASS`;
-- it requires specification → software → tests → hardware → regression → documentation;
-- it requires the complete software CPU before hardware integration;
-- it explicitly defers workflow commands.
-
-### Tests
-
-- policy checklist review;
-- search for required status names and development sequence;
-- confirm no conflicting workflow policy exists.
-
-### Documentation
-
-- `AGENTS.md` only.
-
-### Recommended commit
-
-```text
-docs: add repository agent policy
-```
-
-## Task 0.3 — Create the monorepo skeleton
-
-### Goal
-
-Create the approved package and directory boundaries without production behavior.
-
-### Scope
-
-- directories defined in `docs/repository-structure.md`;
-- package markers only where required by the chosen language;
-- root README updates;
-- `.gitignore`;
-- one build/project manifest;
-- no empty generated binaries committed.
-
-### Non-goals
-
-- placeholder CPU classes;
-- speculative APIs;
-- dead production modules;
-- compiler directory.
-
-### Acceptance criteria
-
-- all approved top-level directories exist;
-- package discovery/import smoke test succeeds;
-- no production file claims unimplemented behavior;
-- repository structure matches its document;
-- clean checkout has no required manual setup beyond documented tool installation.
-
-### Tests
-
-- directory-layout check;
-- import/package discovery smoke test;
-- `git diff --check`;
-- clean-tree check after build/test.
-
-### Documentation
-
-- root README repository map;
-- `docs/repository-structure.md`.
-
-### Recommended commits
-
-```text
+docs: translate project documentation to Russian
+docs: establish R8 v1 architecture baseline
 build: create monorepo skeleton
-docs: document repository structure
+build: configure Python development toolchain
+test: add repository foundation checks
+scripts: add reproducible verification commands
+docs: document local software verification
 ```
 
-## Task 0.4 — Establish the software toolchain
-
-### Goal
-
-Choose and configure one minimal, reproducible development toolchain for upcoming software milestones.
-
-### Scope
-
-- supported runtime version;
-- dependency management;
-- formatter;
-- linter/static analysis;
-- test runner;
-- deterministic configuration in the repository.
-
-### Non-goals
-
-- framework-heavy application structure;
-- packaging for end users;
-- performance optimization;
-- hardware libraries.
-
-### Acceptance criteria
-
-- supported runtime is documented;
-- dependencies install from the committed manifest/lock data;
-- formatter check, static check, and empty/basic test suite pass;
-- commands return meaningful non-zero exit codes on failure;
-- no globally installed undeclared dependency is required.
-
-### Tests
-
-- clean-environment install where practical;
-- intentional formatter/linter/test failure confirms propagation;
-- version-report command.
-
-### Documentation
-
-- local development prerequisites;
-- exact installation and verification commands.
-
-### Recommended commits
-
-```text
-build: configure software development toolchain
-test: add foundation smoke tests
-```
-
-## Task 0.5 — Add minimal reproducible scripts
-
-### Goal
-
-Provide stable shell entry points without introducing OpenCode-specific workflow automation.
-
-### Scope
-
-- `scripts/verify`;
-- `scripts/check-docs`;
-- `scripts/generate` as a safe no-op or explicit future hook until generated sources exist;
-- clear exit-code behavior.
-
-### Non-goals
-
-- `/plan`, `/verify`, `/docs`, `/review`, or `/commit` OpenCode commands;
-- subagent orchestration;
-- automatic commits or pushes;
-- hardware status mutation.
-
-### Acceptance criteria
-
-`scripts/verify` runs, at minimum:
-
-- formatter check;
-- static analysis;
-- tests;
-- documentation checks;
-- generated-artifact consistency check when generators exist;
-- `git diff --check` or equivalent repository whitespace validation.
-
-The scripts do not modify source files during verification. Temporary build output is ignored and removed or reproducible.
-
-### Tests
-
-- success from a clean repository;
-- failure propagation from each underlying check;
-- shell syntax validation;
-- execution from repository root.
-
-### Documentation
-
-- `docs/testing/software.md`;
-- root README command summary.
-
-### Recommended commits
-
-```text
-scripts: add reproducible repository checks
-docs: document local verification
-```
-
-## Task 0.6 — Add architecture consistency checks
-
-### Goal
-
-Catch accidental divergence before implementation grows.
-
-### Scope
-
-Initially lightweight checks for:
-
-- unique active ADR numbers;
-- active ADR index completeness;
-- reserved opcode range consistency;
-- control-word width and reserved bit consistency;
-- memory size and image-size consistency;
-- required architecture document presence;
-- absence of the superseded explicit `FLAGS_LOAD` decision in active sources.
-
-### Non-goals
-
-- full natural-language theorem checking;
-- generating architecture from code;
-- replacing human review.
-
-### Acceptance criteria
-
-- a deliberately duplicated ADR number fails;
-- a missing indexed ADR fails;
-- contradictory canonical constants fail where machine-checkable;
-- the approved baseline passes;
-- checks report actionable file locations.
-
-### Tests
-
-- fixture-based positive and negative tests;
-- deterministic output and exit status.
-
-### Documentation
-
-- description of what is and is not mechanically checked.
-
-### Recommended commit
-
-```text
-test: add architecture consistency gates
-```
-
-## Task 0.7 — Foundation review and milestone closure
-
-### Goal
-
-Verify that Milestone 0 contains governance and infrastructure only and leaves `main` ready for component models.
-
-### Scope
-
-- full diff review;
-- architecture consistency review;
-- clean-checkout verification;
-- documentation review;
-- milestone report.
-
-### Non-goals
-
-- adding “small” CPU implementations during cleanup;
-- starting Milestone 1 in the same commit;
-- physical hardware testing.
-
-### Acceptance criteria
-
-- all Milestone 0 tasks meet their criteria;
-- `scripts/verify` passes from a clean checkout;
-- no CPU/emulator/simulator/assembler/loader behavior exists;
-- hardware status is `NOT_TESTED` and no physical PASS is claimed;
-- `main` is stable;
-- milestone report lists exact verification performed;
-- milestone tag may be created only after merge and verification.
-
-### Tests
-
-- full foundation verification;
-- repository cleanliness check;
-- manual architecture and scope review.
-
-### Documentation
-
-```text
-docs/milestones/milestone-0-report.md
-```
-
-### Recommended commits
-
-```text
-docs: add milestone 0 verification report
-```
-
-Optional tag after completion:
-
-```text
-v1-m0-foundation
-```
-
-## Suggested atomic commit sequence
-
-1. `spec: define deterministic software model semantics`
-2. `spec: align normative documents with ADR-0010`
-3. `docs: add repository agent policy`
-4. `docs: document repository structure`
-5. `build: create monorepo skeleton`
-6. `build: configure software development toolchain`
-7. `test: add foundation smoke tests`
-8. `scripts: add reproducible repository checks`
-9. `test: add architecture consistency gates`
-10. `docs: document local verification`
-11. `docs: add milestone 0 verification report`
-
-Commits may be combined only when the resulting commit remains cohesive, independently verifiable, and easily revertible.
+Commits можно объединять только если resulting commit cohesive, independently verifiable и легко revertible. Перед каждым commit: relevant tests, complete diff review, docs sync, generated-artifact check, no unrelated files и `git diff --check`.
 
 ## Milestone exit gate
-
-Milestone 0 is complete only when all of the following are true:
 
 ```text
 architecture baseline consistent
 AGENTS.md approved
 monorepo structure present
-toolchain reproducible
 foundation tests pass
 architecture gates pass
-documentation current
 hardware status = NOT_TESTED
 main stable
 ```
 
-OpenCode workflow commands remain deferred. Their need will be evaluated after real repeated work during Milestones 1–2.
+OpenCode workflow commands остаются deferred до повторяющейся repository work.
