@@ -35,7 +35,7 @@
 | M1-004 | B | Реализовать A и B register boundaries | COMPLETED | `004-a-b-register-boundaries.md` | — | Решён вариант B: generic `FixedWidthRegister` instances |
 | M1-005 | B | Реализовать MAR | COMPLETED | `005-mar.md` | — | Named 12-bit storage boundary |
 | M1-006 | B | Реализовать Program Counter | COMPLETED | `006-program-counter.md` | — | Modulo increment only; hold is implicit |
-| M1-007 | B | Реализовать Instruction Register | PLANNED | `007-instruction-register.md` | — | — |
+| M1-007 | B | Реализовать Instruction Register | COMPLETED | `007-instruction-register.md` | — | Independent IRH/IRL storage and derived views |
 | M1-008 | C | Реализовать ALU ADD | PLANNED | `008-alu-add.md` | — | — |
 | M1-009 | C | Реализовать ALU SUB | PLANNED | `009-alu-sub.md` | — | — |
 | M1-010 | C | Объединить ADD/SUB в публичную ALU model | PLANNED | `010-public-alu-model.md` | — | — |
