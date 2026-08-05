@@ -15,6 +15,7 @@ from .instruction_register import InstructionRegister
 from .mar import MemoryAddressRegister
 from .program_counter import ProgramCounter
 from .register import FixedWidthRegister
+from .sram import SRAM, SRAM_SIZE
 from .values import (
     ADDRESS_BITS,
     ADDRESS_MASK,
@@ -49,6 +50,8 @@ __all__ = [
     "NIBBLE_MASK",
     "ProgramCounter",
     "SubtractResult",
+    "SRAM",
+    "SRAM_SIZE",
     "InvalidComponentValue",
     "add",
     "evaluate",
