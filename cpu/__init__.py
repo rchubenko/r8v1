@@ -15,7 +15,7 @@ from .instruction_register import InstructionRegister
 from .mar import MemoryAddressRegister
 from .program_counter import ProgramCounter
 from .register import FixedWidthRegister
-from .sram import SRAM, SRAM_SIZE
+from .sram import SRAM, SRAM_SIZE, InvalidMemoryImage
 from .values import (
     ADDRESS_BITS,
     ADDRESS_MASK,
@@ -53,6 +53,7 @@ __all__ = [
     "SRAM",
     "SRAM_SIZE",
     "InvalidComponentValue",
+    "InvalidMemoryImage",
     "add",
     "evaluate",
     "resolve_data_bus",

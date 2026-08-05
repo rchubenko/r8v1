@@ -45,7 +45,7 @@
 | M1-014 | D | Реализовать FLAGS latch policy для записи A | COMPLETED | `014-flags-latch-policy.md` | — | Stateless full/partial-defined write policy with preserve/reset |
 | M1-015 | D | Добавить exhaustive/parameterized flags tests | COMPLETED | `015-flags-exhaustive-tests.md` | — | 65536 ADD, 65536 SUB and 1024 non-ALU policy cases |
 | M1-016 | E | Реализовать SRAM storage model | COMPLETED | `016-sram-storage.md` | — | Fixed 4096-byte zero-filled storage with strict read/write validation |
-| M1-017 | E | Реализовать full-image replacement | PLANNED | `017-full-image-replacement.md` | — | — |
+| M1-017 | E | Реализовать full-image replacement | COMPLETED | `017-full-image-replacement.md` | — | Atomic replacement of exact 4096-byte bytes-like image |
 | M1-018 | E | Реализовать MICROSTEP counter | PLANNED | `018-microstep-counter.md` | — | — |
 | M1-019 | E | Реализовать HALT latch | PLANNED | `019-halt-latch.md` | — | — |
 | M1-020 | F | Создать component-state container | PLANNED | `020-component-state-container.md` | — | Условная задача |
