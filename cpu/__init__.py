@@ -11,6 +11,7 @@ from .flags_policy import (
     latch_flags_for_non_alu_write,
     preserve_flags,
 )
+from .halt import HaltLatch
 from .instruction_register import InstructionRegister
 from .mar import MemoryAddressRegister
 from .microstep import MicrostepCounter
@@ -45,6 +46,7 @@ __all__ = [
     "FlagsDefinedMask",
     "FlagsSnapshot",
     "FixedWidthRegister",
+    "HaltLatch",
     "InstructionRegister",
     "MemoryAddressRegister",
     "MicrostepCounter",
