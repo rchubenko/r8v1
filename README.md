@@ -47,7 +47,7 @@ uv sync --dev
 
 ## Статус
 
-Текущая работа относится к Milestone 0 — Repository Foundation. Реализация CPU, ISA emulator, simulator микроархитектуры, assembler и loader не начата. Статус аппаратной проверки: `NOT_TESTED`.
+Milestone 0 — Repository Foundation завершён; текущая работа относится к Milestone 1 — Component Models. Реализация CPU, ISA emulator, simulator микроархитектуры, assembler и loader не начата. Статус аппаратной проверки: `NOT_TESTED`.
 
 ## Управление проектом
 
@@ -55,3 +55,5 @@ uv sync --dev
 - `docs/repository-structure.md` — утверждённая структура monorepo.
 - `docs/plans/milestone-0-repository-foundation.md` — план Milestone 0.
 - `docs/reports/milestone-0-readiness-review.md` — проверка готовности.
+- `docs/plans/milestone-1-component-models.md` — план Milestone 1.
+- `docs/reports/milestone-1/README.md` — индекс отчётов Milestone 1.
