@@ -3,6 +3,7 @@
 from .alu import ALUMode, ALUResult, evaluate
 from .alu_add import AddResult, add
 from .alu_sub import SubtractResult, subtract
+from .data_bus import DataBusContention, resolve_data_bus
 from .instruction_register import InstructionRegister
 from .mar import MemoryAddressRegister
 from .program_counter import ProgramCounter
@@ -28,6 +29,7 @@ __all__ = [
     "ALUResult",
     "BYTE_BITS",
     "BYTE_MASK",
+    "DataBusContention",
     "FixedWidthRegister",
     "InstructionRegister",
     "MemoryAddressRegister",
@@ -38,6 +40,7 @@ __all__ = [
     "InvalidComponentValue",
     "add",
     "evaluate",
+    "resolve_data_bus",
     "subtract",
     "validate_address",
     "validate_byte",

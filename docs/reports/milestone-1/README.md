@@ -39,7 +39,7 @@
 | M1-008 | C | Реализовать ALU ADD | COMPLETED | `008-alu-add.md` | — | Stateless ADD with exhaustive flags coverage |
 | M1-009 | C | Реализовать ALU SUB | COMPLETED | `009-alu-sub.md` | — | Stateless SUB with no-borrow carry and exhaustive flags coverage |
 | M1-010 | C | Объединить ADD/SUB в публичную ALU model | COMPLETED | `010-unified-alu.md` | — | Stateless unified API with explicit ADD/SUB modes |
-| M1-011 | C | Реализовать DATA BUS resolver | PLANNED | `011-data-bus-resolver.md` | — | — |
+| M1-011 | C | Реализовать DATA BUS resolver | COMPLETED | `011-data-bus-resolver.md` | — | Stateless resolver with HIGH_Z and contention detection |
 | M1-012 | C | Реализовать address source selector | PLANNED | `012-address-source-selector.md` | — | — |
 | M1-013 | D | Реализовать Flags value и defined mask | PLANNED | `013-flags-value-defined-mask.md` | — | — |
 | M1-014 | D | Реализовать FLAGS latch policy для записи A | PLANNED | `014-flags-latch-policy.md` | — | — |
