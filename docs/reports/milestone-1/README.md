@@ -36,7 +36,7 @@
 | M1-005 | B | Реализовать MAR | COMPLETED | `005-mar.md` | — | Named 12-bit storage boundary |
 | M1-006 | B | Реализовать Program Counter | COMPLETED | `006-program-counter.md` | — | Modulo increment only; hold is implicit |
 | M1-007 | B | Реализовать Instruction Register | COMPLETED | `007-instruction-register.md` | — | Independent IRH/IRL storage and derived views |
-| M1-008 | C | Реализовать ALU ADD | PLANNED | `008-alu-add.md` | — | — |
+| M1-008 | C | Реализовать ALU ADD | COMPLETED | `008-alu-add.md` | — | Stateless ADD with exhaustive flags coverage |
 | M1-009 | C | Реализовать ALU SUB | PLANNED | `009-alu-sub.md` | — | — |
 | M1-010 | C | Объединить ADD/SUB в публичную ALU model | PLANNED | `010-public-alu-model.md` | — | — |
 | M1-011 | C | Реализовать DATA BUS resolver | PLANNED | `011-data-bus-resolver.md` | — | — |
