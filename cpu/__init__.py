@@ -1,5 +1,6 @@
 """Reusable component primitives for the R8 v1 CPU."""
 
+from .alu import ALUMode, ALUResult, evaluate
 from .alu_add import AddResult, add
 from .alu_sub import SubtractResult, subtract
 from .instruction_register import InstructionRegister
@@ -23,6 +24,8 @@ __all__ = [
     "ADDRESS_BITS",
     "ADDRESS_MASK",
     "AddResult",
+    "ALUMode",
+    "ALUResult",
     "BYTE_BITS",
     "BYTE_MASK",
     "FixedWidthRegister",
@@ -34,6 +37,7 @@ __all__ = [
     "SubtractResult",
     "InvalidComponentValue",
     "add",
+    "evaluate",
     "subtract",
     "validate_address",
     "validate_byte",
