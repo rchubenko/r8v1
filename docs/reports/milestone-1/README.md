@@ -4,6 +4,10 @@
 
 Каталог хранит отчёты о завершённых инженерных задачах Milestone 1. Этот индекс не является ADR и не является architecture specification.
 
+**Статус Milestone 1:** `COMPLETED`
+
+**Аппаратная проверка:** `NOT_TESTED`
+
 ## Правила
 
 Для каждой задачи необходимо:
@@ -50,7 +54,7 @@
 | M1-019 | E | Реализовать HALT latch | COMPLETED | `019-halt-latch.md` | — | Самостоятельный boolean latch; orchestration не входит |
 | M1-020 | F | Создать component-state container | COMPLETED | `020-component-state-container.md` | — | DEFERRED AS UNNECESSARY; production container не добавлен |
 | M1-021 | F | Добавить component-level integration tests | COMPLETED | `021-component-integration-tests.md` | — | 31 deterministic integration cases; production code unchanged |
-| M1-022 | F | Documentation and milestone regression | PLANNED | `022-milestone-regression.md` | — | — |
+| M1-022 | F | Documentation and milestone regression | COMPLETED | `000-final-report.md` | — | Итоговая документация и полная regression; Milestone 1 завершён |
 
 Task 1 report не создаётся заранее: текущая работа фиксирует саму specification и этот index; фактические проверки Task 1 указываются в итоговом инженерном отчёте или commit metadata.
 
@@ -63,10 +67,12 @@ Task 1 report не создаётся заранее: текущая работ�
 002-width-value-primitives.md
 003-fixed-width-register.md
 ...
-022-milestone-regression.md
+000-final-report.md
 ```
 
 Пустые report files заранее не создаются. Для Task 1 строка `Report` намеренно содержит `—`, поскольку отдельный пустой report не добавляется.
+
+Итоговый report Task 22 и Milestone 1 использует специальное имя `000-final-report.md`.
 
 ## Минимальный шаблон отчёта
 

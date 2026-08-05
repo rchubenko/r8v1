@@ -4,7 +4,7 @@
 
 ## Цель
 
-R8 v1 — автономный 8-битный TTL CPU с unified 4 KB SRAM, assembler, Raspberry Pi loader и демонстрационными программами. На текущем этапе CPU и его software models ещё не реализованы.
+R8 v1 — автономный 8-битный TTL CPU с unified 4 KB SRAM, assembler, Raspberry Pi loader и демонстрационными программами. Component models Milestone 1 реализованы; полный CPU ещё не собран.
 
 ## Источники истины
 
@@ -20,7 +20,7 @@ R8 v1 — автономный 8-битный TTL CPU с unified 4 KB SRAM, asse
 ## Карта monorepo
 
 - `specs/` — будущие машиночитаемые definitions.
-- `cpu/` — будущие component models.
+- `cpu/` — component models Milestone 1.
 - `emulator/` — будущий эталонный ISA emulator.
 - `simulator/` — будущий simulator, управляемый control word.
 - `assembler/` — будущий assembler.
@@ -28,7 +28,7 @@ R8 v1 — автономный 8-битный TTL CPU с unified 4 KB SRAM, asse
 - `loader/` — будущий image/loader tooling.
 - `hardware/` — будущая hardware integration.
 - `programs/` — будущие программы.
-- `tests/` — foundation и будущие test layers.
+- `tests/` — foundation, component unit tests и component-level integration tests.
 - `scripts/` — воспроизводимые проверки репозитория.
 - `docs/` — нормативные документы и отчёты.
 
@@ -47,7 +47,7 @@ uv sync --dev
 
 ## Статус
 
-Milestone 0 — Repository Foundation завершён; текущая работа относится к Milestone 1 — Component Models. Реализация CPU, ISA emulator, simulator микроархитектуры, assembler и loader не начата. Статус аппаратной проверки: `NOT_TESTED`.
+Milestone 0 — Repository Foundation и Milestone 1 — Component Models завершены. Реализация CPU execution, ISA emulator, simulator микроархитектуры, assembler и loader не начата. Статус аппаратной проверки: `NOT_TESTED`.
 
 ## Управление проектом
 
@@ -57,3 +57,4 @@ Milestone 0 — Repository Foundation завершён; текущая рабо�
 - `docs/reports/milestone-0-readiness-review.md` — проверка готовности.
 - `docs/plans/milestone-1-component-models.md` — план Milestone 1.
 - `docs/reports/milestone-1/README.md` — индекс отчётов Milestone 1.
+- `docs/reports/milestone-1/000-final-report.md` — итоговый отчёт Milestone 1.
