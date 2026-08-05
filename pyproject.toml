@@ -16,7 +16,7 @@ build-backend = "hatchling.build"
 package = true
 
 [tool.hatch.build.targets.wheel]
-packages = ["r8_foundation"]
+packages = ["r8_foundation", "cpu"]
 
 [dependency-groups]
 dev = [

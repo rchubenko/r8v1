@@ -29,8 +29,8 @@
 
 | ID | Phase | Task | Status | Report | Commit | Notes |
 |---|---|---|---|---|---|---|
-| M1-001 | A | Зафиксировать specification Milestone 1 | COMPLETED | — | — | Documentation-only; отдельный report не создаётся заранее |
-| M1-002 | A | Добавить width/value primitives | PLANNED | `002-width-value-primitives.md` | — | — |
+| M1-001 | A | Зафиксировать specification Milestone 1 | COMPLETED | — | `3dd173d` | Documentation-only; отдельный report не создаётся заранее |
+| M1-002 | A | Добавить width/value primitives | COMPLETED | `002-width-value-primitives.md` | — | Hash текущего commit будет добавлен следующим documentation update |
 | M1-003 | B | Реализовать базовый fixed-width register | PLANNED | `003-fixed-width-register.md` | — | — |
 | M1-004 | B | Реализовать A и B register boundaries | PLANNED | `004-a-b-register-boundaries.md` | — | — |
 | M1-005 | B | Реализовать MAR | PLANNED | `005-mar.md` | — | — |
