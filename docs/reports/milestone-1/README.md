@@ -31,7 +31,7 @@
 |---|---|---|---|---|---|---|
 | M1-001 | A | Зафиксировать specification Milestone 1 | COMPLETED | — | `3dd173d` | Documentation-only; отдельный report не создаётся заранее |
 | M1-002 | A | Добавить width/value primitives | COMPLETED | `002-width-value-primitives.md` | — | Hash текущего commit будет добавлен следующим documentation update |
-| M1-003 | B | Реализовать базовый fixed-width register | PLANNED | `003-fixed-width-register.md` | — | — |
+| M1-003 | B | Реализовать базовый fixed-width register | COMPLETED | `003-fixed-width-register.md` | — | Hash текущего commit будет добавлен следующим documentation update |
 | M1-004 | B | Реализовать A и B register boundaries | PLANNED | `004-a-b-register-boundaries.md` | — | — |
 | M1-005 | B | Реализовать MAR | PLANNED | `005-mar.md` | — | — |
 | M1-006 | B | Реализовать Program Counter | PLANNED | `006-program-counter.md` | — | — |
