@@ -1,5 +1,6 @@
 """Reusable component primitives for the R8 v1 CPU."""
 
+from .address import AddressSource, select_address
 from .alu import ALUMode, ALUResult, evaluate
 from .alu_add import AddResult, add
 from .alu_sub import SubtractResult, subtract
@@ -25,6 +26,7 @@ __all__ = [
     "ADDRESS_BITS",
     "ADDRESS_MASK",
     "AddResult",
+    "AddressSource",
     "ALUMode",
     "ALUResult",
     "BYTE_BITS",
@@ -41,6 +43,7 @@ __all__ = [
     "add",
     "evaluate",
     "resolve_data_bus",
+    "select_address",
     "subtract",
     "validate_address",
     "validate_byte",
