@@ -42,7 +42,7 @@
 | M1-011 | C | Реализовать DATA BUS resolver | COMPLETED | `011-data-bus-resolver.md` | — | Stateless resolver with HIGH_Z and contention detection |
 | M1-012 | C | Реализовать address source selector | COMPLETED | `012-address-source-selector.md` | — | Stateless PC/IR operand selector with strict 12-bit validation |
 | M1-013 | D | Реализовать Flags value и defined mask | COMPLETED | `013-flags-values-defined-mask.md` | — | Immutable concrete values, mask and reset snapshot |
-| M1-014 | D | Реализовать FLAGS latch policy для записи A | PLANNED | `014-flags-latch-policy.md` | — | — |
+| M1-014 | D | Реализовать FLAGS latch policy для записи A | COMPLETED | `014-flags-latch-policy.md` | — | Stateless full/partial-defined write policy with preserve/reset |
 | M1-015 | D | Добавить exhaustive/parameterized flags tests | PLANNED | `015-flags-tests.md` | — | — |
 | M1-016 | E | Реализовать SRAM storage model | PLANNED | `016-sram-storage.md` | — | — |
 | M1-017 | E | Реализовать full-image replacement | PLANNED | `017-full-image-replacement.md` | — | — |

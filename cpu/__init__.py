@@ -6,6 +6,11 @@ from .alu_add import AddResult, add
 from .alu_sub import SubtractResult, subtract
 from .data_bus import DataBusContention, resolve_data_bus
 from .flags import Flag, FlagsDefinedMask, FlagsSnapshot, FlagValues
+from .flags_policy import (
+    latch_flags_for_alu_write,
+    latch_flags_for_non_alu_write,
+    preserve_flags,
+)
 from .instruction_register import InstructionRegister
 from .mar import MemoryAddressRegister
 from .program_counter import ProgramCounter
@@ -48,6 +53,9 @@ __all__ = [
     "add",
     "evaluate",
     "resolve_data_bus",
+    "latch_flags_for_alu_write",
+    "latch_flags_for_non_alu_write",
+    "preserve_flags",
     "select_address",
     "subtract",
     "validate_address",
