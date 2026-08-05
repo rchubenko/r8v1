@@ -5,6 +5,7 @@ from .alu import ALUMode, ALUResult, evaluate
 from .alu_add import AddResult, add
 from .alu_sub import SubtractResult, subtract
 from .data_bus import DataBusContention, resolve_data_bus
+from .flags import Flag, FlagsDefinedMask, FlagsSnapshot, FlagValues
 from .instruction_register import InstructionRegister
 from .mar import MemoryAddressRegister
 from .program_counter import ProgramCounter
@@ -32,6 +33,10 @@ __all__ = [
     "BYTE_BITS",
     "BYTE_MASK",
     "DataBusContention",
+    "Flag",
+    "FlagValues",
+    "FlagsDefinedMask",
+    "FlagsSnapshot",
     "FixedWidthRegister",
     "InstructionRegister",
     "MemoryAddressRegister",
