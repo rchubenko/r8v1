@@ -51,4 +51,14 @@ Scripts не выполняют commit, push или hardware actions и не и�
 
 Будущие software tests должны быть отделены от simulation tests. Ни один software или simulation test не является hardware `PASS`.
 
+## ISA reference emulator execution policy
+
+ISA reference emulator должен поддерживать `STRICT` и `HARDWARE_LIKE` policy для чтения архитектурно неопределённых flags. Policy является конфигурацией execution environment и не входит в architectural CPU state.
+
+При выполнении conditional jump проверка `flags_defined_mask` выполняется после fetch инструкции и до изменения PC branch action.
+
+В `STRICT` policy чтение undefined flag возвращает non-architectural diagnostic `UNDEFINED_CONDITIONAL_FLAG`. Branch action не выполняется, PC остаётся в post-fetch state, `HALT_STATE` не устанавливается.
+
+В `HARDWARE_LIKE` policy conditional jump использует concrete physical flag value. `flags_defined_mask` не изменяется. Реализация может дополнительно записать warning diagnostic, но execution продолжается.
+
 Hardware verification использует только `NOT_TESTED`, `PASS`, `FAIL`, `BLOCKED`; на этом milestone статус остаётся `NOT_TESTED`.
