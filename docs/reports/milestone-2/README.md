@@ -54,7 +54,7 @@ Index содержит таблицу с обязательными полями
 | ID | Phase | Task | Status | Report | Commit | Notes |
 |---|---|---|---|---|---|---|
 | M2-001 | A | Зафиксировать Milestone 2 plan и report index | COMPLETED | — | — | Documentation baseline этой задачи |
-| M2-002 | A | Зафиксировать emulator state и atomic transition contract | PLANNED | — | — | Не смешивать с CPU или simulator state |
+| M2-002 | A | Зафиксировать emulator state и atomic transition contract | COMPLETED | `002-emulator-execution-contract.md` | — | Atomic architectural contract; implementation не выполнялась |
 | M2-003 | A | Зафиксировать execution policies и diagnostics | PLANNED | — | — | `STRICT`, `HARDWARE_LIKE`, `UNDEFINED_CONDITIONAL_FLAG` |
 | M2-004 | A | Подготовить emulator instruction test matrix | PLANNED | — | — | Deterministic cases без parity |
 | M2-005 | B | Реализовать emulator state и validated image input | PLANNED | — | — | Production implementation |
