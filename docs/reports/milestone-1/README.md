@@ -49,7 +49,7 @@
 | M1-018 | E | Реализовать MICROSTEP counter | COMPLETED | `018-microstep-counter.md` | — | Fixed 4-bit T0..T15 counter with modulo wrap and explicit return T0 |
 | M1-019 | E | Реализовать HALT latch | COMPLETED | `019-halt-latch.md` | — | Самостоятельный boolean latch; orchestration не входит |
 | M1-020 | F | Создать component-state container | COMPLETED | `020-component-state-container.md` | — | DEFERRED AS UNNECESSARY; production container не добавлен |
-| M1-021 | F | Добавить component-level integration tests | PLANNED | `021-component-integration-tests.md` | — | — |
+| M1-021 | F | Добавить component-level integration tests | COMPLETED | `021-component-integration-tests.md` | — | 31 deterministic integration cases; production code unchanged |
 | M1-022 | F | Documentation and milestone regression | PLANNED | `022-milestone-regression.md` | — | — |
 
 Task 1 report не создаётся заранее: текущая работа фиксирует саму specification и этот index; фактические проверки Task 1 указываются в итоговом инженерном отчёте или commit metadata.
