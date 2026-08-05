@@ -13,6 +13,7 @@ from .flags_policy import (
 )
 from .instruction_register import InstructionRegister
 from .mar import MemoryAddressRegister
+from .microstep import MicrostepCounter
 from .program_counter import ProgramCounter
 from .register import FixedWidthRegister
 from .sram import SRAM, SRAM_SIZE, InvalidMemoryImage
@@ -46,6 +47,7 @@ __all__ = [
     "FixedWidthRegister",
     "InstructionRegister",
     "MemoryAddressRegister",
+    "MicrostepCounter",
     "NIBBLE_BITS",
     "NIBBLE_MASK",
     "ProgramCounter",
