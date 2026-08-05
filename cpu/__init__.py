@@ -1,6 +1,7 @@
 """Reusable component primitives for the R8 v1 CPU."""
 
 from .mar import MemoryAddressRegister
+from .program_counter import ProgramCounter
 from .register import FixedWidthRegister
 from .values import (
     ADDRESS_BITS,
@@ -24,6 +25,7 @@ __all__ = [
     "MemoryAddressRegister",
     "NIBBLE_BITS",
     "NIBBLE_MASK",
+    "ProgramCounter",
     "InvalidComponentValue",
     "validate_address",
     "validate_byte",
