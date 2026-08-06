@@ -75,10 +75,10 @@ Hardware status: `NOT_TESTED`.
 
 ## Commit
 
-Expected atomic commit:
+Atomic commit:
 
 ```text
-emulator: add ISA instruction decoding values
+f2c2237 emulator: add ISA instruction decoding values
 ```
 
 Planning correction находится в отдельном commit `f55ea0e` с message `docs: align Milestone 2 task numbering`.

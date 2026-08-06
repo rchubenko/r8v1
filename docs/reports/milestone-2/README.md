@@ -53,19 +53,19 @@ Index содержит таблицу с обязательными полями
 
 | ID | Phase | Task | Status | Report | Commit | Notes |
 |---|---|---|---|---|---|---|
-| M2-001 | A | Зафиксировать Milestone 2 plan и report index | COMPLETED | — | — | Documentation baseline этой задачи |
-| M2-002 | A | Зафиксировать emulator state и atomic transition contract | COMPLETED | [`002-emulator-execution-contract.md`](002-emulator-execution-contract.md) | — | Atomic architectural contract; implementation не выполнялась |
-| M2-003 | B | Добавить opcode и decoded instruction values | COMPLETED | [`003-opcode-and-decoded-instruction-values.md`](003-opcode-and-decoded-instruction-values.md) | — | Typed decode foundation; reserved opcode remain representable |
-| M2-004 | B | Добавить architectural emulator state | COMPLETED | [`004-architectural-emulator-state.md`](004-architectural-emulator-state.md) | — | Architectural state construction and safe observation |
-| M2-005 | B | Реализовать architectural reset | COMPLETED | [`005-architectural-reset.md`](005-architectural-reset.md) | — | Deterministic reset behavior; SRAM preserved |
-| M2-006 | B | Добавить exact executable image loading | COMPLETED | [`006-executable-image-loading.md`](006-executable-image-loading.md) | — | Validated 4096-byte image input; atomic SRAM replacement |
-| M2-007 | B | Реализовать atomic fetch и post-fetch PC behavior | COMPLETED | [`007-atomic-instruction-fetch.md`](007-atomic-instruction-fetch.md) | — | Atomic ISA layer; PC/IR update only |
-| M2-008 | B | Добавить immutable architectural snapshots | COMPLETED | [`008-architectural-state-snapshots.md`](008-architectural-state-snapshots.md) | — | Safe architectural observation; optional full memory capture |
-| M2-009 | C | Реализовать NOP и LDI | COMPLETED | [`009-nop-and-ldi.md`](009-nop-and-ldi.md) | — | Atomic execution boundary for NOP/LDI |
-| M2-010 | C | Реализовать LDA | COMPLETED | [`010-lda.md`](010-lda.md) | — | Atomic LDA execution with full 12-bit addressing |
-| M2-011 | C | Реализовать ADD | COMPLETED | [`011-add.md`](011-add.md) | — | Atomic ADD execution; exhaustive 256 x 256 coverage |
-| M2-012 | C | Реализовать SUB | COMPLETED | [`012-sub.md`](012-sub.md) | — | Atomic SUB execution; exhaustive 256 x 256 coverage |
-| M2-013 | C | Реализовать STA | COMPLETED | [`013-sta.md`](013-sta.md) | — | Atomic STA execution; exact-one-byte and self-modifying coverage |
+| M2-001 | A | Зафиксировать Milestone 2 plan и report index | COMPLETED | [`001-milestone-2-plan-and-index.md`](001-milestone-2-plan-and-index.md) | 92aa04f | Documentation baseline этой задачи |
+| M2-002 | A | Зафиксировать emulator state и atomic transition contract | COMPLETED | [`002-emulator-execution-contract.md`](002-emulator-execution-contract.md) | 4ba49b8 | Atomic architectural contract; implementation не выполнялась |
+| M2-003 | B | Добавить opcode и decoded instruction values | COMPLETED | [`003-opcode-and-decoded-instruction-values.md`](003-opcode-and-decoded-instruction-values.md) | f2c2237 | Typed decode foundation; reserved opcode remain representable |
+| M2-004 | B | Добавить architectural emulator state | COMPLETED | [`004-architectural-emulator-state.md`](004-architectural-emulator-state.md) | 2edc01e | Architectural state construction and safe observation |
+| M2-005 | B | Реализовать architectural reset | COMPLETED | [`005-architectural-reset.md`](005-architectural-reset.md) | d9189b1 | Deterministic reset behavior; SRAM preserved |
+| M2-006 | B | Добавить exact executable image loading | COMPLETED | [`006-executable-image-loading.md`](006-executable-image-loading.md) | 0655304 | Validated 4096-byte image input; atomic SRAM replacement |
+| M2-007 | B | Реализовать atomic fetch и post-fetch PC behavior | COMPLETED | [`007-atomic-instruction-fetch.md`](007-atomic-instruction-fetch.md) | 8503845 | Atomic ISA layer; PC/IR update only |
+| M2-008 | B | Добавить immutable architectural snapshots | COMPLETED | [`008-architectural-state-snapshots.md`](008-architectural-state-snapshots.md) | 11e93bf | Safe architectural observation; optional full memory capture |
+| M2-009 | C | Реализовать NOP и LDI | COMPLETED | [`009-nop-and-ldi.md`](009-nop-and-ldi.md) | 9506ae8 | Atomic execution boundary for NOP/LDI |
+| M2-010 | C | Реализовать LDA | COMPLETED | [`010-lda.md`](010-lda.md) | d36cb20 | Atomic LDA execution with full 12-bit addressing |
+| M2-011 | C | Реализовать ADD | COMPLETED | [`011-add.md`](011-add.md) | fe92ca1 | Atomic ADD execution; exhaustive 256 x 256 coverage |
+| M2-012 | C | Реализовать SUB | COMPLETED | [`012-sub.md`](012-sub.md) | 1d8a2d7 | Atomic SUB execution; exhaustive 256 x 256 coverage |
+| M2-013 | C | Реализовать STA | COMPLETED | [`013-sta.md`](013-sta.md) | cc9a5b1 | Atomic STA execution; exact-one-byte and self-modifying coverage |
 | M2-014 | D | Реализовать JMP | PLANNED | — | — | Unconditional control-flow semantics |
 | M2-015 | D | Реализовать JZ и JN | PLANNED | — | — | Zero/sign conditional branches |
 | M2-016 | D | Реализовать undefined-flag diagnostics | PLANNED | — | — | Approved STRICT/HARDWARE_LIKE diagnostics |

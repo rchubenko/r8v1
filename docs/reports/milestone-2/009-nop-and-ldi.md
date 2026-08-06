@@ -83,10 +83,10 @@ Hardware status: `NOT_TESTED`.
 
 ## Commit
 
-Expected atomic commit:
+Atomic commit:
 
 ```text
-emulator: implement NOP and LDI
+9506ae8 emulator: implement NOP and LDI
 ```
 
 ## Follow-up

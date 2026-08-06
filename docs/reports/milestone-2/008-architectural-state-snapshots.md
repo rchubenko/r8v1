@@ -79,10 +79,10 @@ Hardware status: `NOT_TESTED`.
 
 ## Commit
 
-Expected atomic commit:
+Atomic commit:
 
 ```text
-emulator: add architectural state snapshots
+11e93bf emulator: add architectural state snapshots
 ```
 
 ## Follow-up

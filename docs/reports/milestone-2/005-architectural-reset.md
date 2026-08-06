@@ -90,10 +90,10 @@ Hardware status: `NOT_TESTED`.
 
 ## Commit
 
-Expected atomic commit:
+Atomic commit:
 
 ```text
-emulator: implement architectural reset
+d9189b1 emulator: implement architectural reset
 ```
 
 ## Follow-up

@@ -84,10 +84,10 @@ Hardware status: `NOT_TESTED`.
 
 ## Commit
 
-Expected atomic commit:
+Atomic commit:
 
 ```text
-emulator: implement atomic instruction fetch
+8503845 emulator: implement atomic instruction fetch
 ```
 
 ## Follow-up

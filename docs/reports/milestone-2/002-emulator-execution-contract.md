@@ -154,7 +154,7 @@ Contract не добавляет новых ISA instructions, opcode, registers,
 Atomic commit:
 
 ```text
-docs: define ISA emulator execution contract
+4ba49b8 docs: define ISA emulator execution contract
 ```
 
 Push не выполняется в рамках текущей documentation task.

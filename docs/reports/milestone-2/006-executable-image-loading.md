@@ -78,10 +78,10 @@ Hardware status: `NOT_TESTED`.
 
 ## Commit
 
-Expected atomic commit:
+Atomic commit:
 
 ```text
-emulator: add executable image loading
+0655304 emulator: add executable image loading
 ```
 
 ## Follow-up

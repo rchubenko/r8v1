@@ -87,10 +87,10 @@ Hardware status: `NOT_TESTED`.
 
 ## Commit
 
-Expected atomic commit:
+Atomic commit:
 
 ```text
-emulator: add architectural machine state
+2edc01e emulator: add architectural machine state
 ```
 
 ## Follow-up
