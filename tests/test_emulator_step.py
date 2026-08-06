@@ -55,8 +55,11 @@ def test_step_dispatches_every_opcode(
     state._memory.write(0x123, 0x01)
     _write_instruction(state, 0x000, opcode, 0x123)
 
-    diagnostic = state.step(policy=ExecutionPolicy.HARDWARE_LIKE)
+    result = state.step(policy=ExecutionPolicy.HARDWARE_LIKE)
 
+    diagnostic = result.diagnostic
+    assert result.instruction is not None
+    assert result.instruction.opcode is opcode
     assert state.pc == expected_pc
     assert (state.irh, state.irl) == ((opcode.value << 4) | 0x01, 0x23)
     assert state.halt_state is expected_halt
@@ -84,8 +87,9 @@ def test_step_propagates_undefined_conditional_diagnostics(
     _write_instruction(state, 0x000, Opcode.LDI, 0x042)
     _write_instruction(state, 0x002, opcode, 0xABC)
 
-    assert state.step() is None
-    diagnostic = state.step(policy=policy)
+    assert state.step().diagnostic is None
+    result = state.step(policy=policy)
+    diagnostic = result.diagnostic
 
     assert diagnostic is not None
     assert diagnostic.identifier is DiagnosticIdentifier.UNDEFINED_CONDITIONAL_FLAG
@@ -115,7 +119,8 @@ def test_step_uses_defined_conditional_flags_without_diagnostic(opcode: Opcode) 
     state._flags = _all_flags_true()
     _write_instruction(state, 0x000, opcode, 0xABC)
 
-    diagnostic = state.step(policy=ExecutionPolicy.STRICT)
+    result = state.step(policy=ExecutionPolicy.STRICT)
+    diagnostic = result.diagnostic
 
     assert diagnostic is None
     assert state.pc == 0xABC
@@ -129,11 +134,11 @@ def test_step_fetches_current_sram_after_self_modifying_sta() -> None:
     state._memory.write(0x100, 0x00)
     state._memory.write(0x101, 0x42)
 
-    assert state.step() is None
-    assert state.step() is None
+    assert state.step().diagnostic is None
+    assert state.step().diagnostic is None
     state._pc.load(0x100)
 
-    assert state.step() is None
+    assert state.step().diagnostic is None
     assert state.opcode == Opcode.JMP.value
     assert state.operand == 0x042
     assert state.pc == 0x042
@@ -145,7 +150,7 @@ def test_step_fetches_across_sram_address_boundary(start: int) -> None:
     state._pc.load(start)
     _write_instruction(state, start, Opcode.LDI, 0x042)
 
-    assert state.step() is None
+    assert state.step().diagnostic is None
     assert state.a == 0x42
     assert state.pc == (0x000 if start == 0xFFE else 0x001)
 
@@ -159,13 +164,16 @@ def test_halted_step_is_stable_and_does_not_repeat_diagnostic(opcode: Opcode) ->
 
     assert state.halt_state is True
     if opcode is Opcode.HLT:
-        assert first is None
+        assert first.diagnostic is None
     else:
-        assert first is not None
-        assert first.identifier is DiagnosticIdentifier.ILLEGAL_OPCODE
+        assert first.diagnostic is not None
+        assert first.diagnostic.identifier is DiagnosticIdentifier.ILLEGAL_OPCODE
 
     for _ in range(3):
-        assert state.step() is None
+        halted_result = state.step()
+        assert halted_result.instruction is None
+        assert halted_result.diagnostic is None
+        assert halted_result.pre_state == halted_result.post_state
         assert state.snapshot(include_memory=True) == before
 
 
@@ -174,12 +182,12 @@ def test_step_reset_resumes_from_zero_without_clearing_sram() -> None:
     _write_instruction(state, 0x000, Opcode.HLT, 0x000)
     state._memory.write(0xABC, 0x5A)
 
-    assert state.step() is None
+    assert state.step().diagnostic is None
     state._memory.write(0x000, 0x10)
     state._memory.write(0x001, 0x42)
     state.reset()
 
-    assert state.step() is None
+    assert state.step().diagnostic is None
     assert state.a == 0x42
     assert state.pc == 0x002
     assert state._memory.read(0xABC) == 0x5A
@@ -199,9 +207,9 @@ def test_step_matches_direct_fetch_execute_composition(opcode: Opcode) -> None:
         _write_instruction(state, 0x000, opcode, 0x123)
 
     policy = ExecutionPolicy.HARDWARE_LIKE
-    stepped_diagnostic = stepped.step(policy=policy)
+    stepped_result = stepped.step(policy=policy)
     fetched = composed.fetch_instruction()
     composed_diagnostic = composed.execute_instruction(fetched, policy=policy)
 
-    assert stepped_diagnostic == composed_diagnostic
+    assert stepped_result.diagnostic == composed_diagnostic
     assert stepped.snapshot(include_memory=True) == composed.snapshot(include_memory=True)

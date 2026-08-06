@@ -51,7 +51,7 @@ def test_halted_step_does_not_fetch_or_change_architectural_state() -> None:
     before = state.snapshot(include_memory=True)
 
     for _ in range(3):
-        assert state.step() is None
+        assert state.step().diagnostic is None
         assert state.snapshot(include_memory=True) == before
 
 
@@ -93,7 +93,7 @@ def test_reset_clears_halt_preserves_sram_and_execution_resumes() -> None:
     assert state.flags_defined_mask == FlagsDefinedMask.all()
     assert state._memory.read(0xABC) == 0x5A
 
-    assert state.step() is None
+    assert state.step().diagnostic is None
     assert state.a == 0x42
     assert state.pc == 0x002
 

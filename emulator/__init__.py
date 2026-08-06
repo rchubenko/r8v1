@@ -9,6 +9,7 @@ from .policy import (
     ExecutionPolicy,
     resolve_conditional_flag,
 )
+from .result import StepResult
 from .snapshot import ArchitecturalStateSnapshot
 from .state import ArchitecturalState
 
@@ -22,6 +23,7 @@ __all__ = [
     "DiagnosticSeverity",
     "ExecutionPolicy",
     "Opcode",
+    "StepResult",
     "decode_instruction",
     "resolve_conditional_flag",
 ]

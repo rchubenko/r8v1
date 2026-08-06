@@ -119,8 +119,8 @@ def test_reserved_opcode_halted_steps_do_not_repeat_diagnostic_or_fetch(opcode: 
     before = state.snapshot(include_memory=True)
 
     assert first is not None
-    assert state.step() is None
-    assert state.step() is None
+    assert state.step().diagnostic is None
+    assert state.step().diagnostic is None
     assert state.snapshot(include_memory=True) == before
 
 
@@ -131,8 +131,8 @@ def test_reserved_opcode_reset_clears_halt_and_execution_resumes() -> None:
     state._memory.write(0xABC, 0x5A)
 
     first = state.step()
-    assert first is not None
-    assert first.identifier is DiagnosticIdentifier.ILLEGAL_OPCODE
+    assert first.diagnostic is not None
+    assert first.diagnostic.identifier is DiagnosticIdentifier.ILLEGAL_OPCODE
 
     state._memory.write(0x000, 0x10)
     state._memory.write(0x001, 0x42)
@@ -140,7 +140,7 @@ def test_reserved_opcode_reset_clears_halt_and_execution_resumes() -> None:
 
     assert state.halt_state is False
     assert state._memory.read(0xABC) == 0x5A
-    assert state.step() is None
+    assert state.step().diagnostic is None
     assert state.a == 0x42
 
 

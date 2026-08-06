@@ -24,6 +24,7 @@ from .policy import (
     ExecutionPolicy,
     resolve_conditional_flag,
 )
+from .result import StepResult
 from .snapshot import ArchitecturalStateSnapshot
 
 
@@ -63,13 +64,21 @@ class ArchitecturalState:
         self._ir.load_low(low)
         return decode_instruction((self._ir.high << 8) | self._ir.low)
 
-    def step(self, *, policy: ExecutionPolicy | None = None) -> Diagnostic | None:
-        """Run one canonical halted-guard/fetch/decode/execute transition."""
+    def step(
+        self,
+        *,
+        policy: ExecutionPolicy | None = None,
+        include_memory: bool = False,
+    ) -> StepResult:
+        """Run one atomic transition and return detached pre/post observations."""
 
+        pre_state = self.snapshot(include_memory=include_memory)
         if self.halt_state:
-            return None
+            return StepResult(None, pre_state, pre_state, None)
         instruction = self.fetch_instruction()
-        return self.execute_instruction(instruction, policy=policy)
+        diagnostic = self.execute_instruction(instruction, policy=policy)
+        post_state = self.snapshot(include_memory=include_memory)
+        return StepResult(instruction, pre_state, post_state, diagnostic)
 
     def execute_instruction(
         self,

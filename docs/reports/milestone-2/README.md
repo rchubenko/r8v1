@@ -73,7 +73,7 @@ Index содержит таблицу с обязательными полями
 | M2-018 | D | Реализовать HLT | COMPLETED | [`018-hlt.md`](018-hlt.md) | c66e48e | Atomic HLT and halted-guard/no-fetch coverage |
 | M2-019 | D | Реализовать reserved-opcode halt | COMPLETED | [`019-reserved-opcode-halt.md`](019-reserved-opcode-halt.md) | 52c322f | Four reserved opcodes halt with IR-derived diagnostics |
 | M2-020 | E | Реализовать instruction dispatcher | COMPLETED | [`020-complete-single-step-dispatcher.md`](020-complete-single-step-dispatcher.md) | — | Canonical `step()` path; all-opcode dispatch and diagnostic propagation |
-| M2-021 | E | Добавить structured step result | PLANNED | — | — | Observable step outcome |
+| M2-021 | E | Добавить structured step result | COMPLETED | [`021-deterministic-step-result.md`](021-deterministic-step-result.md) | — | Immutable pre/post `StepResult`; optional memory capture |
 | M2-022 | E | Добавить bounded execution helper | PLANNED | — | — | Deterministic bounded execution |
 | M2-023 | F | Подготовить conformance matrix | PLANNED | — | — | Instruction and policy coverage |
 | M2-024 | F | Добавить integration programs | PLANNED | — | — | End-to-end emulator scenarios |
