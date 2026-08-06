@@ -102,6 +102,14 @@ class ArchitecturalState:
         if instruction.opcode is Opcode.JMP:
             self._pc.load(instruction.operand)
             return
+        if instruction.opcode is Opcode.JZ:
+            if self._flags.values.zero:
+                self._pc.load(instruction.operand)
+            return
+        if instruction.opcode is Opcode.JN:
+            if self._flags.values.sign:
+                self._pc.load(instruction.operand)
+            return
         raise ValueError(f"unsupported opcode for execution: {instruction.opcode.value:#x}")
 
     def snapshot(self, *, include_memory: bool = False) -> ArchitecturalStateSnapshot:
