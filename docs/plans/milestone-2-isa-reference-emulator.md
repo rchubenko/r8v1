@@ -178,19 +178,22 @@ Execution policy является конфигурацией execution environme
 
 - Реализовать JMP, JZ/JN, JC/JV, HLT и reserved-opcode halt согласно ISA semantics.
 - Реализовать approved undefined-flag diagnostics contract без изменения execution policy.
-- Добавить dispatcher, structured step result и bounded execution helper.
+- Завершить control-flow and halt scope до начала Phase E.
 
-### Phase E — Emulator conformance
+### Phase E — Complete execution boundary
+
+- Собрать complete atomic step dispatcher и единый fetch/decode/execute/result boundary.
+- Добавить deterministic step result и bounded execution helper согласно task scope.
+- Проверить, что все opcode проходят через один canonical execution path.
+
+### Phase F — Conformance closure
 
 - Подготовить conformance matrix для всех ISA instructions и execution policies.
 - Выполнить integration programs для arithmetic, memory, branches, HALT и reserved opcodes.
 - Проверить reset, PC boundaries, SRAM persistence, diagnostics и отсутствие drift.
-
-### Phase F — Final regression and release readiness
-
-- Выполнить deterministic emulator unit, instruction, conformance и integration tests.
+- Выполнить final deterministic emulator regression и documentation review.
 - Проверить отсутствие simulator/control-word coupling.
-- Обновить emulator documentation и подготовить итоговый report.
+- Подготовить milestone closure documentation.
 
 ## Последовательность инженерных задач
 
@@ -215,12 +218,12 @@ Execution policy является конфигурацией execution environme
 | M2-017 | D | Реализовать JC и JV | Carry/overflow conditional branches |
 | M2-018 | D | Реализовать HLT | Canonical HALT semantics |
 | M2-019 | D | Реализовать reserved-opcode halt | Reserved instruction handling |
-| M2-020 | D | Реализовать instruction dispatcher | Deterministic opcode dispatch |
-| M2-021 | D | Добавить structured step result | Observable step outcome |
-| M2-022 | D | Добавить bounded execution helper | Deterministic bounded execution |
-| M2-023 | E | Подготовить conformance matrix | Instruction and policy coverage |
-| M2-024 | E | Добавить integration programs | End-to-end emulator scenarios |
-| M2-025 | E | Проверить boundary and drift cases | Boundary and source-of-truth verification |
+| M2-020 | E | Реализовать instruction dispatcher | Deterministic opcode dispatch |
+| M2-021 | E | Добавить structured step result | Observable step outcome |
+| M2-022 | E | Добавить bounded execution helper | Deterministic bounded execution |
+| M2-023 | F | Подготовить conformance matrix | Instruction and policy coverage |
+| M2-024 | F | Добавить integration programs | End-to-end emulator scenarios |
+| M2-025 | F | Проверить boundary and drift cases | Boundary and source-of-truth verification |
 | M2-026 | F | Выполнить final regression and documentation review | Milestone 2 completion candidate |
 
 Каждая implementation task выполняется в порядке specification -> production code -> tests -> regression -> documentation. Архитектурные вопросы, обнаруженные в ходе задач, блокируют только затронутую часть до принятия решения.
@@ -294,6 +297,12 @@ Milestone 2 может быть завершён только если:
 - `./scripts/verify` и `git diff --check` проходят;
 - hardware status остаётся `NOT_TESTED`.
 
+## Критерии завершения фаз
+
+- Phase D считается завершённой после M2-019, соответствующей regression и push checkpoint.
+- Phase E включает только M2-020..M2-022 и завершается после regression и push checkpoint M2-022.
+- Phase F включает M2-023..M2-026 и завершается final regression и подготовкой milestone closure.
+
 ## Workflow проекта
 
 Для каждой задачи:
@@ -319,6 +328,12 @@ Milestone 2 может быть завершён только если:
 - отправить commits в configured remote;
 - проверить branch tracking и remote HEAD;
 - не создавать milestone tag до завершения всех фаз и финального review.
+
+Phase-specific checkpoints:
+
+- После M2-019: выполнить Phase D regression, проверить clean tree и отправить milestone branch.
+- После M2-022: выполнить Phase E regression, проверить clean tree и отправить milestone branch.
+- После M2-026: выполнить final Phase F regression и подготовить milestone closure review; tag создаётся только отдельной процедурой после утверждения.
 
 Для текущей documentation task workflow ограничен изучением документации, подготовкой документов, documentation checks, `./scripts/verify`, `git diff --check` и одним atomic commit. Push этой задачи не выполняется автоматически без отдельного Git/release запроса.
 
