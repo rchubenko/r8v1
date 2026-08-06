@@ -75,7 +75,7 @@ Index содержит таблицу с обязательными полями
 | M2-020 | E | Реализовать instruction dispatcher | COMPLETED | [`020-complete-single-step-dispatcher.md`](020-complete-single-step-dispatcher.md) | 6463946 | Canonical `step()` path; all-opcode dispatch and diagnostic propagation |
 | M2-021 | E | Добавить structured step result | COMPLETED | [`021-deterministic-step-result.md`](021-deterministic-step-result.md) | a0fb690 | Immutable pre/post `StepResult`; optional memory capture |
 | M2-022 | E | Добавить bounded execution helper | DEFERRED AS UNNECESSARY | [`022-bounded-execution-helper.md`](022-bounded-execution-helper.md) | 995b507 | No reusable consumer; explicit finite `step()` calls remain sufficient |
-| M2-023 | F | Подготовить conformance matrix | PLANNED | — | — | Instruction and policy coverage |
+| M2-023 | F | Подготовить conformance matrix | COMPLETED | [`023-isa-conformance-matrix.md`](023-isa-conformance-matrix.md) | — | Complete opcode/effects conformance matrix; representative coverage |
 | M2-024 | F | Добавить integration programs | PLANNED | — | — | End-to-end emulator scenarios |
 | M2-025 | F | Проверить boundary and drift cases | PLANNED | — | — | Boundary and source-of-truth verification |
 | M2-026 | F | Выполнить final regression and documentation review | PLANNED | — | — | Hardware remains `NOT_TESTED` |
