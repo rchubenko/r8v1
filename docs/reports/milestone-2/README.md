@@ -60,7 +60,7 @@ Index содержит таблицу с обязательными полями
 | M2-005 | B | Реализовать architectural reset | COMPLETED | [`005-architectural-reset.md`](005-architectural-reset.md) | — | Deterministic reset behavior; SRAM preserved |
 | M2-006 | B | Добавить exact executable image loading | COMPLETED | [`006-executable-image-loading.md`](006-executable-image-loading.md) | — | Validated 4096-byte image input; atomic SRAM replacement |
 | M2-007 | B | Реализовать atomic fetch и post-fetch PC behavior | COMPLETED | [`007-atomic-instruction-fetch.md`](007-atomic-instruction-fetch.md) | — | Atomic ISA layer; PC/IR update only |
-| M2-008 | B | Добавить immutable architectural snapshots | PLANNED | — | — | Safe architectural observation |
+| M2-008 | B | Добавить immutable architectural snapshots | COMPLETED | [`008-architectural-state-snapshots.md`](008-architectural-state-snapshots.md) | — | Safe architectural observation; optional full memory capture |
 | M2-009 | C | Реализовать non-branch ISA instructions | PLANNED | — | — | ISA semantics only |
 | M2-010 | C | Реализовать branch, HLT и reserved-opcode behavior | PLANNED | — | — | Approved ISA behavior |
 | M2-011 | C | Интегрировать FLAGS policies и diagnostics | PLANNED | — | — | Undefined conditional flag policy |

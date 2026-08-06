@@ -12,6 +12,7 @@ from cpu import (
 )
 
 from .instruction import DecodedInstruction, decode_instruction
+from .snapshot import ArchitecturalStateSnapshot
 
 
 class ArchitecturalState:
@@ -49,6 +50,20 @@ class ArchitecturalState:
         self._ir.load_high(high)
         self._ir.load_low(low)
         return decode_instruction((self._ir.high << 8) | self._ir.low)
+
+    def snapshot(self, *, include_memory: bool = False) -> ArchitecturalStateSnapshot:
+        """Return an immutable architectural observation."""
+
+        return ArchitecturalStateSnapshot(
+            a=self.a,
+            pc=self.pc,
+            irh=self.irh,
+            irl=self.irl,
+            flags=self.flags,
+            flags_defined_mask=self.flags_defined_mask,
+            halt_state=self.halt_state,
+            memory=self.memory_image if include_memory else None,
+        )
 
     @property
     def a(self) -> int:
