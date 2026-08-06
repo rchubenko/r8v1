@@ -35,3 +35,10 @@ Milestone 0 создаёт только действительно нужные 
 `assembler/` позднее должен выдавать exact 4096-byte image и reject overflow. `microcode/` содержит declarative sequences и reproducible generated outputs; generated files вручную не редактируются. `loader/` разделяет image handling и ownership; `hardware/` содержит physical adapters, где `PASS` возможен только после explicit user confirmation.
 
 `tests/` разделяет test layers. `scripts/` содержит обычные local entry points; OpenCode workflow commands отложены.
+
+## Связанные решения и документы
+
+- [README проекта](../README.md) содержит карту monorepo и основные точки входа.
+- [План Milestone 0](plans/milestone-0-repository-foundation.md) описывает создание этой структуры.
+- [План Milestone 1](plans/milestone-1-component-models.md) и [план Milestone 2](plans/milestone-2-isa-reference-emulator.md) используют разделённые package boundaries.
+- [Индекс ADR](adr/README.md) содержит активные архитектурные решения.

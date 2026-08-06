@@ -34,3 +34,9 @@ R8 нужны понятные модели хранения code и data, CPU, 
 - program bytes можно перезаписать;
 - data может исполняться как code;
 - code/data layout должен обрабатываться assembler.
+
+## Связанные решения и документы
+
+- [Архитектура memory](../memory.md) описывает unified SRAM contract.
+- [Архитектура R8 v1](../architecture.md) задаёт общую memory model.
+- [ADR-0007](0007-memory-ownership.md) определяет владение общей SRAM.

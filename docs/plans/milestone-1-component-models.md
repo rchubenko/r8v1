@@ -252,3 +252,10 @@ docs: define milestone 1 component models plan
 Отчёты задач хранятся в `docs/reports/milestone-1/README.md`. Итоговый report должен отделять утверждённую архитектуру, программную проверку, отсутствие hardware verification и отложенные возможности. Milestone exit gate — все критерии приёмки выше, успешный `./scripts/verify`, чистая проверка diff и отсутствие реализации за пределами scope.
 
 На текущей задаче создаются только specification и report index. Python-код компонентов, component behavior tests, emulator, simulator, microcode, assembler, loader и hardware integration не создаются.
+
+## Связанные решения и документы
+
+- [Архитектура R8 v1](../architecture.md), [ISA](../isa.md), [микроархитектура](../microarchitecture.md), [Control Word](../control-word.md) и [memory](../memory.md) задают component boundaries.
+- [Индекс ADR](../adr/README.md) содержит активные решения, которые должны сохраняться моделями компонентов.
+- [Индекс отчётов Milestone 1](../reports/milestone-1/README.md) связывает план с task reports и итоговым report.
+- [Локальная проверка software](../testing/software.md) определяет обязательные проверки.

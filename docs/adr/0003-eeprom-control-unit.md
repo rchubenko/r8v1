@@ -34,3 +34,8 @@ Conditional flags вычисляются отдельной branch logic и не
 - требуется workflow программирования EEPROM;
 - требуются microstep counter и decode logic;
 - EEPROM access timing входит в clock budget.
+
+## Связанные решения и документы
+
+- [Control Word](../control-word.md) определяет 16-bit word, формируемый EEPROM.
+- [Микроархитектура](../microarchitecture.md) описывает microcode address и sequences.

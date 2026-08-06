@@ -62,3 +62,10 @@ ISA reference emulator должен поддерживать `STRICT` и `HARDWA
 В `HARDWARE_LIKE` policy conditional jump использует concrete physical flag value. `flags_defined_mask` не изменяется. Реализация может дополнительно записать warning diagnostic, но execution продолжается.
 
 Hardware verification использует только `NOT_TESTED`, `PASS`, `FAIL`, `BLOCKED`; на этом milestone статус остаётся `NOT_TESTED`.
+
+## Связанные решения и документы
+
+- [README проекта](../../README.md) содержит основной command entry point `./scripts/verify`.
+- [Структура monorepo](../repository-structure.md) определяет границы test layers.
+- [ADR-0010](../adr/0010-deterministic-software-model-semantics.md) задаёт deterministic software-model rules.
+- [План Milestone 2](../plans/milestone-2-isa-reference-emulator.md) определяет emulator test scope.

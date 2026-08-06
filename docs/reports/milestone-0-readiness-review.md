@@ -386,3 +386,9 @@ Push выполнять только после успешной проверк�
 - CPU, emulator, simulator, assembler и loader не реализовывались.
 - Hardware integration не выполнялась.
 - Hardware verification status остаётся `NOT_TESTED`.
+
+## Связанные решения и документы
+
+- [План Milestone 0](../plans/milestone-0-repository-foundation.md) использует этот readiness review.
+- [Архитектура R8 v1](../architecture.md), [ISA](../isa.md), [микроархитектура](../microarchitecture.md), [Control Word](../control-word.md) и [memory](../memory.md) являются проверенными источниками.
+- [Индекс ADR](../adr/README.md) содержит активные ADR, проверенные в отчёте.

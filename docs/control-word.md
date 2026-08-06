@@ -76,3 +76,10 @@ OE_SEL = OE_NONE
 Generator должен отвергать: reserved OE/E/ALU codes; `RAM_WE=1` с `OE_NONE`; bit 13 = 1; `OE_SRAM` вместе с RAM_WE; E_MAR с undefined address source; invalid PC operations; sequences, не завершающиеся к T15; non-canonical HALT или HALT с write action; multiple DATA BUS sources; DATA BUS consumer без ровно одного producer; conditional jump по undefined flag в strict mode.
 
 `OE_NONE` означает no producer (`HIGH_Z`/`None`). Consumers: `E_A`, `E_B`, `E_IRH`, `E_IRL`, `RAM_WE`; `E_MAR` не consumer. One producer без consumer разрешён для bring-up/debugging. Control word использует logical active-high semantics; physical inversion остаётся в decoder/interface circuitry.
+
+## Связанные решения и документы
+
+- [Микроархитектура](microarchitecture.md) использует эти поля в microstep sequences.
+- [Архитектура R8 v1](architecture.md) задаёт границы registers, buses и control unit.
+- [ADR-0003](adr/0003-eeprom-control-unit.md) фиксирует EEPROM-based control unit.
+- [ADR-0005](adr/0005-flags-update-on-a-write.md) фиксирует внутреннюю связь A-load и FLAGS.

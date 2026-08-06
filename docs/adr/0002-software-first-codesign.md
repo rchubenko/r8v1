@@ -31,3 +31,9 @@
 - до первого hardware milestone требуется больше software work;
 - interfaces нужно тщательно сопоставлять с physical boundaries;
 - simulator не должен скрывать timing и contention rules.
+
+## Связанные решения и документы
+
+- [Архитектура R8 v1](../architecture.md) задаёт software-first sequence.
+- [План Milestone 2](../plans/milestone-2-isa-reference-emulator.md) описывает ISA Reference Emulator.
+- [План Milestone 1](../plans/milestone-1-component-models.md) описывает prerequisite component models.

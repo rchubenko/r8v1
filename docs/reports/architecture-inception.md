@@ -26,3 +26,9 @@
 ## Hardware status
 
 `NOT_TESTED` — на этом этапе есть только спецификации и планирование репозитория.
+
+## Связанные решения и документы
+
+- [Архитектура R8 v1](../architecture.md), [ISA](../isa.md), [микроархитектура](../microarchitecture.md), [Control Word](../control-word.md) и [memory](../memory.md) составляют проверенную архитектурную базу.
+- [Индекс ADR](../adr/README.md) содержит решения, упомянутые в отчёте.
+- [План Milestone 0](../plans/milestone-0-repository-foundation.md) использует этот readiness baseline.

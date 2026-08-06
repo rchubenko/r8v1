@@ -43,3 +43,10 @@ v1 не предоставляет ROM/write protection, privilege, memory manag
 ## 5. Контракт software image
 
 Новая software machine содержит ровно 4096 SRAM bytes, initialized to `0x00`. Standard executable image ровно 4096 bytes: code начинается `0x000`, data следует за code, remainder zero-filled. Loading заменяет complete software SRAM. RESET SRAM не очищает. Physical SRAM до loader initialization unspecified; hardware parity требует full image до RESET release.
+
+## Связанные решения и документы
+
+- [Архитектура R8 v1](architecture.md) задаёт unified memory и address path.
+- [ISA R8 v1](isa.md) определяет instruction width и absolute memory operands.
+- [ADR-0001](adr/0001-unified-memory.md) фиксирует единую SRAM для code и data.
+- [ADR-0007](adr/0007-memory-ownership.md) фиксирует исключительное владение SRAM.

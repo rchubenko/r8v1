@@ -36,3 +36,8 @@ Reset — отдельный system signal, не часть control word.
 
 - требуется reset-conditioning hardware;
 - все stateful devices должны поддерживать reset или external initialization logic.
+
+## Связанные решения и документы
+
+- [Архитектура R8 v1](../architecture.md) задаёт reset values и priority.
+- [Микроархитектура](../microarchitecture.md) описывает reset относительно clock и HALT.

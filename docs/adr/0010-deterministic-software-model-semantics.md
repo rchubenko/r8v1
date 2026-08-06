@@ -51,3 +51,9 @@ PC — 12-bit modulo counter: `0xFFF + 1 = 0x000`. Fetch через address-spac
 - software state includes metadata not present as a physical register;
 - strict and hardware-like diagnostic modes must both be tested;
 - hardware loading always writes or guarantees a full 4096-byte image.
+
+## Связанные решения и документы
+
+- [ISA R8 v1](../isa.md) определяет architectural instruction and FLAGS semantics.
+- [Микроархитектура](../microarchitecture.md) определяет bus, HALT и fetch behavior.
+- [Локальная проверка software](../testing/software.md) фиксирует test and hardware-status rules.

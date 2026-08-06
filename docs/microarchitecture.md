@@ -72,3 +72,10 @@ HLT: T4 canonical neutral HALT word; на edge `HALT_STATE <- 1`, затем cou
 RESET asynchronous assertion, synchronized deassertion, execution resumes T0 с PC `0x000`. HALT blocks microstep progression и normal updates, но не reset и не memory ownership.
 
 Simulator/driver должны detect multiple drivers, invalid codes, `RAM_WE` без source, simultaneous ownership, undefined PC operand, execution beyond T15, reserved opcode без halt, consumer без producer и HALT с write actions.
+
+## Связанные решения и документы
+
+- [Архитектура R8 v1](architecture.md) задаёт registers, buses, clock и reset boundaries.
+- [ISA R8 v1](isa.md) является источником instruction semantics.
+- [Control Word](control-word.md) определяет encoding управляющих полей.
+- [ADR-0003](adr/0003-eeprom-control-unit.md), [ADR-0004](adr/0004-separate-address-path.md) и [ADR-0009](adr/0009-clock-transition.md) фиксируют связанные hardware decisions.

@@ -97,3 +97,11 @@ main stable
 ```
 
 OpenCode workflow commands остаются deferred до появления повторяющейся repository work.
+
+## Связанные решения и документы
+
+- [Архитектура R8 v1](../architecture.md), [ISA](../isa.md), [микроархитектура](../microarchitecture.md), [Control Word](../control-word.md) и [memory](../memory.md) являются источниками foundation baseline.
+- [Индекс ADR](../adr/README.md) содержит принятые решения, проверяемые планом.
+- [Архитектурный inception report](../reports/architecture-inception.md) фиксирует исходную согласованность архитектурного пакета.
+- [Проверка готовности Milestone 0](../reports/milestone-0-readiness-review.md) содержит исходный readiness review.
+- [Структура monorepo](../repository-structure.md) и [локальная проверка software](../testing/software.md) описывают repository/tooling boundaries.

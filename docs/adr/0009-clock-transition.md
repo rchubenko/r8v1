@@ -28,3 +28,9 @@ Hybrid operation требует deterministic control-signal setup перед к
 
 - final performance testing происходит поздно;
 - всё ещё требуются clock-source selection и conditioning hardware.
+
+## Связанные решения и документы
+
+- [Архитектура R8 v1](../architecture.md) задаёт общий `CPU_CLK_IN` contract.
+- [Микроархитектура](../microarchitecture.md) описывает rising-edge execution model.
+- [ADR-0006](0006-reset-architecture.md) ограничивает clock-source switching active reset.

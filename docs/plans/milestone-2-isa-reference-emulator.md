@@ -293,3 +293,10 @@ NOT_TESTED
 ```
 
 Milestone 2 не включает physical CPU, hardware adapters, GPIO или hardware `PASS`.
+
+## Связанные решения и документы
+
+- [Архитектура R8 v1](../architecture.md), [ISA](../isa.md), [микроархитектура](../microarchitecture.md), [Control Word](../control-word.md) и [memory](../memory.md) являются источниками emulator boundary.
+- [Индекс ADR](../adr/README.md) содержит активные архитектурные решения, используемые планом.
+- [Индекс отчётов Milestone 2](../reports/milestone-2/README.md) связывает фазы плана с task reports.
+- [Execution contract M2-002](../reports/milestone-2/002-emulator-execution-contract.md) фиксирует approved emulator boundary.

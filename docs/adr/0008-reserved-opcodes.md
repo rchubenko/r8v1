@@ -28,3 +28,8 @@ Logical operations, CALL/RET, stack support и extension prefixes могут п�
 
 - в v1 нет AND/OR/XOR и stack instructions;
 - некоторым algorithms нужны memory-based workarounds или deferment.
+
+## Связанные решения и документы
+
+- [ISA R8 v1](../isa.md) содержит таблицу opcode и illegal-opcode semantics.
+- [Микроархитектура](../microarchitecture.md) описывает reserved-opcode halt sequence.

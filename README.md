@@ -19,17 +19,17 @@ R8 v1 — автономный 8-битный TTL CPU с unified 4 KB SRAM, asse
 
 ## Карта monorepo
 
-- `specs/` — будущие машиночитаемые definitions.
-- `cpu/` — component models Milestone 1.
-- `emulator/` — будущий эталонный ISA emulator.
-- `simulator/` — будущий simulator, управляемый control word.
-- `assembler/` — будущий assembler.
-- `microcode/` — будущие definitions и generated artifacts.
-- `loader/` — будущий image/loader tooling.
-- `hardware/` — будущая hardware integration.
-- `programs/` — будущие программы.
-- `tests/` — foundation, component unit tests и component-level integration tests.
-- `scripts/` — воспроизводимые проверки репозитория.
+- [`specs/`](specs/README.md) — будущие машиночитаемые definitions.
+- [`cpu/`](cpu/README.md) — component models Milestone 1.
+- [`emulator/`](emulator/README.md) — будущий эталонный ISA emulator.
+- [`simulator/`](simulator/README.md) — будущий simulator, управляемый control word.
+- [`assembler/`](assembler/README.md) — будущий assembler.
+- [`microcode/`](microcode/README.md) — будущие definitions и generated artifacts.
+- [`loader/`](loader/README.md) — будущий image/loader tooling.
+- [`hardware/`](hardware/README.md) — будущая hardware integration.
+- [`programs/`](programs/README.md) — будущие программы.
+- [`tests/`](tests/test_foundation.py) — foundation, component unit tests и component-level integration tests.
+- [`scripts/`](scripts/README.md) — воспроизводимые проверки репозитория.
 - `docs/` — нормативные документы и отчёты.
 
 `compiler/` в R8 v1 не создаётся.
@@ -51,10 +51,12 @@ Milestone 0 — Repository Foundation и Milestone 1 — Component Models зав
 
 ## Управление проектом
 
-- `AGENTS.md` — общие правила репозитория.
-- `docs/repository-structure.md` — утверждённая структура monorepo.
-- `docs/plans/milestone-0-repository-foundation.md` — план Milestone 0.
-- `docs/reports/milestone-0-readiness-review.md` — проверка готовности.
-- `docs/plans/milestone-1-component-models.md` — план Milestone 1.
-- `docs/reports/milestone-1/README.md` — индекс отчётов Milestone 1.
-- `docs/reports/milestone-1/000-final-report.md` — итоговый отчёт Milestone 1.
+- [`AGENTS.md`](AGENTS.md) — общие правила репозитория.
+- [`docs/repository-structure.md`](docs/repository-structure.md) — утверждённая структура monorepo.
+- [`docs/adr/README.md`](docs/adr/README.md) — индекс активных ADR.
+- [`docs/testing/software.md`](docs/testing/software.md) — локальная проверка software.
+- [`docs/plans/milestone-0-repository-foundation.md`](docs/plans/milestone-0-repository-foundation.md) — план Milestone 0.
+- [`docs/reports/milestone-0-readiness-review.md`](docs/reports/milestone-0-readiness-review.md) — проверка готовности.
+- [`docs/plans/milestone-1-component-models.md`](docs/plans/milestone-1-component-models.md) — план Milestone 1.
+- [`docs/reports/milestone-1/README.md`](docs/reports/milestone-1/README.md) — индекс отчётов Milestone 1.
+- [`docs/reports/milestone-1/000-final-report.md`](docs/reports/milestone-1/000-final-report.md) — итоговый отчёт Milestone 1.

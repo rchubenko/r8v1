@@ -30,3 +30,9 @@
 
 - больше wiring и selection hardware;
 - address-path behavior нужно тестировать отдельно от DATA BUS behavior.
+
+## Связанные решения и документы
+
+- [Архитектура R8 v1](../architecture.md) задаёт отдельный address path.
+- [Микроархитектура](../microarchitecture.md) описывает его использование через MAR.
+- [Архитектура memory](../memory.md) показывает путь address source к SRAM.

@@ -40,3 +40,9 @@ FLAGS_LOAD_INTERNAL = A_LOAD
 - нельзя записать A с сохранением FLAGS;
 - compare-like instructions потребовали бы architecture revision;
 - programs не должны использовать JC/JV после LDI/LDA, поскольку C/O unspecified.
+
+## Связанные решения и документы
+
+- [ISA R8 v1](../isa.md) определяет обновление FLAGS для инструкций.
+- [Control Word](../control-word.md) фиксирует связь `E_A` и FLAGS latch.
+- [ADR-0010](0010-deterministic-software-model-semantics.md) определяет software `flags_defined_mask`.

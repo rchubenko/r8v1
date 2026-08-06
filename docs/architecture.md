@@ -151,3 +151,11 @@ R8 — monorepo. `compiler/` reserved для later versions и не входит
 ## 13. Источник истины
 
 Утверждённые written specifications — source of truth. Приоритет: architecture/ISA, microarchitecture/control-word, generated microcode, software implementations, hardware implementation. Emulator и physical wiring не могут silently redefine architectural behavior.
+
+## Связанные решения и документы
+
+- [ISA R8 v1](isa.md) определяет кодирование и семантику инструкций.
+- [Микроархитектура](microarchitecture.md) описывает исполнение ISA через microsteps.
+- [Control Word](control-word.md) задаёт управляющие поля для микроархитектуры.
+- [Архитектура memory](memory.md) уточняет unified SRAM и image contract.
+- [Активные ADR](adr/README.md) фиксируют принятые архитектурные решения.

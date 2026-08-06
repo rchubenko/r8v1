@@ -161,3 +161,10 @@ Debugger может определить `ILLEGAL_OPCODE` по IRH; dedicated ar
 ## 8. Адресация и совместимость в будущем
 
 Memory operands — absolute 12-bit byte addresses. Indirect, relative и register-addressed ADD/SUB отсутствуют. Instructions и data используют общее address space; любой 12-bit byte address может быть jump target. Opcodes `0xB..0xE` остаются unused; изменения ISA требуют новой architecture version и ADR.
+
+## Связанные решения и документы
+
+- [Архитектура R8 v1](architecture.md) задаёт общие параметры CPU и формат instruction.
+- [Микроархитектура](microarchitecture.md) описывает fetch и microsequences для этой ISA.
+- [ADR-0008](adr/0008-reserved-opcodes.md) фиксирует резервирование opcode `0xB`–`0xE`.
+- [Активные ADR](adr/README.md) являются индексом принятых решений.

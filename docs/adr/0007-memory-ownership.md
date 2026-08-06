@@ -28,3 +28,9 @@ Ownership switching управляет address, data и write-related signals. �
 - требуются multiplexers или tri-state arbitration;
 - loader workflow должен соблюдать строгую последовательность;
 - ownership switching не должен вызывать glitch SRAM write controls.
+
+## Связанные решения и документы
+
+- [Архитектура memory](../memory.md) описывает CPU/Pi ownership protocol.
+- [Архитектура R8 v1](../architecture.md) задаёт unified SRAM boundary.
+- [README loader](../../loader/README.md) обозначает будущую loader boundary.

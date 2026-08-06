@@ -54,7 +54,7 @@ Index содержит таблицу с обязательными полями
 | ID | Phase | Task | Status | Report | Commit | Notes |
 |---|---|---|---|---|---|---|
 | M2-001 | A | Зафиксировать Milestone 2 plan и report index | COMPLETED | — | — | Documentation baseline этой задачи |
-| M2-002 | A | Зафиксировать emulator state и atomic transition contract | COMPLETED | `002-emulator-execution-contract.md` | — | Atomic architectural contract; implementation не выполнялась |
+| M2-002 | A | Зафиксировать emulator state и atomic transition contract | COMPLETED | [`002-emulator-execution-contract.md`](002-emulator-execution-contract.md) | — | Atomic architectural contract; implementation не выполнялась |
 | M2-003 | A | Зафиксировать execution policies и diagnostics | PLANNED | — | — | `STRICT`, `HARDWARE_LIKE`, `UNDEFINED_CONDITIONAL_FLAG` |
 | M2-004 | A | Подготовить emulator instruction test matrix | PLANNED | — | — | Deterministic cases без parity |
 | M2-005 | B | Реализовать emulator state и validated image input | PLANNED | — | — | Production implementation |
@@ -108,3 +108,10 @@ Report обязан явно указывать:
 ```text
 NOT_TESTED
 ```
+
+## Связанные решения и документы
+
+- [План Milestone 2](../../plans/milestone-2-isa-reference-emulator.md) определяет roadmap, scope и acceptance criteria.
+- [Архитектура R8 v1](../../architecture.md), [ISA](../../isa.md), [микроархитектура](../../microarchitecture.md), [Control Word](../../control-word.md) и [memory](../../memory.md) являются источниками task reports.
+- [Индекс ADR](../../adr/README.md) содержит активные решения, обязательные для emulator boundary.
+- [Локальная проверка software](../../testing/software.md) определяет verification workflow.

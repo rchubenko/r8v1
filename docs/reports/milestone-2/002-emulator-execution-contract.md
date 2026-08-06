@@ -162,3 +162,10 @@ Push не выполняется в рамках текущей documentation ta
 ## Follow-up
 
 Следующая задача — M2-003: расширить diagnostics contract вокруг уже утверждённых execution policies без изменения ISA и architecture.
+
+## Связанные решения и документы
+
+- [План Milestone 2](../../plans/milestone-2-isa-reference-emulator.md) определяет phase и dependency context.
+- [ISA R8 v1](../../isa.md) является источником instruction encoding и semantics.
+- [Архитектура R8 v1](../../architecture.md) и [локальная проверка software](../../testing/software.md) задают emulator boundary и verification rules.
+- [ADR-0010](../../adr/0010-deterministic-software-model-semantics.md) фиксирует deterministic software-model behavior.
