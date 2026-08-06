@@ -3,12 +3,15 @@
 from cpu import (
     SRAM,
     SRAM_SIZE,
+    ALUMode,
     FixedWidthRegister,
     FlagsDefinedMask,
     FlagsSnapshot,
     HaltLatch,
     InstructionRegister,
     ProgramCounter,
+    evaluate,
+    latch_flags_for_alu_write,
     latch_flags_for_non_alu_write,
 )
 
@@ -53,7 +56,7 @@ class ArchitecturalState:
         return decode_instruction((self._ir.high << 8) | self._ir.low)
 
     def execute_instruction(self, instruction: DecodedInstruction) -> None:
-        """Execute only the currently supported NOP and LDI instructions."""
+        """Execute the currently supported atomic ISA instructions."""
 
         if not isinstance(instruction, DecodedInstruction):
             raise TypeError(f"instruction must be a DecodedInstruction; got {instruction!r}")
@@ -74,6 +77,15 @@ class ArchitecturalState:
                 alu_carry=self._flags.values.carry,
                 alu_overflow=self._flags.values.overflow,
             )
+            return
+        if instruction.opcode is Opcode.ADD:
+            alu_result = evaluate(
+                ALUMode.ADD,
+                self._a.value,
+                self._memory.read(instruction.operand),
+            )
+            self._a.load(alu_result.result)
+            self._flags = latch_flags_for_alu_write(alu_result)
             return
         raise ValueError(f"unsupported opcode for execution: {instruction.opcode.value:#x}")
 
