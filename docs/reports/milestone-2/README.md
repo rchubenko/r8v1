@@ -65,7 +65,7 @@ Index содержит таблицу с обязательными полями
 | M2-010 | C | Реализовать LDA | COMPLETED | [`010-lda.md`](010-lda.md) | — | Atomic LDA execution with full 12-bit addressing |
 | M2-011 | C | Реализовать ADD | COMPLETED | [`011-add.md`](011-add.md) | — | Atomic ADD execution; exhaustive 256 x 256 coverage |
 | M2-012 | C | Реализовать SUB | COMPLETED | [`012-sub.md`](012-sub.md) | — | Atomic SUB execution; exhaustive 256 x 256 coverage |
-| M2-013 | C | Реализовать STA | PLANNED | — | — | Atomic memory-write semantics |
+| M2-013 | C | Реализовать STA | COMPLETED | [`013-sta.md`](013-sta.md) | — | Atomic STA execution; exact-one-byte and self-modifying coverage |
 | M2-014 | D | Реализовать JMP | PLANNED | — | — | Unconditional control-flow semantics |
 | M2-015 | D | Реализовать JZ и JN | PLANNED | — | — | Zero/sign conditional branches |
 | M2-016 | D | Реализовать undefined-flag diagnostics | PLANNED | — | — | Approved STRICT/HARDWARE_LIKE diagnostics |

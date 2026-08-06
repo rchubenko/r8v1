@@ -96,6 +96,9 @@ class ArchitecturalState:
             self._a.load(alu_result.result)
             self._flags = latch_flags_for_alu_write(alu_result)
             return
+        if instruction.opcode is Opcode.STA:
+            self._memory.write(instruction.operand, self._a.value)
+            return
         raise ValueError(f"unsupported opcode for execution: {instruction.opcode.value:#x}")
 
     def snapshot(self, *, include_memory: bool = False) -> ArchitecturalStateSnapshot:
