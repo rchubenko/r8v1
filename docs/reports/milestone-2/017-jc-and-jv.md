@@ -62,7 +62,7 @@ Source-of-truth documents, ISA, active ADR и milestone plan не изменял
 - boundary fetch `0xFFF -> 0x000` for strict and hardware-like paths;
 - A/IR/SRAM/FLAGS/mask/HALT preservation;
 - explicit policy requirement and existing-instruction `None` compatibility;
-- policy/snapshot exclusion and JC/JV regression with HLT and reserved opcodes still unsupported.
+- policy/snapshot exclusion and JC/JV regression with HLT and reserved-opcode halt behavior.
 
 ## Verification
 

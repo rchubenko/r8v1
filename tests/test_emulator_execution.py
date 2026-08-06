@@ -163,16 +163,6 @@ def test_ldi_fetched_across_address_boundary_executes_without_pc_change() -> Non
     assert state.pc == 0x001
 
 
-def test_unsupported_opcode_is_rejected_without_mutation() -> None:
-    state = ArchitecturalState()
-    before = state.snapshot(include_memory=True)
-
-    with pytest.raises(ValueError, match="unsupported opcode"):
-        state.execute_instruction(DecodedInstruction(Opcode.RESERVED_B, 0x123))
-
-    assert state.snapshot(include_memory=True) == before
-
-
 def test_invalid_execution_input_is_rejected_without_mutation() -> None:
     state = ArchitecturalState()
     before = state.snapshot(include_memory=True)

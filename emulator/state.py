@@ -17,7 +17,13 @@ from cpu import (
 )
 
 from .instruction import DecodedInstruction, Opcode, decode_instruction
-from .policy import Diagnostic, ExecutionPolicy, resolve_conditional_flag
+from .policy import (
+    Diagnostic,
+    DiagnosticIdentifier,
+    DiagnosticSeverity,
+    ExecutionPolicy,
+    resolve_conditional_flag,
+)
 from .snapshot import ArchitecturalStateSnapshot
 
 
@@ -127,6 +133,18 @@ class ArchitecturalState:
         if instruction.opcode is Opcode.HLT:
             self._halt.latch()
             return None
+        if instruction.opcode in (
+            Opcode.RESERVED_B,
+            Opcode.RESERVED_C,
+            Opcode.RESERVED_D,
+            Opcode.RESERVED_E,
+        ):
+            self._halt.latch()
+            return Diagnostic(
+                identifier=DiagnosticIdentifier.ILLEGAL_OPCODE,
+                severity=DiagnosticSeverity.ERROR,
+                opcode=instruction.opcode,
+            )
         if instruction.opcode in (Opcode.JC, Opcode.JV):
             if policy is None:
                 raise TypeError("policy is required for JC and JV execution")

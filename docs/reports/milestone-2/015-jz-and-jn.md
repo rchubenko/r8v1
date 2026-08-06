@@ -55,7 +55,7 @@ Source-of-truth documents, ISA, active ADR и milestone plan не изменял
 - concrete FLAGS combinations и masks Z/S, all, Z-only, S-only без mask changes;
 - A/IR/SRAM/HALT preservation;
 - false and taken JZ/JN fetched через `0xFFF -> 0x000` с post-fetch PC `0x001`;
-- existing NOP, LDI, LDA, ADD, SUB, STA и JMP regression, а также unsupported reserved-opcode rejection.
+- existing NOP, LDI, LDA, ADD, SUB, STA и JMP regression, а также reserved-opcode halt coverage.
 
 ## Verification
 

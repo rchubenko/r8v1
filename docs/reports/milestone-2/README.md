@@ -71,7 +71,7 @@ Index содержит таблицу с обязательными полями
 | M2-016 | D | Реализовать undefined-flag diagnostics | COMPLETED | [`016-undefined-conditional-flag-diagnostics.md`](016-undefined-conditional-flag-diagnostics.md) | — | Execution policies and immutable diagnostics; JC/JV remain separate |
 | M2-017 | D | Реализовать JC и JV | COMPLETED | [`017-jc-and-jv.md`](017-jc-and-jv.md) | — | Policy-aware JC/JV; defined/undefined C/O coverage |
 | M2-018 | D | Реализовать HLT | COMPLETED | [`018-hlt.md`](018-hlt.md) | — | Atomic HLT and halted-guard/no-fetch coverage |
-| M2-019 | D | Реализовать reserved-opcode halt | PLANNED | — | — | Reserved instruction handling |
+| M2-019 | D | Реализовать reserved-opcode halt | COMPLETED | [`019-reserved-opcode-halt.md`](019-reserved-opcode-halt.md) | — | Four reserved opcodes halt with IR-derived diagnostics |
 | M2-020 | D | Реализовать instruction dispatcher | PLANNED | — | — | Deterministic opcode dispatch |
 | M2-021 | D | Добавить structured step result | PLANNED | — | — | Observable step outcome |
 | M2-022 | D | Добавить bounded execution helper | PLANNED | — | — | Deterministic bounded execution |

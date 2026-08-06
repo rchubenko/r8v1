@@ -116,13 +116,3 @@ def test_lda_instruction_fetched_across_boundary_uses_independent_operand() -> N
     assert fetched == DecodedInstruction(Opcode.LDA, 0x123)
     assert state.a == 0xA6
     assert state.pc == 0x001
-
-
-def test_lda_does_not_change_unsupported_opcode_boundary() -> None:
-    state = ArchitecturalState()
-    before = state.snapshot(include_memory=True)
-
-    with pytest.raises(ValueError, match="unsupported opcode"):
-        state.execute_instruction(DecodedInstruction(Opcode.RESERVED_B, 0x123))
-
-    assert state.snapshot(include_memory=True) == before

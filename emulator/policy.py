@@ -5,6 +5,8 @@ from enum import Enum
 
 from cpu import Flag, FlagsSnapshot
 
+from .instruction import Opcode
+
 
 class ExecutionPolicy(Enum):
     """Policy for reading an architecturally undefined conditional flag."""
@@ -17,6 +19,7 @@ class DiagnosticIdentifier(Enum):
     """Typed identifiers for non-architectural execution observations."""
 
     UNDEFINED_CONDITIONAL_FLAG = "UNDEFINED_CONDITIONAL_FLAG"
+    ILLEGAL_OPCODE = "ILLEGAL_OPCODE"
 
 
 class DiagnosticSeverity(Enum):
@@ -32,6 +35,7 @@ class Diagnostic:
 
     identifier: DiagnosticIdentifier
     severity: DiagnosticSeverity
+    opcode: Opcode | None = None
 
 
 @dataclass(frozen=True, slots=True)
