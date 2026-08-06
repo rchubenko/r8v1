@@ -21,14 +21,14 @@ R8 v1 — автономный 8-битный TTL CPU с unified 4 KB SRAM, asse
 
 - [`specs/`](specs/README.md) — будущие машиночитаемые definitions.
 - [`cpu/`](cpu/README.md) — component models Milestone 1.
-- [`emulator/`](emulator/README.md) — будущий эталонный ISA emulator.
+- [`emulator/`](emulator/README.md) — эталонный ISA emulator Milestone 2.
 - [`simulator/`](simulator/README.md) — будущий simulator, управляемый control word.
 - [`assembler/`](assembler/README.md) — будущий assembler.
 - [`microcode/`](microcode/README.md) — будущие definitions и generated artifacts.
 - [`loader/`](loader/README.md) — будущий image/loader tooling.
 - [`hardware/`](hardware/README.md) — будущая hardware integration.
 - [`programs/`](programs/README.md) — будущие программы.
-- [`tests/`](tests/test_foundation.py) — foundation, component unit tests и component-level integration tests.
+- [`tests/`](tests/test_foundation.py) — foundation, component, ISA conformance и integration tests.
 - [`scripts/`](scripts/README.md) — воспроизводимые проверки репозитория.
 - `docs/` — нормативные документы и отчёты.
 
@@ -47,7 +47,15 @@ uv sync --dev
 
 ## Статус
 
-Milestone 0 — Repository Foundation и Milestone 1 — Component Models завершены. Реализация CPU execution, ISA emulator, simulator микроархитектуры, assembler и loader не начата. Статус аппаратной проверки: `NOT_TESTED`.
+Milestone 0 — Repository Foundation, Milestone 1 — Component Models и Milestone 2 — ISA Reference Emulator завершены в software scope. ISA emulator поддерживает opcode `0x0..0xF`, `STRICT`/`HARDWARE_LIKE`, immutable `StepResult`, conformance matrix, hand-encoded integration programs и package-boundary checks. Hardware status: `NOT_TESTED`.
+
+Milestone 2 documentation:
+
+- [План Milestone 2](docs/plans/milestone-2-isa-reference-emulator.md)
+- [Индекс reports Milestone 2](docs/reports/milestone-2/README.md)
+- [Итоговый report Milestone 2](docs/reports/milestone-2/000-final-report.md)
+
+Simulator/microarchitecture, microcode, assembler, loader и hardware integration остаются будущими milestones и не входят в завершённый ISA Reference Emulator scope.
 
 ## Управление проектом
 
@@ -60,3 +68,4 @@ Milestone 0 — Repository Foundation и Milestone 1 — Component Models зав
 - [`docs/plans/milestone-1-component-models.md`](docs/plans/milestone-1-component-models.md) — план Milestone 1.
 - [`docs/reports/milestone-1/README.md`](docs/reports/milestone-1/README.md) — индекс отчётов Milestone 1.
 - [`docs/reports/milestone-1/000-final-report.md`](docs/reports/milestone-1/000-final-report.md) — итоговый отчёт Milestone 1.
+- [`docs/plans/milestone-2-isa-reference-emulator.md`](docs/plans/milestone-2-isa-reference-emulator.md) — план Milestone 2.

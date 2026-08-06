@@ -360,4 +360,5 @@ Milestone 2 не включает physical CPU, hardware adapters, GPIO или h
 - [Архитектура R8 v1](../architecture.md), [ISA](../isa.md), [микроархитектура](../microarchitecture.md), [Control Word](../control-word.md) и [memory](../memory.md) являются источниками emulator boundary.
 - [Индекс ADR](../adr/README.md) содержит активные архитектурные решения, используемые планом.
 - [Индекс отчётов Milestone 2](../reports/milestone-2/README.md) связывает фазы плана с task reports.
+- [Итоговый report Milestone 2](../reports/milestone-2/000-final-report.md) фиксирует completion review и regression result.
 - [Execution contract M2-002](../reports/milestone-2/002-emulator-execution-contract.md) фиксирует approved emulator boundary.

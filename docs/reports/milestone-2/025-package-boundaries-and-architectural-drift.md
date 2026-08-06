@@ -99,7 +99,11 @@ Production code, ISA, architecture, microarchitecture, control word, memory mode
 
 ## Commit
 
-Atomic commit reference будет зафиксирован итоговым commit этой задачи без amend или второго documentation commit. До создания commit в report и index используется pending commit reference; фактический hash указывается в итоговом отчёте.
+Atomic commit:
+
+```text
+f332cdb test: enforce ISA emulator boundaries
+```
 
 ## Result
 

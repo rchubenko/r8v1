@@ -103,7 +103,11 @@ Source-of-truth documents, ISA, architecture, ADR и milestone plan не изм�
 
 ## Commit
 
-Atomic commit reference будет зафиксирован итоговым commit этой задачи без amend или второго documentation commit. До создания commit в report и index используется pending commit reference; фактический hash указывается в итоговом отчёте.
+Atomic commit:
+
+```text
+b4612c8 test: add ISA emulator integration programs
+```
 
 ## Result
 

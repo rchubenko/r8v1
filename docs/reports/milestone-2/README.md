@@ -4,7 +4,7 @@
 
 Каталог хранит task reports Milestone 2. Этот README определяет структуру отчётов и не является ISA, architecture, microarchitecture или control-word specification.
 
-**Статус Milestone 2:** `PLANNED`
+**Статус Milestone 2:** `COMPLETED`
 
 **Аппаратная проверка:** `NOT_TESTED`
 
@@ -12,7 +12,7 @@
 
 Отчёты должны описывать только ISA Reference Emulator и его deterministic software verification. Они не должны смешивать emulator с Microarchitecture Simulator, `control word`, microsteps, DATA BUS execution, clock orchestration или hardware.
 
-Текущая documentation task создаёт только plan и этот index. Пустые task reports заранее не создаются.
+Индекс связывает task reports с canonical plan, commit history и final milestone report.
 
 ## Нумерация и именование
 
@@ -28,7 +28,7 @@ NNN-short-kebab-case-name.md
 M2-004 -> 004-emulator-state.md
 ```
 
-Итоговый report milestone будет иметь отдельное имя:
+Итоговый report milestone имеет отдельное имя:
 
 ```text
 000-final-report.md
@@ -40,7 +40,7 @@ Index содержит таблицу с обязательными полями
 
 | Поле | Назначение |
 |---|---|
-| `Phase` | Фаза Milestone 2: A, B, C или D |
+ | `Phase` | Фаза Milestone 2: A, B, C, D, E или F |
 | `Task` | Краткое название инженерной задачи |
 | `Status` | `PLANNED`, `COMPLETED` или `DEFERRED AS UNNECESSARY` |
 | `Report` | Ссылка на task report либо `—`, если report ещё не создан |
@@ -75,10 +75,10 @@ Index содержит таблицу с обязательными полями
 | M2-020 | E | Реализовать instruction dispatcher | COMPLETED | [`020-complete-single-step-dispatcher.md`](020-complete-single-step-dispatcher.md) | 6463946 | Canonical `step()` path; all-opcode dispatch and diagnostic propagation |
 | M2-021 | E | Добавить structured step result | COMPLETED | [`021-deterministic-step-result.md`](021-deterministic-step-result.md) | a0fb690 | Immutable pre/post `StepResult`; optional memory capture |
 | M2-022 | E | Добавить bounded execution helper | DEFERRED AS UNNECESSARY | [`022-bounded-execution-helper.md`](022-bounded-execution-helper.md) | 995b507 | No reusable consumer; explicit finite `step()` calls remain sufficient |
-| M2-023 | F | Подготовить conformance matrix | COMPLETED | [`023-isa-conformance-matrix.md`](023-isa-conformance-matrix.md) | — | Complete opcode/effects conformance matrix; representative coverage |
-| M2-024 | F | Добавить integration programs | COMPLETED | [`024-multi-instruction-integration-programs.md`](024-multi-instruction-integration-programs.md) | — | Hand-encoded bounded programs; exact snapshots and sequences |
-| M2-025 | F | Проверить boundary and drift cases | COMPLETED | [`025-package-boundaries-and-architectural-drift.md`](025-package-boundaries-and-architectural-drift.md) | — | No architectural drift detected; package boundaries enforced |
-| M2-026 | F | Выполнить final regression and documentation review | PLANNED | — | — | Hardware remains `NOT_TESTED` |
+| M2-023 | F | Подготовить conformance matrix | COMPLETED | [`023-isa-conformance-matrix.md`](023-isa-conformance-matrix.md) | b8327d1 | Complete opcode/effects conformance matrix; representative coverage |
+| M2-024 | F | Добавить integration programs | COMPLETED | [`024-multi-instruction-integration-programs.md`](024-multi-instruction-integration-programs.md) | b4612c8 | Hand-encoded bounded programs; exact snapshots and sequences |
+| M2-025 | F | Проверить boundary and drift cases | COMPLETED | [`025-package-boundaries-and-architectural-drift.md`](025-package-boundaries-and-architectural-drift.md) | f332cdb | No architectural drift detected; package boundaries enforced |
+| M2-026 | F | Выполнить final regression and documentation review | COMPLETED | [`000-final-report.md`](000-final-report.md) | — | Final software regression and documentation consolidation; hardware remains `NOT_TESTED` |
 
 ## Обязательные поля task report
 
@@ -129,3 +129,4 @@ NOT_TESTED
 - [Архитектура R8 v1](../../architecture.md), [ISA](../../isa.md), [микроархитектура](../../microarchitecture.md), [Control Word](../../control-word.md) и [memory](../../memory.md) являются источниками task reports.
 - [Индекс ADR](../../adr/README.md) содержит активные решения, обязательные для emulator boundary.
 - [Локальная проверка software](../../testing/software.md) определяет verification workflow.
+- [Итоговый report](000-final-report.md) фиксирует deliverables, exclusions, regression и final review.

@@ -47,9 +47,25 @@ Scripts не выполняют commit, push или hardware actions и не и�
 
 ## Границы test layers
 
-В Milestone 0 проверяются только package metadata, deterministic test runner, repository layout, обязательные документы, ADR index/numbering и Markdown links. ISA, CPU components, emulator, simulator, assembler, loader и hardware behavior не тестируются, потому что ещё не реализованы.
+На этапе Milestone 0 проверялись только package metadata, deterministic test runner, repository layout, обязательные документы, ADR index/numbering и Markdown links. Начиная с Milestone 1 и Milestone 2 component, emulator, conformance и integration tests выделены в отдельные layers.
 
 Будущие software tests должны быть отделены от simulation tests. Ни один software или simulation test не является hardware `PASS`.
+
+## ISA Reference Emulator
+
+ISA Reference Emulator выполняет одну instruction через canonical atomic sequence:
+
+```text
+halted guard -> fetch -> decode -> execute -> StepResult
+```
+
+`ArchitecturalState.step(*, policy=None, include_memory=False)` всегда возвращает immutable `StepResult` с `instruction`, `pre_state`, `post_state` и `diagnostic`. Already-halted step содержит `instruction=None`, equal pre/post snapshots и no diagnostic. `include_memory=False` использует lightweight snapshots; `include_memory=True` включает detached full SRAM images.
+
+`STRICT` возвращает `UNDEFINED_CONDITIONAL_FLAG` с severity `ERROR`, не выполняет undefined branch и сохраняет post-fetch PC. `HARDWARE_LIKE` использует concrete C/O value, возвращает `WARNING` и продолжает execution. Reserved opcode `0xB..0xE` возвращает `ILLEGAL_OPCODE` `ERROR` и устанавливает HALT; HLT устанавливает HALT без diagnostic. Diagnostics и policy не являются architectural state.
+
+Bounded production runner не реализован: M2-022 завершена как `DEFERRED AS UNNECESSARY`, поскольку reusable consumer отсутствует. Multi-step tests обязаны использовать fixed step sequences или explicit hard limits; `while not halted` без limit запрещён.
+
+Conformance layer находится в [M2-023 report](../reports/milestone-2/023-isa-conformance-matrix.md), integration programs — в [M2-024 report](../reports/milestone-2/024-multi-instruction-integration-programs.md), package-boundary review — в [M2-025 report](../reports/milestone-2/025-package-boundaries-and-architectural-drift.md). Итоговый статус собран в [M2 final report](../reports/milestone-2/000-final-report.md).
 
 ## ISA reference emulator execution policy
 
@@ -69,3 +85,5 @@ Hardware verification использует только `NOT_TESTED`, `PASS`, `F
 - [Структура monorepo](../repository-structure.md) определяет границы test layers.
 - [ADR-0010](../adr/0010-deterministic-software-model-semantics.md) задаёт deterministic software-model rules.
 - [План Milestone 2](../plans/milestone-2-isa-reference-emulator.md) определяет emulator test scope.
+- [Execution contract M2-002](../reports/milestone-2/002-emulator-execution-contract.md) определяет atomic transition boundary.
+- [Индекс reports Milestone 2](../reports/milestone-2/README.md) связывает task, phase, status и verification.

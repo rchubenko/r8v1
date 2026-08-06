@@ -80,7 +80,11 @@ Coverage includes all opcode rows, public `step()`/`StepResult` contract, instru
 
 ## Commit
 
-Atomic commit reference будет зафиксирован итоговым commit этой задачи без amend или второго documentation commit. До создания commit в report и index используется pending commit reference; фактический hash указывается в итоговом отчёте.
+Atomic commit:
+
+```text
+b8327d1 test: add complete ISA conformance coverage
+```
 
 ## Result
 
