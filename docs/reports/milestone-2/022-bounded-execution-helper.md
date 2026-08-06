@@ -79,7 +79,11 @@ Production code, tests, ISA, architecture, ADR, execution contract, milestone pl
 
 ## Commit
 
-Atomic commit reference будет зафиксирован итоговым commit этой documentation-only задачи без amend или второго commit. До создания commit в report и index используется pending commit reference; фактический hash указывается в итоговом отчёте.
+Atomic commit:
+
+```text
+995b507 docs: defer bounded program execution
+```
 
 ## Hardware status
 

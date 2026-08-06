@@ -98,7 +98,11 @@ Targeted M2-021 and affected emulator tests: `113 passed`.
 
 ## Commit
 
-Atomic commit reference будет зафиксирован итоговым commit этой задачи без amend или второго documentation commit. До создания commit в report и index используется pending commit reference; фактический hash указывается в итоговом отчёте.
+Atomic commit:
+
+```text
+a0fb690 emulator: add deterministic step results
+```
 
 ## Result
 

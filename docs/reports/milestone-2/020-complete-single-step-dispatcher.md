@@ -94,7 +94,11 @@ Targeted M2-020 tests: `41 passed`.
 
 ## Commit
 
-Atomic commit reference будет зафиксирован итоговым commit этой задачи без последующего amend или второго documentation commit. До создания commit в report и index используется pending commit reference; фактический hash указывается в итоговом отчёте.
+Atomic commit:
+
+```text
+6463946 emulator: add atomic ISA step execution
+```
 
 ## Result
 
