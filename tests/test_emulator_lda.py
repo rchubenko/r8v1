@@ -123,6 +123,6 @@ def test_lda_does_not_change_unsupported_opcode_boundary() -> None:
     before = state.snapshot(include_memory=True)
 
     with pytest.raises(ValueError, match="unsupported opcode"):
-        state.execute_instruction(DecodedInstruction(Opcode.JMP, 0x123))
+        state.execute_instruction(DecodedInstruction(Opcode.JZ, 0x123))
 
     assert state.snapshot(include_memory=True) == before

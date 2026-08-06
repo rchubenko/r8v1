@@ -99,6 +99,9 @@ class ArchitecturalState:
         if instruction.opcode is Opcode.STA:
             self._memory.write(instruction.operand, self._a.value)
             return
+        if instruction.opcode is Opcode.JMP:
+            self._pc.load(instruction.operand)
+            return
         raise ValueError(f"unsupported opcode for execution: {instruction.opcode.value:#x}")
 
     def snapshot(self, *, include_memory: bool = False) -> ArchitecturalStateSnapshot:
