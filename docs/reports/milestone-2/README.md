@@ -68,7 +68,7 @@ Index содержит таблицу с обязательными полями
 | M2-013 | C | Реализовать STA | COMPLETED | [`013-sta.md`](013-sta.md) | cc9a5b1 | Atomic STA execution; exact-one-byte and self-modifying coverage |
 | M2-014 | D | Реализовать JMP | COMPLETED | [`014-jmp.md`](014-jmp.md) | — | Atomic JMP execution; full 12-bit and odd-target coverage |
 | M2-015 | D | Реализовать JZ и JN | COMPLETED | [`015-jz-and-jn.md`](015-jz-and-jn.md) | — | Atomic JZ/JN; taken/not-taken and mask-preservation coverage |
-| M2-016 | D | Реализовать undefined-flag diagnostics | PLANNED | — | — | Approved STRICT/HARDWARE_LIKE diagnostics |
+| M2-016 | D | Реализовать undefined-flag diagnostics | COMPLETED | [`016-undefined-conditional-flag-diagnostics.md`](016-undefined-conditional-flag-diagnostics.md) | — | Execution policies and immutable diagnostics; JC/JV remain separate |
 | M2-017 | D | Реализовать JC и JV | PLANNED | — | — | Carry/overflow conditional branches |
 | M2-018 | D | Реализовать HLT | PLANNED | — | — | Canonical HALT semantics |
 | M2-019 | D | Реализовать reserved-opcode halt | PLANNED | — | — | Reserved instruction handling |
