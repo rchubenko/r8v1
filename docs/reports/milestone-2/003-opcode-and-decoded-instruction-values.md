@@ -85,4 +85,4 @@ Planning correction находится в отдельном commit `f55ea0e` с
 
 ## Follow-up
 
-Следующая задача — M2-004: реализовать emulator state и validated image input. Push не выполняется в рамках этой задачи.
+Следующая задача — M2-004: добавить architectural emulator state. Exact executable image loading остаётся отдельной задачей M2-006. Push не выполняется в рамках этой задачи.

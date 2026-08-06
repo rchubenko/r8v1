@@ -161,7 +161,7 @@ Push не выполняется в рамках текущей documentation ta
 
 ## Follow-up
 
-Следующая задача — M2-003: расширить diagnostics contract вокруг уже утверждённых execution policies без изменения ISA и architecture.
+Следующая задача — M2-003: добавить opcode и decoded instruction values. Режимы `STRICT`/`HARDWARE_LIKE` и `UNDEFINED_CONDITIONAL_FLAG` уже зафиксированы в этом report и [документе software testing](../../testing/software.md).
 
 ## Связанные решения и документы
 
