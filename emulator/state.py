@@ -32,6 +32,11 @@ class ArchitecturalState:
         self._flags = FlagsSnapshot.reset()
         self._halt.reset()
 
+    def load_image(self, image: object) -> None:
+        """Atomically replace SRAM with one complete executable image."""
+
+        self._memory.replace_image(image)
+
     @property
     def a(self) -> int:
         """Return the accumulator value."""

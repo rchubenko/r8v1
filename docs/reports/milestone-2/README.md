@@ -58,7 +58,7 @@ Index содержит таблицу с обязательными полями
 | M2-003 | B | Добавить opcode и decoded instruction values | COMPLETED | [`003-opcode-and-decoded-instruction-values.md`](003-opcode-and-decoded-instruction-values.md) | — | Typed decode foundation; reserved opcode remain representable |
 | M2-004 | B | Добавить architectural emulator state | COMPLETED | [`004-architectural-emulator-state.md`](004-architectural-emulator-state.md) | — | Architectural state construction and safe observation |
 | M2-005 | B | Реализовать architectural reset | COMPLETED | [`005-architectural-reset.md`](005-architectural-reset.md) | — | Deterministic reset behavior; SRAM preserved |
-| M2-006 | B | Добавить exact executable image loading | PLANNED | — | — | Validated 4096-byte image input |
+| M2-006 | B | Добавить exact executable image loading | COMPLETED | [`006-executable-image-loading.md`](006-executable-image-loading.md) | — | Validated 4096-byte image input; atomic SRAM replacement |
 | M2-007 | B | Реализовать atomic fetch и post-fetch PC behavior | PLANNED | — | — | Atomic ISA layer |
 | M2-008 | B | Добавить immutable architectural snapshots | PLANNED | — | — | Safe architectural observation |
 | M2-009 | C | Реализовать non-branch ISA instructions | PLANNED | — | — | ISA semantics only |
