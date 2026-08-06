@@ -16,7 +16,7 @@
 
 ## Нумерация и именование
 
-Task reports используют последовательную нумерацию `001..014` и имя:
+Task reports используют последовательную нумерацию `001..026` и имя:
 
 ```text
 NNN-short-kebab-case-name.md
@@ -63,10 +63,22 @@ Index содержит таблицу с обязательными полями
 | M2-008 | B | Добавить immutable architectural snapshots | COMPLETED | [`008-architectural-state-snapshots.md`](008-architectural-state-snapshots.md) | — | Safe architectural observation; optional full memory capture |
 | M2-009 | C | Реализовать NOP и LDI | COMPLETED | [`009-nop-and-ldi.md`](009-nop-and-ldi.md) | — | Atomic execution boundary for NOP/LDI |
 | M2-010 | C | Реализовать LDA | COMPLETED | [`010-lda.md`](010-lda.md) | — | Atomic LDA execution with full 12-bit addressing |
-| M2-011 | C | Интегрировать FLAGS policies и diagnostics | PLANNED | — | — | Undefined conditional flag policy |
-| M2-012 | D | Добавить emulator instruction and state tests | PLANNED | — | — | Emulator test layer |
-| M2-013 | D | Выполнить full emulator regression and documentation review | PLANNED | — | — | No microarchitecture parity |
-| M2-014 | D | Подготовить final report и release readiness | PLANNED | — | — | Hardware remains `NOT_TESTED` |
+| M2-011 | C | Реализовать ADD | PLANNED | — | — | Arithmetic result and FLAGS semantics |
+| M2-012 | C | Реализовать SUB | PLANNED | — | — | Arithmetic result and FLAGS semantics |
+| M2-013 | C | Реализовать STA | PLANNED | — | — | Atomic memory-write semantics |
+| M2-014 | D | Реализовать JMP | PLANNED | — | — | Unconditional control-flow semantics |
+| M2-015 | D | Реализовать JZ и JN | PLANNED | — | — | Zero/sign conditional branches |
+| M2-016 | D | Реализовать undefined-flag diagnostics | PLANNED | — | — | Approved STRICT/HARDWARE_LIKE diagnostics |
+| M2-017 | D | Реализовать JC и JV | PLANNED | — | — | Carry/overflow conditional branches |
+| M2-018 | D | Реализовать HLT | PLANNED | — | — | Canonical HALT semantics |
+| M2-019 | D | Реализовать reserved-opcode halt | PLANNED | — | — | Reserved instruction handling |
+| M2-020 | D | Реализовать instruction dispatcher | PLANNED | — | — | Deterministic opcode dispatch |
+| M2-021 | D | Добавить structured step result | PLANNED | — | — | Observable step outcome |
+| M2-022 | D | Добавить bounded execution helper | PLANNED | — | — | Deterministic bounded execution |
+| M2-023 | E | Подготовить conformance matrix | PLANNED | — | — | Instruction and policy coverage |
+| M2-024 | E | Добавить integration programs | PLANNED | — | — | End-to-end emulator scenarios |
+| M2-025 | E | Проверить boundary and drift cases | PLANNED | — | — | Boundary and source-of-truth verification |
+| M2-026 | F | Выполнить final regression and documentation review | PLANNED | — | — | Hardware remains `NOT_TESTED` |
 
 ## Обязательные поля task report
 

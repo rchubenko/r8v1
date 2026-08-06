@@ -170,16 +170,25 @@ Execution policy является конфигурацией execution environme
 
 ### Phase C — Atomic ISA execution
 
-- Реализовать non-branch instructions согласно `docs/isa.md`.
+- Реализовать NOP, LDI, LDA, ADD, SUB и STA согласно `docs/isa.md`.
 - Реализовать arithmetic result и FLAGS updates через approved ALU/FLAGS policy.
 - Реализовать memory read/write instructions через unified SRAM contract.
-- Реализовать unconditional and conditional branches с двумя approved execution policies.
-- Реализовать HLT и reserved-opcode halt согласно ISA semantics.
 
-### Phase D — Emulator regression and documentation
+### Phase D — Control flow and execution API
 
-- Выполнить deterministic emulator unit and instruction tests.
-- Проверить reset, PC boundary, SRAM persistence и diagnostics.
+- Реализовать JMP, JZ/JN, JC/JV, HLT и reserved-opcode halt согласно ISA semantics.
+- Реализовать approved undefined-flag diagnostics contract без изменения execution policy.
+- Добавить dispatcher, structured step result и bounded execution helper.
+
+### Phase E — Emulator conformance
+
+- Подготовить conformance matrix для всех ISA instructions и execution policies.
+- Выполнить integration programs для arithmetic, memory, branches, HALT и reserved opcodes.
+- Проверить reset, PC boundaries, SRAM persistence, diagnostics и отсутствие drift.
+
+### Phase F — Final regression and release readiness
+
+- Выполнить deterministic emulator unit, instruction, conformance и integration tests.
 - Проверить отсутствие simulator/control-word coupling.
 - Обновить emulator documentation и подготовить итоговый report.
 
@@ -195,12 +204,24 @@ Execution policy является конфигурацией execution environme
 | M2-006 | B | Добавить exact executable image loading | Validated 4096-byte image input |
 | M2-007 | B | Реализовать atomic fetch и post-fetch PC behavior | Fetch boundary |
 | M2-008 | B | Добавить immutable architectural snapshots | Safe architectural observation |
-| M2-009 | C | Реализовать non-branch ISA instructions | Atomic data/memory semantics |
-| M2-010 | C | Реализовать branch, HLT и reserved-opcode behavior | Complete control-flow semantics |
-| M2-011 | C | Интегрировать FLAGS policies и diagnostics | Undefined-flag behavior |
-| M2-012 | D | Добавить emulator instruction and state tests | Emulator regression coverage |
-| M2-013 | D | Выполнить full emulator regression and documentation review | Verified milestone scope |
-| M2-014 | D | Подготовить final report и release readiness | Milestone 2 completion candidate |
+| M2-009 | C | Реализовать NOP и LDI | Atomic execution for NOP and LDI |
+| M2-010 | C | Реализовать LDA | Atomic memory-read semantics |
+| M2-011 | C | Реализовать ADD | Arithmetic result and FLAGS semantics |
+| M2-012 | C | Реализовать SUB | Arithmetic result and FLAGS semantics |
+| M2-013 | C | Реализовать STA | Atomic memory-write semantics |
+| M2-014 | D | Реализовать JMP | Unconditional control-flow semantics |
+| M2-015 | D | Реализовать JZ и JN | Zero/sign conditional branches |
+| M2-016 | D | Реализовать undefined-flag diagnostics | Approved STRICT/HARDWARE_LIKE diagnostics |
+| M2-017 | D | Реализовать JC и JV | Carry/overflow conditional branches |
+| M2-018 | D | Реализовать HLT | Canonical HALT semantics |
+| M2-019 | D | Реализовать reserved-opcode halt | Reserved instruction handling |
+| M2-020 | D | Реализовать instruction dispatcher | Deterministic opcode dispatch |
+| M2-021 | D | Добавить structured step result | Observable step outcome |
+| M2-022 | D | Добавить bounded execution helper | Deterministic bounded execution |
+| M2-023 | E | Подготовить conformance matrix | Instruction and policy coverage |
+| M2-024 | E | Добавить integration programs | End-to-end emulator scenarios |
+| M2-025 | E | Проверить boundary and drift cases | Boundary and source-of-truth verification |
+| M2-026 | F | Выполнить final regression and documentation review | Milestone 2 completion candidate |
 
 Каждая implementation task выполняется в порядке specification -> production code -> tests -> regression -> documentation. Архитектурные вопросы, обнаруженные в ходе задач, блокируют только затронутую часть до принятия решения.
 
@@ -210,8 +231,10 @@ Execution policy является конфигурацией execution environme
 M2-001
   -> M2-002 -> M2-003
   -> M2-004 -> M2-005 -> M2-006 -> M2-007 -> M2-008
-  -> M2-009 -> M2-010 -> M2-011
-  -> M2-012 -> M2-013 -> M2-014
+  -> M2-009 -> M2-010 -> M2-011 -> M2-012 -> M2-013
+  -> M2-014 -> M2-015 -> M2-016 -> M2-017 -> M2-018 -> M2-019
+  -> M2-020 -> M2-021 -> M2-022
+  -> M2-023 -> M2-024 -> M2-025 -> M2-026
 ```
 
 Точнее:
@@ -228,8 +251,20 @@ M2-008 -> M2-009
 M2-009 -> M2-010
 M2-010 -> M2-011
 M2-011 -> M2-012
-M2-012 -> M2-013
+M2-010 -> M2-013
 M2-013 -> M2-014
+M2-014 -> M2-015
+M2-015 -> M2-016
+M2-016 -> M2-017
+M2-017 -> M2-018
+M2-018 -> M2-019
+M2-019 -> M2-020
+M2-020 -> M2-021
+M2-021 -> M2-022
+M2-022 -> M2-023
+M2-023 -> M2-024
+M2-024 -> M2-025
+M2-025 -> M2-026
 ```
 
 Milestone 1 components являются prerequisite для M2-004, а не частью dependency graph повторно реализуемых production features.
@@ -248,6 +283,9 @@ Milestone 2 может быть завершён только если:
 - `HARDWARE_LIKE` использует concrete flag value, сохраняет `flags_defined_mask` и продолжает execution;
 - execution policy не является architectural CPU state;
 - HLT и reserved-opcode halt соответствуют утверждённой ISA semantics;
+- все задачи M2-001..M2-026 завершены в установленном порядке, с отдельными task reports и atomic commits;
+- Phase C завершена до начала Phase D, Phase D до начала Phase E, а Phase E до начала Phase F;
+- conformance matrix, integration programs и boundary/drift verification покрывают весь утверждённый v1 ISA scope;
 - SRAM image contract и CPU reset persistence не нарушены;
 - emulator не использует microsteps, `control word`, EEPROM, DATA BUS execution, clock или hardware APIs;
 - Microarchitecture Simulator не вызывается и не реализуется внутри emulator;
