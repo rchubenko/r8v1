@@ -23,6 +23,15 @@ class ArchitecturalState:
         self._memory = SRAM()
         self._halt = HaltLatch()
 
+    def reset(self) -> None:
+        """Restore architectural state while preserving the SRAM contents."""
+
+        self._a.reset()
+        self._pc.reset()
+        self._ir.reset()
+        self._flags = FlagsSnapshot.reset()
+        self._halt.reset()
+
     @property
     def a(self) -> int:
         """Return the accumulator value."""

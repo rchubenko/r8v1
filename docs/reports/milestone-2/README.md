@@ -57,7 +57,7 @@ Index содержит таблицу с обязательными полями
 | M2-002 | A | Зафиксировать emulator state и atomic transition contract | COMPLETED | [`002-emulator-execution-contract.md`](002-emulator-execution-contract.md) | — | Atomic architectural contract; implementation не выполнялась |
 | M2-003 | B | Добавить opcode и decoded instruction values | COMPLETED | [`003-opcode-and-decoded-instruction-values.md`](003-opcode-and-decoded-instruction-values.md) | — | Typed decode foundation; reserved opcode remain representable |
 | M2-004 | B | Добавить architectural emulator state | COMPLETED | [`004-architectural-emulator-state.md`](004-architectural-emulator-state.md) | — | Architectural state construction and safe observation |
-| M2-005 | B | Реализовать architectural reset | PLANNED | — | — | Deterministic reset behavior |
+| M2-005 | B | Реализовать architectural reset | COMPLETED | [`005-architectural-reset.md`](005-architectural-reset.md) | — | Deterministic reset behavior; SRAM preserved |
 | M2-006 | B | Добавить exact executable image loading | PLANNED | — | — | Validated 4096-byte image input |
 | M2-007 | B | Реализовать atomic fetch и post-fetch PC behavior | PLANNED | — | — | Atomic ISA layer |
 | M2-008 | B | Добавить immutable architectural snapshots | PLANNED | — | — | Safe architectural observation |
