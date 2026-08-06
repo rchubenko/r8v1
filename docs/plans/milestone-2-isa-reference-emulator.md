@@ -161,8 +161,11 @@ Execution policy является конфигурацией execution environme
 ### Phase B — Architectural state and fetch
 
 - Реализовать minimal emulator state boundary на основе approved Milestone 1 models.
-- Реализовать construction/reset и validated full-image input.
+- Реализовать deterministic architectural construction.
+- Реализовать architectural reset без очистки SRAM.
+- Реализовать exact 4096-byte executable image loading.
 - Реализовать atomic instruction fetch и post-fetch PC state.
+- Добавить immutable architectural snapshots.
 - Проверить, что fetch не использует microsteps, `control word` или physical bus model.
 
 ### Phase C — Atomic ISA execution
@@ -187,14 +190,17 @@ Execution policy является конфигурацией execution environme
 | M2-001 | A | Зафиксировать Milestone 2 plan и report index | Documentation baseline |
 | M2-002 | A | Зафиксировать emulator state и atomic transition contract | Approved emulator boundary |
 | M2-003 | B | Добавить opcode и decoded instruction values | Typed decode foundation |
-| M2-004 | B | Реализовать emulator state и validated image input | Stateful emulator foundation |
-| M2-005 | B | Реализовать atomic fetch и post-fetch PC behavior | Fetch boundary |
-| M2-006 | C | Реализовать non-branch ISA instructions | Atomic data/memory semantics |
-| M2-007 | C | Реализовать branch, HLT и reserved-opcode behavior | Complete control-flow semantics |
-| M2-008 | C | Интегрировать FLAGS policies и diagnostics | Undefined-flag behavior |
-| M2-009 | D | Добавить emulator instruction and state tests | Emulator regression coverage |
-| M2-010 | D | Выполнить full emulator regression and documentation review | Verified milestone scope |
-| M2-011 | D | Подготовить final report и release readiness | Milestone 2 completion candidate |
+| M2-004 | B | Добавить architectural emulator state | Stateful emulator foundation |
+| M2-005 | B | Реализовать architectural reset | Deterministic reset behavior |
+| M2-006 | B | Добавить exact executable image loading | Validated 4096-byte image input |
+| M2-007 | B | Реализовать atomic fetch и post-fetch PC behavior | Fetch boundary |
+| M2-008 | B | Добавить immutable architectural snapshots | Safe architectural observation |
+| M2-009 | C | Реализовать non-branch ISA instructions | Atomic data/memory semantics |
+| M2-010 | C | Реализовать branch, HLT и reserved-opcode behavior | Complete control-flow semantics |
+| M2-011 | C | Интегрировать FLAGS policies и diagnostics | Undefined-flag behavior |
+| M2-012 | D | Добавить emulator instruction and state tests | Emulator regression coverage |
+| M2-013 | D | Выполнить full emulator regression and documentation review | Verified milestone scope |
+| M2-014 | D | Подготовить final report и release readiness | Milestone 2 completion candidate |
 
 Каждая implementation task выполняется в порядке specification -> production code -> tests -> regression -> documentation. Архитектурные вопросы, обнаруженные в ходе задач, блокируют только затронутую часть до принятия решения.
 
@@ -203,9 +209,9 @@ Execution policy является конфигурацией execution environme
 ```text
 M2-001
   -> M2-002 -> M2-003
-  -> M2-004 -> M2-005
-  -> M2-006 -> M2-007 -> M2-008
+  -> M2-004 -> M2-005 -> M2-006 -> M2-007 -> M2-008
   -> M2-009 -> M2-010 -> M2-011
+  -> M2-012 -> M2-013 -> M2-014
 ```
 
 Точнее:
@@ -221,6 +227,9 @@ M2-007 -> M2-008
 M2-008 -> M2-009
 M2-009 -> M2-010
 M2-010 -> M2-011
+M2-011 -> M2-012
+M2-012 -> M2-013
+M2-013 -> M2-014
 ```
 
 Milestone 1 components являются prerequisite для M2-004, а не частью dependency graph повторно реализуемых production features.
@@ -230,6 +239,8 @@ Milestone 1 components являются prerequisite для M2-004, а не ча
 Milestone 2 может быть завершён только если:
 
 - ISA Reference Emulator существует как отдельный atomic architectural layer;
+- architectural state содержит A, PC, IR, concrete FLAGS, `flags_defined_mask`, SRAM и HALT state;
+- construction, reset, exact image loading, fetch и immutable snapshots соответствуют своим task boundaries;
 - все утверждённые v1 ISA instructions исполняются согласно `docs/isa.md`;
 - instruction fetch и post-fetch PC behavior детерминированы;
 - FLAGS values и `flags_defined_mask` соответствуют approved policy;

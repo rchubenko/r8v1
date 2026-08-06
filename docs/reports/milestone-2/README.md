@@ -16,7 +16,7 @@
 
 ## Нумерация и именование
 
-Task reports используют последовательную нумерацию `001..011` и имя:
+Task reports используют последовательную нумерацию `001..014` и имя:
 
 ```text
 NNN-short-kebab-case-name.md
@@ -56,14 +56,17 @@ Index содержит таблицу с обязательными полями
 | M2-001 | A | Зафиксировать Milestone 2 plan и report index | COMPLETED | — | — | Documentation baseline этой задачи |
 | M2-002 | A | Зафиксировать emulator state и atomic transition contract | COMPLETED | [`002-emulator-execution-contract.md`](002-emulator-execution-contract.md) | — | Atomic architectural contract; implementation не выполнялась |
 | M2-003 | B | Добавить opcode и decoded instruction values | COMPLETED | [`003-opcode-and-decoded-instruction-values.md`](003-opcode-and-decoded-instruction-values.md) | — | Typed decode foundation; reserved opcode remain representable |
-| M2-004 | B | Реализовать emulator state и validated image input | PLANNED | — | — | Production implementation |
-| M2-005 | B | Реализовать atomic fetch и post-fetch PC behavior | PLANNED | — | — | Atomic ISA layer |
-| M2-006 | C | Реализовать non-branch ISA instructions | PLANNED | — | — | ISA semantics only |
-| M2-007 | C | Реализовать branch, HLT и reserved-opcode behavior | PLANNED | — | — | Approved ISA behavior |
-| M2-008 | C | Интегрировать FLAGS policies и diagnostics | PLANNED | — | — | Undefined conditional flag policy |
-| M2-009 | D | Добавить emulator instruction and state tests | PLANNED | — | — | Emulator test layer |
-| M2-010 | D | Выполнить full emulator regression and documentation review | PLANNED | — | — | No microarchitecture parity |
-| M2-011 | D | Подготовить final report и release readiness | PLANNED | — | — | Hardware remains `NOT_TESTED` |
+| M2-004 | B | Добавить architectural emulator state | PLANNED | — | — | Stateful emulator foundation |
+| M2-005 | B | Реализовать architectural reset | PLANNED | — | — | Deterministic reset behavior |
+| M2-006 | B | Добавить exact executable image loading | PLANNED | — | — | Validated 4096-byte image input |
+| M2-007 | B | Реализовать atomic fetch и post-fetch PC behavior | PLANNED | — | — | Atomic ISA layer |
+| M2-008 | B | Добавить immutable architectural snapshots | PLANNED | — | — | Safe architectural observation |
+| M2-009 | C | Реализовать non-branch ISA instructions | PLANNED | — | — | ISA semantics only |
+| M2-010 | C | Реализовать branch, HLT и reserved-opcode behavior | PLANNED | — | — | Approved ISA behavior |
+| M2-011 | C | Интегрировать FLAGS policies и diagnostics | PLANNED | — | — | Undefined conditional flag policy |
+| M2-012 | D | Добавить emulator instruction and state tests | PLANNED | — | — | Emulator test layer |
+| M2-013 | D | Выполнить full emulator regression and documentation review | PLANNED | — | — | No microarchitecture parity |
+| M2-014 | D | Подготовить final report и release readiness | PLANNED | — | — | Hardware remains `NOT_TESTED` |
 
 ## Обязательные поля task report
 
