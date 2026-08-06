@@ -67,6 +67,14 @@ class ArchitecturalState:
                 alu_overflow=self._flags.values.overflow,
             )
             return
+        if instruction.opcode is Opcode.LDA:
+            self._a.load(self._memory.read(instruction.operand))
+            self._flags = latch_flags_for_non_alu_write(
+                self._a.value,
+                alu_carry=self._flags.values.carry,
+                alu_overflow=self._flags.values.overflow,
+            )
+            return
         raise ValueError(f"unsupported opcode for execution: {instruction.opcode.value:#x}")
 
     def snapshot(self, *, include_memory: bool = False) -> ArchitecturalStateSnapshot:
