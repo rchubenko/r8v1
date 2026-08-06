@@ -11,6 +11,8 @@ from cpu import (
     ProgramCounter,
 )
 
+from .instruction import DecodedInstruction, decode_instruction
+
 
 class ArchitecturalState:
     """Persistent ISA state without execution orchestration or policy."""
@@ -36,6 +38,17 @@ class ArchitecturalState:
         """Atomically replace SRAM with one complete executable image."""
 
         self._memory.replace_image(image)
+
+    def fetch_instruction(self) -> DecodedInstruction:
+        """Fetch two instruction bytes and return the decoded IR value."""
+
+        high = self._memory.read(self._pc.value)
+        self._pc.increment()
+        low = self._memory.read(self._pc.value)
+        self._pc.increment()
+        self._ir.load_high(high)
+        self._ir.load_low(low)
+        return decode_instruction((self._ir.high << 8) | self._ir.low)
 
     @property
     def a(self) -> int:
