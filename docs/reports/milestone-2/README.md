@@ -55,7 +55,7 @@ Index содержит таблицу с обязательными полями
 |---|---|---|---|---|---|---|
 | M2-001 | A | Зафиксировать Milestone 2 plan и report index | COMPLETED | — | — | Documentation baseline этой задачи |
 | M2-002 | A | Зафиксировать emulator state и atomic transition contract | COMPLETED | [`002-emulator-execution-contract.md`](002-emulator-execution-contract.md) | — | Atomic architectural contract; implementation не выполнялась |
-| M2-003 | B | Добавить opcode и decoded instruction values | PLANNED | — | — | Typed decode foundation |
+| M2-003 | B | Добавить opcode и decoded instruction values | COMPLETED | [`003-opcode-and-decoded-instruction-values.md`](003-opcode-and-decoded-instruction-values.md) | — | Typed decode foundation; reserved opcode remain representable |
 | M2-004 | B | Реализовать emulator state и validated image input | PLANNED | — | — | Production implementation |
 | M2-005 | B | Реализовать atomic fetch и post-fetch PC behavior | PLANNED | — | — | Atomic ISA layer |
 | M2-006 | C | Реализовать non-branch ISA instructions | PLANNED | — | — | ISA semantics only |

@@ -16,7 +16,7 @@ build-backend = "hatchling.build"
 package = true
 
 [tool.hatch.build.targets.wheel]
-packages = ["r8_foundation", "cpu"]
+packages = ["r8_foundation", "cpu", "emulator"]
 
 [dependency-groups]
 dev = [
@@ -45,5 +45,5 @@ indent-style = "space"
 [tool.mypy]
 python_version = "3.12"
 strict = true
-files = ["r8_foundation", "tests"]
+files = ["r8_foundation", "cpu", "emulator", "tests"]
 exclude = ["^docs/"]
