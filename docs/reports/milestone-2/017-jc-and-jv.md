@@ -85,10 +85,10 @@ Hardware status: `NOT_TESTED`.
 
 ## Commit
 
-Expected atomic commit:
+Atomic commit:
 
 ```text
-emulator: implement JC and JV
+c7dbc8e emulator: implement JC and JV
 ```
 
 Push не выполняется в рамках этой задачи.

@@ -77,10 +77,10 @@ Hardware status: `NOT_TESTED`.
 
 ## Commit
 
-Expected atomic commit:
+Atomic commit:
 
 ```text
-emulator: halt on reserved opcodes
+52c322f emulator: halt on reserved opcodes
 ```
 
 Push не выполняется в рамках этой задачи.

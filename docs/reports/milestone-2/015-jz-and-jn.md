@@ -78,10 +78,10 @@ Hardware status: `NOT_TESTED`.
 
 ## Commit
 
-Expected atomic commit:
+Atomic commit:
 
 ```text
-emulator: implement JZ and JN
+4312956 emulator: implement JZ and JN
 ```
 
 Push не выполняется в рамках этой задачи.

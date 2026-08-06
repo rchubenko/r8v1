@@ -84,10 +84,10 @@ Hardware status: `NOT_TESTED`.
 
 ## Commit
 
-Expected atomic commit:
+Atomic commit:
 
 ```text
-emulator: add undefined flag execution policies
+a67f870 emulator: add undefined flag execution policies
 ```
 
 Push не выполняется в рамках этой задачи.
