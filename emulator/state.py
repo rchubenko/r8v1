@@ -57,6 +57,13 @@ class ArchitecturalState:
         self._ir.load_low(low)
         return decode_instruction((self._ir.high << 8) | self._ir.low)
 
+    def step(self, *, policy: ExecutionPolicy | None = None) -> Diagnostic | None:
+        """Run the current fetch/execute boundary unless HALT_STATE is set."""
+
+        if self.halt_state:
+            return None
+        return self.execute_instruction(self.fetch_instruction(), policy=policy)
+
     def execute_instruction(
         self,
         instruction: DecodedInstruction,
@@ -116,6 +123,9 @@ class ArchitecturalState:
         if instruction.opcode is Opcode.JN:
             if self._flags.values.sign:
                 self._pc.load(instruction.operand)
+            return None
+        if instruction.opcode is Opcode.HLT:
+            self._halt.latch()
             return None
         if instruction.opcode in (Opcode.JC, Opcode.JV):
             if policy is None:
