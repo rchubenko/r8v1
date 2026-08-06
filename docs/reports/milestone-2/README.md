@@ -69,7 +69,7 @@ Index содержит таблицу с обязательными полями
 | M2-014 | D | Реализовать JMP | COMPLETED | [`014-jmp.md`](014-jmp.md) | — | Atomic JMP execution; full 12-bit and odd-target coverage |
 | M2-015 | D | Реализовать JZ и JN | COMPLETED | [`015-jz-and-jn.md`](015-jz-and-jn.md) | — | Atomic JZ/JN; taken/not-taken and mask-preservation coverage |
 | M2-016 | D | Реализовать undefined-flag diagnostics | COMPLETED | [`016-undefined-conditional-flag-diagnostics.md`](016-undefined-conditional-flag-diagnostics.md) | — | Execution policies and immutable diagnostics; JC/JV remain separate |
-| M2-017 | D | Реализовать JC и JV | PLANNED | — | — | Carry/overflow conditional branches |
+| M2-017 | D | Реализовать JC и JV | COMPLETED | [`017-jc-and-jv.md`](017-jc-and-jv.md) | — | Policy-aware JC/JV; defined/undefined C/O coverage |
 | M2-018 | D | Реализовать HLT | PLANNED | — | — | Canonical HALT semantics |
 | M2-019 | D | Реализовать reserved-opcode halt | PLANNED | — | — | Reserved instruction handling |
 | M2-020 | D | Реализовать instruction dispatcher | PLANNED | — | — | Deterministic opcode dispatch |

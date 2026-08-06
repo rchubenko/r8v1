@@ -61,7 +61,7 @@ Source-of-truth documents, ISA, active ADR и milestone plan не изменял
 - policy/diagnostic absence from architectural state and snapshots;
 - post-fetch PC/HALT/state preservation при resolution;
 - deterministic repeated HARDWARE_LIKE resolution;
-- NOP, LDI, LDA, ADD, SUB, STA, JMP, JZ и JN regression, JC/JV remain unsupported.
+- NOP, LDI, LDA, ADD, SUB, STA, JMP, JZ и JN regression; JC/JV execution оставались отдельной задачей M2-017.
 
 ## Verification
 

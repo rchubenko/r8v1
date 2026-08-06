@@ -5,6 +5,7 @@ from cpu import (
     SRAM_SIZE,
     ALUMode,
     FixedWidthRegister,
+    Flag,
     FlagsDefinedMask,
     FlagsSnapshot,
     HaltLatch,
@@ -16,6 +17,7 @@ from cpu import (
 )
 
 from .instruction import DecodedInstruction, Opcode, decode_instruction
+from .policy import Diagnostic, ExecutionPolicy, resolve_conditional_flag
 from .snapshot import ArchitecturalStateSnapshot
 
 
@@ -55,13 +57,18 @@ class ArchitecturalState:
         self._ir.load_low(low)
         return decode_instruction((self._ir.high << 8) | self._ir.low)
 
-    def execute_instruction(self, instruction: DecodedInstruction) -> None:
+    def execute_instruction(
+        self,
+        instruction: DecodedInstruction,
+        *,
+        policy: ExecutionPolicy | None = None,
+    ) -> Diagnostic | None:
         """Execute the currently supported atomic ISA instructions."""
 
         if not isinstance(instruction, DecodedInstruction):
             raise TypeError(f"instruction must be a DecodedInstruction; got {instruction!r}")
         if instruction.opcode is Opcode.NOP:
-            return
+            return None
         if instruction.opcode is Opcode.LDI:
             self._a.load(instruction.operand & 0xFF)
             self._flags = latch_flags_for_non_alu_write(
@@ -69,7 +76,7 @@ class ArchitecturalState:
                 alu_carry=self._flags.values.carry,
                 alu_overflow=self._flags.values.overflow,
             )
-            return
+            return None
         if instruction.opcode is Opcode.LDA:
             self._a.load(self._memory.read(instruction.operand))
             self._flags = latch_flags_for_non_alu_write(
@@ -77,7 +84,7 @@ class ArchitecturalState:
                 alu_carry=self._flags.values.carry,
                 alu_overflow=self._flags.values.overflow,
             )
-            return
+            return None
         if instruction.opcode is Opcode.ADD:
             alu_result = evaluate(
                 ALUMode.ADD,
@@ -86,7 +93,7 @@ class ArchitecturalState:
             )
             self._a.load(alu_result.result)
             self._flags = latch_flags_for_alu_write(alu_result)
-            return
+            return None
         if instruction.opcode is Opcode.SUB:
             alu_result = evaluate(
                 ALUMode.SUB,
@@ -95,21 +102,29 @@ class ArchitecturalState:
             )
             self._a.load(alu_result.result)
             self._flags = latch_flags_for_alu_write(alu_result)
-            return
+            return None
         if instruction.opcode is Opcode.STA:
             self._memory.write(instruction.operand, self._a.value)
-            return
+            return None
         if instruction.opcode is Opcode.JMP:
             self._pc.load(instruction.operand)
-            return
+            return None
         if instruction.opcode is Opcode.JZ:
             if self._flags.values.zero:
                 self._pc.load(instruction.operand)
-            return
+            return None
         if instruction.opcode is Opcode.JN:
             if self._flags.values.sign:
                 self._pc.load(instruction.operand)
-            return
+            return None
+        if instruction.opcode in (Opcode.JC, Opcode.JV):
+            if policy is None:
+                raise TypeError("policy is required for JC and JV execution")
+            flag = Flag.CARRY if instruction.opcode is Opcode.JC else Flag.OVERFLOW
+            resolution = resolve_conditional_flag(flag, self._flags, policy)
+            if resolution.branch_allowed and resolution.value:
+                self._pc.load(instruction.operand)
+            return resolution.diagnostic
         raise ValueError(f"unsupported opcode for execution: {instruction.opcode.value:#x}")
 
     def snapshot(self, *, include_memory: bool = False) -> ArchitecturalStateSnapshot:
