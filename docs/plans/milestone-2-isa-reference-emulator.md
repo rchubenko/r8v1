@@ -186,16 +186,15 @@ Execution policy является конфигурацией execution environme
 |---|---|---|---|
 | M2-001 | A | Зафиксировать Milestone 2 plan и report index | Documentation baseline |
 | M2-002 | A | Зафиксировать emulator state и atomic transition contract | Approved emulator boundary |
-| M2-003 | A | Зафиксировать execution policies и diagnostics | `STRICT`/`HARDWARE_LIKE` contract |
-| M2-004 | A | Подготовить emulator instruction test matrix | Deterministic test specification |
-| M2-005 | B | Реализовать emulator state и validated image input | Stateful emulator foundation |
-| M2-006 | B | Реализовать atomic fetch и post-fetch PC behavior | Fetch boundary |
-| M2-007 | C | Реализовать non-branch ISA instructions | Atomic data/memory semantics |
-| M2-008 | C | Реализовать branch, HLT и reserved-opcode behavior | Complete control-flow semantics |
-| M2-009 | C | Интегрировать FLAGS policies и diagnostics | Undefined-flag behavior |
-| M2-010 | D | Добавить emulator instruction and state tests | Emulator regression coverage |
-| M2-011 | D | Выполнить full emulator regression and documentation review | Verified milestone scope |
-| M2-012 | D | Подготовить final report и release readiness | Milestone 2 completion candidate |
+| M2-003 | B | Добавить opcode и decoded instruction values | Typed decode foundation |
+| M2-004 | B | Реализовать emulator state и validated image input | Stateful emulator foundation |
+| M2-005 | B | Реализовать atomic fetch и post-fetch PC behavior | Fetch boundary |
+| M2-006 | C | Реализовать non-branch ISA instructions | Atomic data/memory semantics |
+| M2-007 | C | Реализовать branch, HLT и reserved-opcode behavior | Complete control-flow semantics |
+| M2-008 | C | Интегрировать FLAGS policies и diagnostics | Undefined-flag behavior |
+| M2-009 | D | Добавить emulator instruction and state tests | Emulator regression coverage |
+| M2-010 | D | Выполнить full emulator regression and documentation review | Verified milestone scope |
+| M2-011 | D | Подготовить final report и release readiness | Milestone 2 completion candidate |
 
 Каждая implementation task выполняется в порядке specification -> production code -> tests -> regression -> documentation. Архитектурные вопросы, обнаруженные в ходе задач, блокируют только затронутую часть до принятия решения.
 
@@ -203,10 +202,10 @@ Execution policy является конфигурацией execution environme
 
 ```text
 M2-001
-  -> M2-002 -> M2-003 -> M2-004
-  -> M2-005 -> M2-006
-  -> M2-007 -> M2-008 -> M2-009
-  -> M2-010 -> M2-011 -> M2-012
+  -> M2-002 -> M2-003
+  -> M2-004 -> M2-005
+  -> M2-006 -> M2-007 -> M2-008
+  -> M2-009 -> M2-010 -> M2-011
 ```
 
 Точнее:
@@ -215,18 +214,16 @@ M2-001
 M2-001 -> M2-002
 M2-002 -> M2-003
 M2-003 -> M2-004
-M2-002 -> M2-005
+M2-004 -> M2-005
 M2-005 -> M2-006
 M2-006 -> M2-007
 M2-007 -> M2-008
-M2-003 -> M2-009
 M2-008 -> M2-009
 M2-009 -> M2-010
 M2-010 -> M2-011
-M2-011 -> M2-012
 ```
 
-Milestone 1 components являются prerequisite для M2-005, а не частью dependency graph повторно реализуемых production features.
+Milestone 1 components являются prerequisite для M2-004, а не частью dependency graph повторно реализуемых production features.
 
 ## Acceptance criteria
 
