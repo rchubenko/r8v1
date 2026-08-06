@@ -77,7 +77,7 @@ Index содержит таблицу с обязательными полями
 | M2-022 | E | Добавить bounded execution helper | DEFERRED AS UNNECESSARY | [`022-bounded-execution-helper.md`](022-bounded-execution-helper.md) | 995b507 | No reusable consumer; explicit finite `step()` calls remain sufficient |
 | M2-023 | F | Подготовить conformance matrix | COMPLETED | [`023-isa-conformance-matrix.md`](023-isa-conformance-matrix.md) | — | Complete opcode/effects conformance matrix; representative coverage |
 | M2-024 | F | Добавить integration programs | COMPLETED | [`024-multi-instruction-integration-programs.md`](024-multi-instruction-integration-programs.md) | — | Hand-encoded bounded programs; exact snapshots and sequences |
-| M2-025 | F | Проверить boundary and drift cases | PLANNED | — | — | Boundary and source-of-truth verification |
+| M2-025 | F | Проверить boundary and drift cases | COMPLETED | [`025-package-boundaries-and-architectural-drift.md`](025-package-boundaries-and-architectural-drift.md) | — | No architectural drift detected; package boundaries enforced |
 | M2-026 | F | Выполнить final regression and documentation review | PLANNED | — | — | Hardware remains `NOT_TESTED` |
 
 ## Обязательные поля task report
