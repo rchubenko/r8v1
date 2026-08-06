@@ -78,7 +78,7 @@ Index содержит таблицу с обязательными полями
 | M2-023 | F | Подготовить conformance matrix | COMPLETED | [`023-isa-conformance-matrix.md`](023-isa-conformance-matrix.md) | b8327d1 | Complete opcode/effects conformance matrix; representative coverage |
 | M2-024 | F | Добавить integration programs | COMPLETED | [`024-multi-instruction-integration-programs.md`](024-multi-instruction-integration-programs.md) | b4612c8 | Hand-encoded bounded programs; exact snapshots and sequences |
 | M2-025 | F | Проверить boundary and drift cases | COMPLETED | [`025-package-boundaries-and-architectural-drift.md`](025-package-boundaries-and-architectural-drift.md) | f332cdb | No architectural drift detected; package boundaries enforced |
-| M2-026 | F | Выполнить final regression and documentation review | COMPLETED | [`000-final-report.md`](000-final-report.md) | — | Final software regression and documentation consolidation; hardware remains `NOT_TESTED` |
+| M2-026 | F | Выполнить final regression and documentation review | COMPLETED | [`000-final-report.md`](000-final-report.md) | 60ea326 | Final software regression and documentation consolidation; hardware remains `NOT_TESTED` |
 
 ## Обязательные поля task report
 
