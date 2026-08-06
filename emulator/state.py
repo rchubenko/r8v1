@@ -9,9 +9,10 @@ from cpu import (
     HaltLatch,
     InstructionRegister,
     ProgramCounter,
+    latch_flags_for_non_alu_write,
 )
 
-from .instruction import DecodedInstruction, decode_instruction
+from .instruction import DecodedInstruction, Opcode, decode_instruction
 from .snapshot import ArchitecturalStateSnapshot
 
 
@@ -50,6 +51,23 @@ class ArchitecturalState:
         self._ir.load_high(high)
         self._ir.load_low(low)
         return decode_instruction((self._ir.high << 8) | self._ir.low)
+
+    def execute_instruction(self, instruction: DecodedInstruction) -> None:
+        """Execute only the currently supported NOP and LDI instructions."""
+
+        if not isinstance(instruction, DecodedInstruction):
+            raise TypeError(f"instruction must be a DecodedInstruction; got {instruction!r}")
+        if instruction.opcode is Opcode.NOP:
+            return
+        if instruction.opcode is Opcode.LDI:
+            self._a.load(instruction.operand & 0xFF)
+            self._flags = latch_flags_for_non_alu_write(
+                self._a.value,
+                alu_carry=self._flags.values.carry,
+                alu_overflow=self._flags.values.overflow,
+            )
+            return
+        raise ValueError(f"unsupported opcode for execution: {instruction.opcode.value:#x}")
 
     def snapshot(self, *, include_memory: bool = False) -> ArchitecturalStateSnapshot:
         """Return an immutable architectural observation."""
