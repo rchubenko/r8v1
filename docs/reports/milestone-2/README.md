@@ -42,7 +42,7 @@ Index содержит таблицу с обязательными полями
 |---|---|
 | `Phase` | Фаза Milestone 2: A, B, C или D |
 | `Task` | Краткое название инженерной задачи |
-| `Status` | `PLANNED` или `COMPLETED` |
+| `Status` | `PLANNED`, `COMPLETED` или `DEFERRED AS UNNECESSARY` |
 | `Report` | Ссылка на task report либо `—`, если report ещё не создан |
 | `Commit` | Atomic commit hash либо `—` до commit |
 | `Notes` | Краткие scope notes, diagnostics или blockers |
@@ -74,7 +74,7 @@ Index содержит таблицу с обязательными полями
 | M2-019 | D | Реализовать reserved-opcode halt | COMPLETED | [`019-reserved-opcode-halt.md`](019-reserved-opcode-halt.md) | 52c322f | Four reserved opcodes halt with IR-derived diagnostics |
 | M2-020 | E | Реализовать instruction dispatcher | COMPLETED | [`020-complete-single-step-dispatcher.md`](020-complete-single-step-dispatcher.md) | — | Canonical `step()` path; all-opcode dispatch and diagnostic propagation |
 | M2-021 | E | Добавить structured step result | COMPLETED | [`021-deterministic-step-result.md`](021-deterministic-step-result.md) | — | Immutable pre/post `StepResult`; optional memory capture |
-| M2-022 | E | Добавить bounded execution helper | PLANNED | — | — | Deterministic bounded execution |
+| M2-022 | E | Добавить bounded execution helper | DEFERRED AS UNNECESSARY | [`022-bounded-execution-helper.md`](022-bounded-execution-helper.md) | — | No reusable consumer; explicit finite `step()` calls remain sufficient |
 | M2-023 | F | Подготовить conformance matrix | PLANNED | — | — | Instruction and policy coverage |
 | M2-024 | F | Добавить integration programs | PLANNED | — | — | End-to-end emulator scenarios |
 | M2-025 | F | Проверить boundary and drift cases | PLANNED | — | — | Boundary and source-of-truth verification |
