@@ -168,7 +168,7 @@ def test_unsupported_opcode_is_rejected_without_mutation() -> None:
     before = state.snapshot(include_memory=True)
 
     with pytest.raises(ValueError, match="unsupported opcode"):
-        state.execute_instruction(DecodedInstruction(Opcode.SUB, 0x123))
+        state.execute_instruction(DecodedInstruction(Opcode.STA, 0x123))
 
     assert state.snapshot(include_memory=True) == before
 
