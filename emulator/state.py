@@ -28,7 +28,7 @@ from .snapshot import ArchitecturalStateSnapshot
 
 
 class ArchitecturalState:
-    """Persistent ISA state without execution orchestration or policy."""
+    """Persistent ISA state and the atomic ISA execution boundary."""
 
     def __init__(self) -> None:
         self._a = FixedWidthRegister(width=8, reset_value=0x00)
@@ -64,11 +64,12 @@ class ArchitecturalState:
         return decode_instruction((self._ir.high << 8) | self._ir.low)
 
     def step(self, *, policy: ExecutionPolicy | None = None) -> Diagnostic | None:
-        """Run the current fetch/execute boundary unless HALT_STATE is set."""
+        """Run one canonical halted-guard/fetch/decode/execute transition."""
 
         if self.halt_state:
             return None
-        return self.execute_instruction(self.fetch_instruction(), policy=policy)
+        instruction = self.fetch_instruction()
+        return self.execute_instruction(instruction, policy=policy)
 
     def execute_instruction(
         self,
@@ -76,7 +77,7 @@ class ArchitecturalState:
         *,
         policy: ExecutionPolicy | None = None,
     ) -> Diagnostic | None:
-        """Execute the currently supported atomic ISA instructions."""
+        """Dispatch one fetched instruction through its atomic ISA semantics."""
 
         if not isinstance(instruction, DecodedInstruction):
             raise TypeError(f"instruction must be a DecodedInstruction; got {instruction!r}")
